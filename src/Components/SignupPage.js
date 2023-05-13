@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const SignupPage = () => {
     const navigate = useNavigate();
@@ -13,16 +13,52 @@ const SignupPage = () => {
         passwordtwo: "",
     });
 
+    // Handle Input Changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     }
 
-    const handleSignupSubmit = (e) => {
+    // Handle Signup Form Submit
+    const handleSignupSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-        navigate("/login");
+        const { first_name, last_name, email, password, passwordtwo } = formData;
+
+        if (password !== passwordtwo) {
+            return setError("Passwords do not match")
+        } else {
+            const response = await fetch(`http://localhost:4000/api/users`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                  },
+                body: JSON.stringify({ first_name, last_name, email, password, passwordtwo}),
+                
+            });
+            console.log(response);
+            const data = await response.json();
+            console.log(data);
+
+            // Take the user to the login page.
+            navigate("/login");
+        }
     }
+
+    // Error Messages
+    const [error, setError] = useState(" ");
+    useEffect(() => {
+        if (formData.passwordtwo === "") {
+            // Hasn't been touched yet
+        } else {
+            if (formData.password !== formData.passwordtwo) {
+                setError("Passwords do not match")
+            } else {
+                setError("");
+            }
+        }
+    }, [formData.passwordtwo, formData.password])
+
 
     return (
         <div className="component-signup">
@@ -50,6 +86,7 @@ const SignupPage = () => {
                         <label htmlFor="signup-password-two">Re-enter Password</label>
                         <input type="password" id="signup-password-two" required={true} name="passwordtwo" value={formData.passwordtwo} onChange={handleChange}></input>
                     </div>
+                    <div className="error-container">{error}</div>
                     <button type="submit">Create Account</button>
                 </form>
             </div>
