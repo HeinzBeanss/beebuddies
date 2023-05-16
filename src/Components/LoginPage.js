@@ -1,7 +1,16 @@
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+    const navigate = useNavigate();
+
+    // Check if the user is logged in already
+    useEffect(() => {
+        if (props.isLoggedIn === true) {
+            console.log("User alerady logged in");
+            navigate("/");
+        };
+    }, []);
 
     // Form Data
     const [formData, setFormData] = useState({
