@@ -39,6 +39,11 @@ const LoginPage = (props) => {
         const data = await response.json();
         console.log(data);
         localStorage.setItem("token", data.token);
+        if (data.updatedUser) {
+            navigate("/login");
+        } else {
+            // DO something if it doesn't log in properly.
+        }
     };
 
     // Error Messages

@@ -1,9 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
-const SignupPage = () => {
+const SignupPage = (props) => {
     const navigate = useNavigate();
     // use effect, if signed in, redirect if possible. or do it on app, layer above idk.
+
+    // Check if the user is logged in already
+    useEffect(() => {
+        if (props.isLoggedIn === true) {
+            console.log("User alerady logged in");
+            navigate("/");
+        };
+    }, []);
 
     const [formData, setFormData] = useState({
         first_name: "",

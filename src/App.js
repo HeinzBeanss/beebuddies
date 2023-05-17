@@ -6,6 +6,11 @@ import NavBar from "./Components/NavBar";
 import LoginPage from "./Components/LoginPage";
 import SignupPage from "./Components/SignupPage";
 import Home from "./Components/Home";
+import PostPage from  "./Components/PostPage";
+import UserPage from "./Components/UserPage";
+import ProfilePage from "./Components/ProfilePage";
+import UserIndexPage from "./Components/UserIndexPage";
+import FriendsPage from "./Components/FriendsPage";
 
 const App = () => {
 
@@ -62,9 +67,17 @@ const App = () => {
       <NavBar userData={userData}/>
       <Router>
         <Routes>
-            <Route path={'/login'} element={<LoginPage isLoggedIn={isLoggedIn}/>} />
-            <Route path={'/signup'} element={<SignupPage isLoggedIn={isLoggedIn}/>} />
-            <Route path={'/'} element={<Home />} />
+          
+          <Route exact path={'/'} element={<Home />} />
+          <Route path={'/login'} element={<LoginPage isLoggedIn={isLoggedIn}/>} />
+          <Route path={'/signup'} element={<SignupPage isLoggedIn={isLoggedIn}/>} />
+
+          <Route path={"/profile"} element={<ProfilePage />} />
+          <Route path={"/user/:userId"} element={<UserPage />} />
+
+          <Route path={"/user/:userId/post/:postId"} element={<PostPage />}/>
+          <Route path={"/users"} element={<UserIndexPage />}/>
+          <Route path={"/friends"} element={<FriendsPage />} />
         </Routes>
       </Router>
     </>
