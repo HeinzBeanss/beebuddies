@@ -1,0 +1,29 @@
+.navigation-component {
+    width: 100%;
+    height: 20px;
+    padding: 20px 0;
+    background-color: var(--background-container);
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 8px;
+
+}
+
+.navigation-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-left-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-right-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}

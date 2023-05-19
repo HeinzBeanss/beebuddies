@@ -19,6 +19,7 @@ const SignupPage = (props) => {
         email: "",
         password: "",
         passwordtwo: "",
+        birthdate: "",
     });
 
     // Handle Input Changes
@@ -31,7 +32,7 @@ const SignupPage = (props) => {
     const handleSignupSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-        const { first_name, last_name, email, password, passwordtwo } = formData;
+        const { first_name, last_name, email, password, passwordtwo, birthdate } = formData;
 
         if (password !== passwordtwo) {
             return setError("Passwords do not match")
@@ -41,7 +42,7 @@ const SignupPage = (props) => {
                 headers: {
                     "Content-Type": "application/json"
                   },
-                body: JSON.stringify({ first_name, last_name, email, password, passwordtwo}),
+                body: JSON.stringify({ first_name, last_name, email, password, passwordtwo, birthdate}),
                 
             });
             console.log(response);
@@ -93,6 +94,10 @@ const SignupPage = (props) => {
                     <div className="input-label-group">
                         <label htmlFor="signup-password-two">Re-enter Password</label>
                         <input type="password" id="signup-password-two" required={true} name="passwordtwo" value={formData.passwordtwo} onChange={handleChange}></input>
+                    </div>
+                    <div className="input-label-group">
+                        <label htmlFor="signup-birthday">Birthdate</label>
+                        <input type="date" id="signup-birthdate" required={true} name="birthdate" value={formData.birthdate} onChange={handleChange}></input>
                     </div>
                     <div className="error-container">{error}</div>
                     <button type="submit">Create Account</button>

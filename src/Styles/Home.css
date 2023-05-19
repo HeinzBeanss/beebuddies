@@ -1,0 +1,136 @@
+.home-component {
+    display: flex;
+    justify-content: center;
+    display: flex;
+    gap: 35px;
+    margin-top: 35px;
+}
+
+.home-section-one, .home-section-two, .home-section-three {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.home-section-one {
+    width: 200px;
+}
+
+.home-section-three {
+    width: 240px;
+}
+
+.home-section-two {
+    width: 550px;    
+}
+
+.home-user-section {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.home-user-section, .home-nav-section, .home-createpost-section, .home-request-section, .home-contacts-section {
+    background-color: var(--background-container);
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 8px;
+
+}
+
+.nav-section-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-left: 20px;
+    border-bottom: 1px rgb(230, 230, 230) solid;
+}
+
+.nav-section-image {
+    width: 25px;
+    height: 25px;
+    background-color: yellow;
+    border-radius: 0.6rem;
+}
+
+.last {
+    border: 0;
+}
+
+.home-createpost-section {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.createpost-top-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px rgb(230, 230, 230) solid;
+}
+
+.createpost-button-section {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: end;
+}
+
+.createpost-title {
+    margin: 0;
+}
+
+.createpost-text {
+    border: 0;
+    outline: 0;
+    resize: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    margin-top: 20px;
+    /* width: 100%; */
+}
+
+.request-section-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.request-item-top {
+    display: flex;
+}
+
+.request-item-top-right {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+
+}
+
+.request-item-bottom {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.request-item-name, .request-item-mutuals, .contact-item-name {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.contact-section-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.temp-user {
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    border-radius: 0.6rem;
+}
