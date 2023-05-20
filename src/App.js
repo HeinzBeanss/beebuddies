@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "./Components/NavBar";
 import LoginPage from "./Components/LoginPage";
 import SignupPage from "./Components/SignupPage";
-import Home from "./Components/Home";
+import Home from "./Components/Home/Home";
 import PostPage from  "./Components/PostPage";
 import UserPage from "./Components/UserPage";
 import ProfilePage from "./Components/ProfilePage";

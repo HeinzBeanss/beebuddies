@@ -6,8 +6,8 @@ body.light {
 }
 
 body.dark {
-  --background: #111111;
-  --background-container: #242424;
+  --background: #161616;
+  --background-container: #111111;
   --primary-colour: rgb(236, 236, 167);
 }
 
