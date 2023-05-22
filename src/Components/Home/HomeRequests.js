@@ -1,10 +1,36 @@
 import '../../Styles/Home.css';
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const HomeRequests = () => {
 
-    // fetch just friend requests.
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:4000/api/users/:id/friend-requests");
+                const data = await response.json();
+                setData(data);
+                setIsLoading(false);
+            } catch (err) {
+                setError(err);
+                setIsLoading(false);
+            }
+        } 
+        fetchData();
+    }, [])
+
+    if (isLoading) {
+        return <div className='home-request-section'>Loading...</div>
+        
+    }
+
+    if (error) {
+        return <div className='home-request-section'>Error: {error.message}</div>
+    }
 
     return (
         <div className='home-request-section'>

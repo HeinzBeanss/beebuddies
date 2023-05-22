@@ -1,0 +1,26 @@
+.userindex-component {
+    display: flex;
+    justify-content: center;
+    display: flex;
+    gap: 35px;
+    margin-top: 35px;
+}
+
+.userindex-section-one {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.userindex-section-one {
+    width: 200px;
+}
+
+.userindex-section-two {
+    width: 550px;    
+}
+
+.userindex-user-profilepicture {
+    width: 100px;
+    height: 100px;
+}

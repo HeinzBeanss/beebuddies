@@ -1,28 +1,22 @@
 import '../../Styles/Home.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 
-import HomeUser from "./HomeUser";
+import SharedUser from "../Shared/User";
+import SharedNavigation from "../Shared/Navigation";
+import SharedSettings from "../Shared/Settings"
 import HomeContacts from "./HomeContacts";
 import HomeCreatePost from "./HomeCreatePost";
-import HomeNavigation from "./HomeNavigation";
 import HomeRequests from "./HomeRequests";
 
-const Home = () => {
-
-    const handleLogoutSubmit = async (e) => {
-        e.preventDefault();
-        localStorage.removeItem("token");
-        const response = await fetch("http://localhost:4000/auth/logout");
-        const message = await response.json();
-        console.log(message);
-    };
+const Home = ({ loading, userData, setIsLoggedIn}) => {
     
     return (
         <div className="home-component">
             <div className='home-section-one'>
-                <HomeUser />
-                <HomeNavigation />
+                <SharedUser loading={loading} userData={userData} />
+                <SharedNavigation />
+                <SharedSettings setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className='home-section-two'>
                 <HomeCreatePost />
@@ -36,9 +30,8 @@ const Home = () => {
 
 
             {/* <Link to={"/login"}>Login</Link>
-            <Link to={"/signup"}>Signup</Link>
+            <Link to={"/signup"}>Signup</Link> */}
 
-            <button className="logout-button" type="submit" onClick={handleLogoutSubmit}>Logout</button> */}
         </div>
     )
 }

@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
-const LoginPage = (props) => {
+const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
     const navigate = useNavigate();
 
     // Check if the user is logged in already
     useEffect(() => {
-        if (props.isLoggedIn === true) {
+        if (isLoggedIn === true) {
             console.log("User alerady logged in");
             navigate("/");
         };
@@ -40,7 +40,8 @@ const LoginPage = (props) => {
         console.log(data);
         localStorage.setItem("token", data.token);
         if (data.updatedUser) {
-            navigate("/login");
+            setIsLoggedIn(true);
+            navigate("/");
         } else {
             // DO something if it doesn't log in properly.
         }

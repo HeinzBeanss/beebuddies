@@ -9,13 +9,14 @@ import Home from "./Components/Home/Home";
 import PostPage from  "./Components/PostPage";
 import UserPage from "./Components/UserPage";
 import ProfilePage from "./Components/ProfilePage";
-import UserIndexPage from "./Components/UserIndexPage";
+import UserIndexPage from "./Components/UserList/UserIndexPage";
 import FriendsPage from "./Components/FriendsPage";
 
 const App = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
 
   // Verify Token on page load up.
@@ -36,16 +37,19 @@ const App = () => {
           console.log(userData);
           setUserData(userData);
           setIsLoggedIn(true);
+          setLoading(false);
         } else {
           const errorData = await response.json();
           setError(errorData.message);
           setIsLoggedIn(false);
+          setLoading(false);
           // navigate("/login");
         }
       } catch (error) {
         console.error("Error verifiying token:", error);
         setError("An error occured while verifying the token");
         setIsLoggedIn(false);
+        setLoading(false);
         // navigate("/login");
       }
     }
@@ -60,7 +64,7 @@ const App = () => {
       verifyToken();
       // There is a token
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <>
@@ -68,16 +72,16 @@ const App = () => {
       <Router>
         <Routes>
           
-          <Route exact path={'/'} element={<Home />} />
-          <Route path={'/login'} element={<LoginPage isLoggedIn={isLoggedIn}/>} />
-          <Route path={'/signup'} element={<SignupPage isLoggedIn={isLoggedIn}/>} />
+          <Route exact path={'/'} element={<Home setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />} />
+          <Route path={'/login'} element={<LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>} />
+          <Route path={'/signup'} element={<SignupPage isLoggedIn={isLoggedIn} />} />
 
-          <Route path={"/profile"} element={<ProfilePage />} />
-          <Route path={"/user/:userId"} element={<UserPage />} />
+          <Route path={"/profile"} element={<ProfilePage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData}  />} />
+          <Route path={"/user/:userId"} element={<UserPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData}  />} />
 
-          <Route path={"/user/:userId/post/:postId"} element={<PostPage />}/>
-          <Route path={"/users"} element={<UserIndexPage />}/>
-          <Route path={"/friends"} element={<FriendsPage />} />
+          <Route path={"/user/:userId/post/:postId"} element={<PostPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}/>
+          <Route path={"/users"} element={<UserIndexPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}/>
+          <Route path={"/friends"} element={<FriendsPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />} />
         </Routes>
       </Router>
     </>
