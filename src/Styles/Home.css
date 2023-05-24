@@ -104,7 +104,7 @@
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     margin-top: 20px;
-    /* width: 100%; */
+    width: 100%;
 }
 
 .request-section-item {

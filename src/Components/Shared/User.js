@@ -18,7 +18,7 @@ const HomeUser = ({loading, userData}) => {
     if (userData) {
         return (
             <div className='home-user-section'>
-                <div className='user-section-image'></div>
+                <img className="small-user-profilepicture" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
                 <h4 className='user-section-name'>{userData.updatedUser.first_name} {userData.updatedUser.last_name}</h4>
             </div>
         )

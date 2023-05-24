@@ -8,6 +8,7 @@ import SharedSettings from "../Shared/Settings"
 import HomeContacts from "./HomeContacts";
 import HomeCreatePost from "./HomeCreatePost";
 import HomeRequests from "./HomeRequests";
+import PostContainer from "../Shared/PostContainer";
 
 const Home = ({ loading, userData, setIsLoggedIn}) => {
     
@@ -19,12 +20,12 @@ const Home = ({ loading, userData, setIsLoggedIn}) => {
                 <SharedSettings setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className='home-section-two'>
-                <HomeCreatePost />
-                {/* {for each post, new section for each.} */}
+                <HomeCreatePost userData={userData}/>
+                <PostContainer userData={userData}/>
             </div>
             <div className='home-section-three'>
-                <HomeRequests />
-                <HomeContacts />
+                <HomeRequests userData={userData}/>
+                <HomeContacts userData={userData}/>
             </div>
 
 

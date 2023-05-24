@@ -7,7 +7,7 @@ import SharedNavigation from "../Shared/Navigation";
 import SharedSettings from "../Shared/Settings"
 import UserIndexUserList from "../UserList/UserList";
 
-const UserIndexPage = ({ loading, userData, setIsLoggedIn }) => {
+const UserIndexPage = ({ loading, userData, setIsLoggedIn, setRefreshUserData }) => {
     // console.log(setIsLoggedIn);
     // console.log("ABOVE THIS IS THE SETILOGGEDIN PROPS")
     return (
