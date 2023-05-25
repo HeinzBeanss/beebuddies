@@ -2,12 +2,12 @@ import "../../Styles/Home.css"
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
 
-const PostContainer = ({ userData }) => {
+const PostContainer = ({refreshData, setRefreshData, userData }) => {
 
     const [posts, setPosts] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [refreshData, setRefreshData] = useState(true);
+
 
     useEffect(() => {
         if (userData && refreshData) {
@@ -37,7 +37,7 @@ const PostContainer = ({ userData }) => {
             { posts.length > 0 ? (
                 posts.map((post, index) => {
                     return (
-                        <Post post={post} key={index}/>
+                        <Post setRefreshData={setRefreshData} userData={userData} post={post} key={index}/>
                     )
                 })
             ) : (

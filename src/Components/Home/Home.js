@@ -1,6 +1,6 @@
 import '../../Styles/Home.css';
 import { Link, useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 
 import SharedUser from "../Shared/User";
 import SharedNavigation from "../Shared/Navigation";
@@ -12,6 +12,8 @@ import PostContainer from "../Shared/PostContainer";
 
 const Home = ({ loading, userData, setIsLoggedIn}) => {
     
+    const [refreshData, setRefreshData] = useState(true);
+
     return (
         <div className="home-component">
             <div className='home-section-one'>
@@ -20,8 +22,8 @@ const Home = ({ loading, userData, setIsLoggedIn}) => {
                 <SharedSettings setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className='home-section-two'>
-                <HomeCreatePost userData={userData}/>
-                <PostContainer userData={userData}/>
+                <HomeCreatePost refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
+                <PostContainer refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
             </div>
             <div className='home-section-three'>
                 <HomeRequests userData={userData}/>

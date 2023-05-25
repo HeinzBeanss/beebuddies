@@ -2,7 +2,7 @@ import '../../Styles/Home.css';
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
-const HomeCreatePost = ({ userData }) => {
+const HomeCreatePost = ({ setRefreshData, userData }) => {
 
     const [imageFile, setImageFile] = useState(null);
     const [postData, setPostData] = useState({
@@ -67,6 +67,10 @@ const HomeCreatePost = ({ userData }) => {
             
             const message = await response.json();
             console.log(message);
+            setRefreshData(true);
+            setPostData({
+                content: "",
+            })
         } else {
             return;
         }
