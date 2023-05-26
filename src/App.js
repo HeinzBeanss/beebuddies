@@ -1,5 +1,6 @@
-import './Styles/App.css';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 
 import NavBar from "./Components/NavBar";
@@ -7,13 +8,14 @@ import LoginPage from "./Components/LoginPage";
 import SignupPage from "./Components/SignupPage";
 import Home from "./Components/Home/Home";
 import PostPage from  "./Components/PostPage";
-import UserPage from "./Components/UserPage";
-import ProfilePage from "./Components/ProfilePage";
+import UserPage from "./Components/User/UserPage";
+import ProfilePage from "./Components/Profile/ProfilePage";
 import UserIndexPage from "./Components/UserList/UserIndexPage";
-import FriendsPage from "./Components/FriendsPage";
+import FriendsPage from "./Components/Friends/FriendsPage";
 
 const App = () => {
 
+  // const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -43,6 +45,7 @@ const App = () => {
           setError(errorData.message);
           setIsLoggedIn(false);
           setLoading(false);
+          setIsLoggedIn(false);
           // navigate("/login");
         }
       } catch (error) {
@@ -66,12 +69,13 @@ const App = () => {
     }
   }, [isLoggedIn]);
 
+
+
   return (
     <>
-      <NavBar userData={userData}/>
       <Router>
+        <NavBar userData={userData}/>
         <Routes>
-          
           <Route exact path={'/'} element={<Home setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />} />
           <Route path={'/login'} element={<LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>} />
           <Route path={'/signup'} element={<SignupPage isLoggedIn={isLoggedIn} />} />

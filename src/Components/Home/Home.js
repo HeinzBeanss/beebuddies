@@ -1,4 +1,4 @@
-import '../../Styles/Home.css';
+import '../Home/Home.css';
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
@@ -8,7 +8,7 @@ import SharedSettings from "../Shared/Settings"
 import HomeContacts from "./HomeContacts";
 import HomeCreatePost from "./HomeCreatePost";
 import HomeRequests from "./HomeRequests";
-import PostContainer from "../Shared/PostContainer";
+import HomePostContainer from "../Home/HomePostContainer";
 
 const Home = ({ loading, userData, setIsLoggedIn}) => {
     
@@ -23,7 +23,7 @@ const Home = ({ loading, userData, setIsLoggedIn}) => {
             </div>
             <div className='home-section-two'>
                 <HomeCreatePost refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
-                <PostContainer refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
+                <HomePostContainer refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
             </div>
             <div className='home-section-three'>
                 <HomeRequests userData={userData}/>

@@ -1,19 +1,20 @@
-import '../../Styles/Home.css';
+import '../Home/Home.css';
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const SharedSettings = ({setIsLoggedIn}) => {
     const navigate = useNavigate();
 
-    // DARK/LIGHT THEME 
-    const [theme, setTheme] = useState("light");
-    const toggleTheme = () => {
-      if (theme === 'light') {
-        setTheme('dark');
-      } else {
-        setTheme('light');
-      }
-    };
+    // DARK/LIGHT THEME
+  const storedTheme = localStorage.getItem('theme');
+  const [theme, setTheme] = useState(storedTheme || 'light');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+  
     useEffect(() => {
       document.body.className = theme;
     }, [theme])

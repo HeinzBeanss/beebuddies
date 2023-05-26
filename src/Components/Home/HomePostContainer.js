@@ -1,8 +1,8 @@
-import "../../Styles/Home.css"
+import './Home.css';
 import React, { useState, useEffect } from "react";
-import Post from "./Post";
+import Post from "../Shared/Post";
 
-const PostContainer = ({refreshData, setRefreshData, userData }) => {
+const HomePostContainer = ({refreshData, setRefreshData, userData }) => {
 
     const [posts, setPosts] = useState(null);
     const [error, setError] = useState(null);
@@ -24,12 +24,12 @@ const PostContainer = ({refreshData, setRefreshData, userData }) => {
     }, [userData, refreshData]);
 
     if (isLoading) {
-        return <div className='home-contacts-section'>Loading...</div>
+        return <div className='home-post-section'>Loading...</div>
         
     }
 
     if (error) {
-        return <div className='home-contacts-section'>Error: {error.message}</div>
+        return <div className='home-post-section'>Error: {error.message}</div>
     }
 
     return (
@@ -47,4 +47,4 @@ const PostContainer = ({refreshData, setRefreshData, userData }) => {
     )
 }
 
-export default PostContainer;
+export default HomePostContainer;
