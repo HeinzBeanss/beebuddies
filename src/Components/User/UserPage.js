@@ -40,14 +40,20 @@ const UserPage = ({ setIsLoggedIn, userData }) => {
     }, [refreshData, userData])
     return (
         <div className="user-page">
-            <div className="user-section-one">
-                <UserPageUser targetUser={targetUser} />
-                <UserPhotos targetUser={targetUser} />
-                <UserFriends targetUser={targetUser} />
-                <Settings setIsLoggedIn={setIsLoggedIn} userData={userData} />
-            </div>
-            <div className="user-section-two">
-                <UserPostContainer setRefreshData={setRefreshData} targetUser={targetUser} userData={userData} />
+            {targetUser ? (
+                <img className="user-banner" src={`data:${targetUser.banner.contentType};base64,${targetUser.banner.data}`} alt="Image" />
+            ) :
+            <div className="user-banner"></div>}
+            <div className="user-page-content">
+                <div className="user-section-one">
+                    <UserPageUser targetUser={targetUser} />
+                    <UserFriends targetUser={targetUser} />
+                    <UserPhotos targetUser={targetUser} />
+                    <Settings setIsLoggedIn={setIsLoggedIn} userData={userData} />
+                </div>
+                <div className="user-section-two">
+                    <UserPostContainer setRefreshData={setRefreshData} targetUser={targetUser} userData={userData} />
+                </div>
             </div>
         </div>
     )

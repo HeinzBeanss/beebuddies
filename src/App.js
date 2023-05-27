@@ -11,6 +11,7 @@ import Home from "./Components/Home/Home";
 import "./Components/Home/Home.css";
 import PostPage from  "./Components/PostPage";
 import UserPage from "./Components/User/UserPage";
+import './Components/User/User.css';
 import ProfilePage from "./Components/Profile/ProfilePage";
 import UserIndexPage from "./Components/UserList/UserIndexPage";
 import FriendsPage from "./Components/Friends/FriendsPage";

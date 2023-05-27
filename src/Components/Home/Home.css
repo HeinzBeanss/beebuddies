@@ -1,7 +1,6 @@
 .home-component {
     display: flex;
     justify-content: center;
-    display: flex;
     gap: 35px;
     margin-top: 35px;
 }
@@ -216,13 +215,6 @@ input[type="file"] {
     gap: 15px;
     padding: 15px 5px;
     border-bottom: var(--separator-line);
-}
-
-.temp-user {
-    width: 25px;
-    height: 25px;
-    background-color: red;
-    border-radius: 0.6rem;
 }
 
 .home-contacts-section > :last-child {

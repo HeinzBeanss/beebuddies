@@ -1,0 +1,138 @@
+.user-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-page-content {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    gap: 35px;
+    margin-top: 35px;
+}
+
+.user-banner {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: var(--box-shadow-small);
+
+}
+
+.user-section-one, .user-section-two {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.user-section-one {
+    width: 400px;
+}
+
+.user-section-two {
+    width: 550px;
+}
+
+/* User Page User Section */
+.user-user-section {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--background-container);
+    border-radius: var(--bg-container-br);
+    box-shadow: var(--box-shadow-small);
+}
+
+.user-section-top {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: var(--separator-line);
+}
+
+.userpage-user-section-name {
+    font-size: 1.4rem;
+    color: var(--neutral-text-colour);
+    line-height: 1.1rem;
+    font-weight: 400;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+.user-section-info {
+    display: flex;
+    flex-direction: column;
+    /* gap: 15px; */
+}
+
+.user-section-info-bio {
+    color: var(--neutral-text-colour);
+    font-size: 0.9rem;
+    font-weight: var(--font-thickness-300d-400l);
+}
+
+.user-section-info-item {
+    color: var(--neutral-text-colour);
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    font-weight: var(--font-thickness-300d-400l);
+    padding-bottom: 5px;
+}
+
+.user-profilepicture-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 0.5rem;
+}
+/* User Page Friends Section */
+.user-contacts-loading, .user-photos-loading {
+    padding: 15px;
+    color: var(--neutral-text-colour);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.user-contacts-section {
+    background-color: var(--background-container);
+    border-radius: var(--bg-container-br);
+    box-shadow: var(--box-shadow-small);
+    display: flex;
+    flex-direction: column;
+    padding: 0px 15px;
+}
+
+.contact-section-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 5px;
+    border-bottom: var(--separator-line);
+}
+
+.user-contacts-section > :last-child {
+    border: 0
+}
+
+/* User Photos Section */
+.user-photos-section {
+    background-color: var(--background-container);
+    border-radius: var(--bg-container-br);
+    box-shadow: var(--box-shadow-small);
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    grid-gap: 15px;
+}
+
+.user-photos-photo {
+    border-radius: 0.4rem;
+    width: 100%;
+    height: 100%;
+}

@@ -15,22 +15,24 @@ const UserContacts = ({ targetUser }) => {
     }
 
     return (
-        <div className='user-photos-section'>
-            { targetUser.posts.length > 0 ? (
-                targetUser.posts.map((post, index) => {
-                    return (
-                        post.image ? (
-                            <div className='photo-section-item' key={index}>
-                                <img className="small-user-profilepicture" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
-                        </div>
-                        ) : null
-                    )
-                })
-            ) : (
-                <div>This user has no photos.</div>
-            )}
-        
-    </div>
+        <div class="user-photos-outer">
+            <h4 className='outer-title'>Photos</h4>
+            <div className='user-photos-section'>
+                { targetUser.posts.length > 0 ? (
+                    targetUser.posts.map((post, index) => {
+                        return (
+                            post.image ? (
+                                <img key={index} className="user-photos-photo" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
+                            
+                            ) : null
+                        )
+                    })
+                ) : (
+                    <div className='user-photos-loading'>This user has no photos.</div>
+                )}
+            
+                </div>
+        </div>
     )
 }
 
