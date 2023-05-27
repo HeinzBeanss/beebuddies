@@ -16,7 +16,7 @@ const ProfilePostContainer = ({ setRefreshData, userData, profileUser }) => {
     // }
 
     return (
-        <div className="profile-post-section">
+        <div className="post-section">
             { profileUser.posts.length > 0 ? (
                 profileUser.posts.map((post, index) => {
                     return (

@@ -30,14 +30,16 @@ const SharedSettings = ({setIsLoggedIn}) => {
     };
 
     return (
-        <div className='shared-settings-section'>
-            <div className='settings-switchtheme'>
-                <button className='settings-switchtheme-button' onClick={toggleTheme}>Switch Theme</button>
-            </div>
-            <div className='settings-logout'>
-                <button className="settings-logout-button" type="submit" onClick={handleLogoutSubmit}>Logout</button>
-            </div>
-
+        <div className="settings-outer">
+          <h4 className='outer-title'>Settings</h4>
+          <div className='shared-settings-section'>
+              <div className='settings-switchtheme'>
+                  <button className='settings-switchtheme-button' onClick={toggleTheme}>Switch Theme</button>
+              </div>
+              <div className='settings-logout'>
+                  <button className="settings-logout-button" type="submit" onClick={handleLogoutSubmit}>Logout</button>
+              </div>
+          </div>
         </div>
     )
 }

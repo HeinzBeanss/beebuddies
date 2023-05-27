@@ -1,38 +1,69 @@
 body.light {
   --background: #edeef5;
   --background-container: #ffffff;
+  --background-lighter: #dbdbdb;
   --primary-colour: rgb(228, 228, 106);
-  --small-box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 8px;
-  /* small box shadow */
+  --box-shadow-small: rgba(0, 0, 0, 0.04) 0px 1px 8px;
+  --separator-line: 1px rgb(230, 230, 230) solid;
+  
+  --neutral-text-colour: rgb(37, 37, 37);
+  --lighter-text-colour: rgb(58, 58, 58);
+  --neutral-text-colour-opposite: #ebebeb;
+  --lighter-text-colour-opposite: #a8a8a8;
+  /* --svg-filter: invert(78%) sepia(7%) saturate(3707%) hue-rotate(173deg) brightness(101%) contrast(105%); */
+
+  --font-thickness-300d-400l: 400;
+  --font-thickness-400d-500l: 500;
+  --svg-filter: invert(63%) sepia(8%) saturate(1838%) hue-rotate(165deg) brightness(87%) contrast(100%);
+
+
 }
 
 body.dark {
-  --background: #161616;
-  --background-container: #111111;
+  /* --background: rgb(17, 17, 17);
+  --background-container: #161616; */
+  /* --background: rgb(24, 25, 26);
+  --background-container: rgb(36, 37, 38); */
+
+  --background: rgb(19, 20, 21);
+  --background-container: rgb(28, 29, 30);
+  --background-lighter: #222020;
   --primary-colour: rgb(236, 236, 167);
+  --box-shadow-small: rgba(0, 0, 0, 0.04) 0px 1px 8px;
+  --separator-line: 1px rgb(63, 63, 63) solid;
+
+  --neutral-text-colour: #ebebeb;
+  --lighter-text-colour: #a8a8a8;
+  --neutral-text-colour-opposite: rgb(37, 37, 37);
+  --lighter-text-colour-opposite: rgb(58, 58, 58);
+  --font-thickness-300d-400l: 300;
+  --font-thickness-400d-500l: 400;
+  --svg-filter: invert(100%) sepia(17%) saturate(7490%) hue-rotate(317deg) brightness(115%) contrast(107%);
 }
-
-/* :root.dark-mode {
-
-} */
 
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background);
+  --bg-container-br: 0.4rem;
+  margin-bottom: 20px;
 }
 
-h4 {
+h1, h2, h3, h4, h5, h6, p {
   margin: 0;
+  padding: 0;
 }
 
-img {
+
+/* img {
   width: 25px;
   height: 25px;
-}
+} */
 
+
+a {
+  color: var(--neutral-text-colour);
+}

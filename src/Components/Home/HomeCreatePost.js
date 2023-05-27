@@ -10,6 +10,11 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
     });
     const [fileError, setFileError] = useState(<div></div>)
 
+    const handleFileUpload = () => {
+        const fileInput = document.querySelector('.createpost-file');
+        fileInput.click();
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setPostData({...postData, [name]: value});
@@ -86,8 +91,8 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
                 </div>
             ) : (
                 <div className="createpost-top-section">
-                <img className="small-user-profilepicture" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
-                <h5 className='user-section-name'>What's on your mind, {userData.updatedUser.first_name}?</h5>
+                <img className="user-profilepicture-medium" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
+                <h4 className='createpost-title'>What's on your mind, {userData.updatedUser.first_name}?</h4>
                 </div>
             )}
 
@@ -95,7 +100,10 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
             <textarea className='createpost-text' name="content" placeholder='Write your thoughts here' rows={4} value={postData.content} onChange={handleInputChange}></textarea>
             <div className="createpost-button-section">
                 {fileError}
-                <input type="file" accept="image/*" onChange={handleFileChange} />
+                <div className="createpost-upload-button">
+                    <input className="createpost-file" type="file" accept="image/*" onChange={handleFileChange}/>
+                    <button className="custom-file-upload" type="button" onClick={handleFileUpload}>Upload an image</button>
+                </div>
                 <button className='createpost-input-button' type='submit'>Create Post</button>
             </div>
         </form>

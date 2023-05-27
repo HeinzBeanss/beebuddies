@@ -16,7 +16,7 @@ const UserPostContainer = ({ setRefreshData, userData, targetUser }) => {
     // }
 
     return (
-        <div className="user-post-section">
+        <div className="post-section">
             { targetUser.posts.length > 0 ? (
                 targetUser.posts.map((post, index) => {
                     return (

@@ -1,4 +1,3 @@
-import './Home.css';
 import React, { useState, useEffect } from "react";
 import Post from "../Shared/Post";
 
@@ -24,16 +23,16 @@ const HomePostContainer = ({refreshData, setRefreshData, userData }) => {
     }, [userData, refreshData]);
 
     if (isLoading) {
-        return <div className='home-post-section'>Loading...</div>
+        return <div className='home-postcontainer-loading'>Loading...</div>
         
     }
 
     if (error) {
-        return <div className='home-post-section'>Error: {error.message}</div>
+        return <div className='home-postcontainer-loading'>Error: {error.message}</div>
     }
 
     return (
-        <div className="home-posts-section">
+        <div className="post-section">
             { posts.length > 0 ? (
                 posts.map((post, index) => {
                     return (
@@ -41,7 +40,7 @@ const HomePostContainer = ({refreshData, setRefreshData, userData }) => {
                     )
                 })
             ) : (
-                <div>No one's posted anything yet!</div>
+                <div className="home-postcontainer-loading">There are no posts to display!</div>
             )}
         </div>
     )

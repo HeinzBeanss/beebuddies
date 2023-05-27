@@ -24,32 +24,11 @@
     width: 550px;    
 }
 
-.home-user-section {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.home-user-section, .home-nav-section, .home-createpost-section, .home-request-section, .home-contacts-section, .shared-settings-section {
+.home-createpost-section, .home-request-section, .home-contacts-section, .shared-settings-section {
     background-color: var(--background-container);
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 8px;
 
-}
-
-.nav-section-item {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding-left: 20px;
-    border-bottom: 1px rgb(230, 230, 230) solid;
-}
-
-.nav-section-image {
-    width: 25px;
-    height: 25px;
-    background-color: yellow;
-    border-radius: 0.6rem;
 }
 
 .shared-settings-section {
@@ -67,22 +46,20 @@
     margin: 0;
 }
 
-.last {
-    border: 0;
-}
+/* Create Post Section */
 
 .home-createpost-section {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 15px;
 }
 
 .createpost-top-section {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px rgb(230, 230, 230) solid;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: var(--separator-line);
 }
 
 .createpost-button-section {
@@ -93,7 +70,11 @@
 }
 
 .createpost-title {
-    margin: 0;
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    font-weight: 500;
+    color: var(--neutral-text-colour);
+    align-self: center;
 }
 
 .createpost-text {
@@ -103,19 +84,73 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-    margin-top: 20px;
+    margin-top: 15px;
     width: 100%;
+    background-color: var(--background);
+    border-radius: 0.4rem;
+    padding: 7px;
+    box-sizing: border-box;
+    color: var(--neutral-text-colour);
+    font-weight: var(--font-thickness-300d-400l);
+}
+
+.createpost-input-button, .custom-file-upload {
+    color: var(--neutral-text-colour);
+    background-color: var(--background);
+    border: transparent 1px solid;
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.3rem;
+    
+}
+
+.createpost-input-button:hover, .custom-file-upload:hover {
+    border: var(--primary-colour) 1px solid;
+    
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.createpost-button-section {
+    padding-top: 10px;
+}
+
+/* Request Section -------------------------------------- */
+
+.home-request-section {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 15px;
+}
+
+.home-request-section > :last-child {
+    border: 0
+}
+
+.home-request-loading {
+    padding: 15px;
+    color: var(--neutral-text-colour);
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 .request-section-item {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 20px;
+    gap: 15px;
+    /* padding: 15px; */
+    padding: 15px 5px;
+    border-bottom: var(--separator-line);
 }
 
 .request-item-top {
     display: flex;
+    align-items: center;
 }
 
 .request-item-top-right {
@@ -131,16 +166,56 @@
     gap: 20px;
 }
 
-.request-item-name, .request-item-mutuals, .contact-item-name {
-    margin: 0;
+.small-user-name {
+    font-weight: 400;
     font-size: 0.8rem;
+    line-height: 1rem;
+}
+
+.small-user-name:hover {
+    font-weight: 600;
+}
+
+.request-item-mutuals {
+    color: var(--lighter-text-colour);
+    font-size: 0.7rem;
+}
+
+.request-accept-button, .request-deny-button {
+    background-color: var(--background);
+    border-radius: 0.4rem;
+    padding: 5px 12px;
+    border: 1px transparent solid;
+    width: 100%;
+    color: var(--neutral-text-colour);
+    font-size: 0.75rem;
+    line-height: 0.8rem;
+}
+
+.request-accept-button:hover, .request-deny-button:hover {
+    border: 1px solid var(--primary-colour);
+}
+
+/* Contacts Section -------------------------- */
+.home-contacts-loading {
+    padding: 15px;
+    color: var(--neutral-text-colour);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.home-contacts-section {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 15px;
 }
 
 .contact-section-item {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
+    gap: 15px;
+    padding: 15px 5px;
+    border-bottom: var(--separator-line);
 }
 
 .temp-user {
@@ -148,4 +223,8 @@
     height: 25px;
     background-color: red;
     border-radius: 0.6rem;
+}
+
+.home-contacts-section > :last-child {
+    border: 0
 }
