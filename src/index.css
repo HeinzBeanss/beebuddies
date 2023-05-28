@@ -15,8 +15,8 @@ body.light {
   --font-thickness-300d-400l: 400;
   --font-thickness-400d-500l: 500;
   --svg-filter: invert(63%) sepia(8%) saturate(1838%) hue-rotate(165deg) brightness(87%) contrast(100%);
-
-
+  --success-text-colour: rgb(52, 175, 52);
+  --error-text-colour: rgb(134, 0, 0);
 }
 
 body.dark {
@@ -39,6 +39,8 @@ body.dark {
   --font-thickness-300d-400l: 300;
   --font-thickness-400d-500l: 400;
   --svg-filter: invert(100%) sepia(17%) saturate(7490%) hue-rotate(317deg) brightness(115%) contrast(107%);
+  --success-text-colour: rgb(140, 190, 140);
+  --error-text-colour: rgb(192, 68, 68);
 }
 
 body {

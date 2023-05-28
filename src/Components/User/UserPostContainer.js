@@ -8,7 +8,7 @@ const UserPostContainer = ({ setRefreshData, userData, targetUser }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     if (!targetUser || !userData) {
-        return <div className='user-post-section'>Loading...</div>
+        return <div className='user-post-loading'>Loading...</div>
     }
     
     // if (error) {

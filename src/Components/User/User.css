@@ -91,7 +91,7 @@
     border-radius: 0.5rem;
 }
 /* User Page Friends Section */
-.user-contacts-loading, .user-photos-loading {
+.user-contacts-loading, .user-photos-loading, .user-post-loading {
     padding: 15px;
     color: var(--neutral-text-colour);
     font-size: 0.9rem;
@@ -129,10 +129,18 @@
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 1fr;
     grid-gap: 15px;
+    /* align-items: start; */
+}
+
+.photo-wrapper {
+    width: 100%;
+    height: 100%;
 }
 
 .user-photos-photo {
     border-radius: 0.4rem;
     width: 100%;
     height: 100%;
+    /* object-position: center;
+    object-fit: cover; */
 }

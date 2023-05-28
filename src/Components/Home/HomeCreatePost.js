@@ -9,6 +9,7 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
         content: "",
     });
     const [fileError, setFileError] = useState(<div></div>)
+    const [fileName, setFileName] = useState("");
 
     const handleFileUpload = () => {
         const fileInput = document.querySelector('.createpost-file');
@@ -26,6 +27,7 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
         if (!file) {
             console.log("actually no file was chosen");
             setImageFile(null);
+            setFileName("");
             return;
         }
 
@@ -40,17 +42,21 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
 
         // Validate File Size
         if (file.size > 1 * 1024 * 1024) {
-            setFileError(<div>Sorry, your file was too big. (Over 1MB)</div>)
+            setFileError(<div className='createpost-file-error'>Sorry, your file was too big. (Over 1MB)</div>)
+            setFileName("");
             e.target.value = "";
             return;
         } 
         if (!allowedFileTypes.includes(file.type)) {
-            setFileError(<div>Sorry, {file.type} isn't a supported file type.</div>);
+            setFileError(<div className='createpost-file-error'>{file.type} isn't a supported file type.</div>);
             e.target.value = "";
+            setFileName("");
             return;
         }
         setFileError(<div></div>)
         setImageFile(file);
+        console.log(file);
+        setFileName(file.name);
     }
 
     const createPost = async (e) => {
@@ -100,6 +106,7 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
             <textarea className='createpost-text' name="content" placeholder='Write your thoughts here' rows={4} value={postData.content} onChange={handleInputChange}></textarea>
             <div className="createpost-button-section">
                 {fileError}
+                <p className='createpost-file-name'>{fileName}</p>
                 <div className="createpost-upload-button">
                     <input className="createpost-file" type="file" accept="image/*" onChange={handleFileChange}/>
                     <button className="custom-file-upload" type="button" onClick={handleFileUpload}>Upload an image</button>

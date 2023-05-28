@@ -7,15 +7,15 @@ const UserContacts = ({ targetUser }) => {
     const [error, setError] = useState(null);
     
     if (!targetUser) {
-        return <div className='user-contacts-section'>Loading...</div>
+        return <div className='user-contacts-loading'>Loading...</div>
     }
 
     if (error) {
-        return <div className='user-contacts-section'>Error: {error.message}</div>
+        return <div className='user-contacts-loading'>Error: {error.message}</div>
     }
 
     return (
-        <div class="user-contacts-outer">
+        <div className="user-contacts-outer">
             <h4 className='outer-title'>Buddies</h4>
             <div className='user-contacts-section'>
                 { targetUser.friends.length > 0 ? (

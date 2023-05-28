@@ -65,6 +65,7 @@
     display: flex;
     width: 100%;
     gap: 10px;
+    align-items: center;
     justify-content: end;
 }
 
@@ -103,7 +104,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 0.3rem;
-    
+    white-space: nowrap;
 }
 
 .createpost-input-button:hover, .custom-file-upload:hover {
@@ -117,6 +118,22 @@ input[type="file"] {
 
 .createpost-button-section {
     padding-top: 10px;
+}
+
+.createpost-file-name, .createpost-file-error {
+    color: var(--neutral-text-colour);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.createpost-file-name {
+    color: var(--success-text-colour);
+}
+
+.createpost-file-error {
+    color: var(--error-text-colour);
 }
 
 /* Request Section -------------------------------------- */

@@ -1,7 +1,16 @@
-// css
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { DateTime } from 'luxon';
 
-const Post = ({ setRefreshData, userData, post, profileUser}) => {
+import heart from "../../Assets/heart-outline.svg";
+import heartfull from "../../Assets/heart.svg";
+
+const ProfilePost = ({setRefreshData, userData, post, profileUser}) => {
+
+    const formatTimestamp = (timestamp) => {
+        const formattedTime = DateTime.fromISO(timestamp).toFormat("MMMM d' at 'HH:mm");
+        return formattedTime;
+    }
 
     const [comment, setComment] = useState("");
 
@@ -10,6 +19,12 @@ const Post = ({ setRefreshData, userData, post, profileUser}) => {
     }
 
     const postComment = async () => {
+
+        if (!comment) {
+            return;
+        }
+        const sanitizedComment = sanitizeComment(comment);
+
         const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}/comment`, {
             method: "POST",
             headers: {
@@ -22,6 +37,12 @@ const Post = ({ setRefreshData, userData, post, profileUser}) => {
         setRefreshData(true);
         setComment("");
     };
+
+    const sanitizeComment = (input) => {
+        const tempElement = document.createElement('div');
+        tempElement.innerText = input;
+        return tempElement.innerHTML;
+      };
 
     const toggleLikePost = async () => {
         const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}/toggle-like`, {
@@ -45,57 +66,60 @@ const Post = ({ setRefreshData, userData, post, profileUser}) => {
     return (
         <div className="post-item">
             <div className="post-section-header">
-                <img className="small-user-profilepicture" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt="Image" />
-                <div>{post.author.first_name} {post.author.last_name}</div>
-                <div>{post.timestamp}</div>
+                <Link className="user-profilepicture-medium" to={`/user/${post.author._id}`}><img className="user-profilepicture-medium" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt="Image" /></Link>
+                <div className="post-section-header-info">
+                <Link to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
+                    <p className="post-timestamp">{formatTimestamp(post.timestamp)}</p>
+                </div>
             </div>
-            <div className="post-section-four">{post.content}</div>
+            <div className="post-section-content">{post.content}</div>
             {post.image ? (
-                <img className="post-section-four small-user-profilepicture" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
-            ) : (
-                <div></div>
-            )}
+                <img className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
+            ) : null}
             {/* Note - add hover like thing displaying users. */}
             <div className="post-section-feedback">
                 <div className="post-section-likes">
+                    <img className="comment-item-likesvg" src={post.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={toggleLikePost}></img>
                     <p className="post-section-likecount">{post.likes.length}</p>
-                    <button className="comment-item-likes" onClick={toggleLikePost}>Like</button>
                 </div>
-                <div className="post-section-comments">{post.comments.length}</div>
+                <p className="post-section-comments">{post.comments.length} Comments</p>
             </div>
-            <div className="post-section-writecomment">
-                <div className="writecomment-section-header">
-                    <img className="small-user-profilepicture" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
-                    <h5 className="small-user-name">{userData.updatedUser.first_name} {userData.updatedUser.last_name}</h5>
-                </div>
-                <div className="writecomment-section-input">
-                    <input className="writecomment-section-comment" type="text" name="comment" placeholder="Write a comment..." onChange={handleInputChange} value={comment}></input>
-                    <button className="writecomment-section-post" onClick={postComment}>Post Comment</button>
-                </div>
-                {post.comments.length > 0 && (
-                    post.comments.map((comment, index) => {
-                        return (
-                            <div key={index} className="comment-section-item">
-                                <img className="small-user-profilepicture" src={`data:${comment.author.profile_picture.contentType};base64,${comment.author.profile_picture.data}`} alt="Image" />
-                                <div className="comment-item-right">
-                                    <h5 className="comment-item-author">{comment.author.first_name} {comment.author.last_name}</h5>
+            <div className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
+                <img className="user-profilepicture-small" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
+                <input className="writecomment-section-comment" type="text" name="comment" placeholder="Write a comment..." onChange={handleInputChange} value={comment}></input>
+                <button className="writecomment-section-post" onClick={postComment}>Post Comment</button>
+            </div>
+            {post.comments.length > 0 ? (
+            <div className="comment-section">
+            {post.comments.length > 0 && (
+                
+                post.comments.map((comment, index) => {
+                    return (
+                        <div key={index} className="comment-section-item">
+                            <Link className="user-profilepicture-small" to={`/user/${comment.author._id}`}><img className="user-profilepicture-small" src={`data:${comment.author.profile_picture.contentType};base64,${comment.author.profile_picture.data}`} alt="Image" /></Link>
+                            <div className="comment-item-right">
+                                <div className="comment-item-right-top">
+                                <Link to={`/user/${comment.author._id}`}><h5 className="comment-item-author">{comment.author.first_name} {comment.author.last_name}</h5></Link>
+                                    <p className="comment-item-timestamp">{formatTimestamp(comment.timestamp)}</p>
+                                </div>
+                                
+                                <div className="comment-item-right-bot">
                                     <p className="comment-item-content">{comment.content}</p>
-                                    <div className="comment-item-final">
-                                        <p className="comment-item-timestamp">{comment.timestamp}</p>
-                                        <div className="comment-item-likes">
-                                            <p className="comment-item-likecount">{comment.likes.length}</p>
-                                            <button className="comment-item-likes" onClick={(e) => toggleLikeComment(e, comment)}>Like</button>
-                                        </div>
+                                    <div className="comment-item-likes">
+                                        <p className="comment-section-likecount">{comment.likes.length}</p>
+                                        <img className="comment-item-likesvg" src={comment.likes.includes(userData.updatedUser._id) ? heartfull : heart} onClick={(e) => toggleLikeComment(e, comment)}></img>
+
                                     </div>
                                 </div>
                             </div>
-                        )
-                    })
-                )}
+                        </div>
+                    )
+                })
+            )}
             </div>
-
+            ) : null}
         </div>
     )
 }
 
-export default Post;
+export default ProfilePost;

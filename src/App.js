@@ -13,6 +13,7 @@ import PostPage from  "./Components/PostPage";
 import UserPage from "./Components/User/UserPage";
 import './Components/User/User.css';
 import ProfilePage from "./Components/Profile/ProfilePage";
+import './Components/Profile/Profile.css';
 import UserIndexPage from "./Components/UserList/UserIndexPage";
 import FriendsPage from "./Components/Friends/FriendsPage";
 
