@@ -20,7 +20,7 @@
     object-fit: cover;
     object-position: center;
     box-shadow: var(--box-shadow-small);
-
+    /* border-bottom: var(--primary-border); */
 }
 
 .profile-section-one, .profile-section-two {
@@ -55,15 +55,39 @@
     cursor: pointer;
 }
 
-.banner-feedback {
+.banner-feedback, .avatar-feedback {
     position: absolute;
     top: -25px;
     left: 5px;
 }
-/*  Del Below */
+
+.createpost-file-name {
+    color: var(--success-text-colour);
+}
+
+.createpost-file-error {
+    color: var(--error-text-colour);
+}
+
+.profile-edit-textarea {
+    border: 0;
+    outline: 0;
+    resize: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    width: 100%;
+    background-color: var(--background);
+    border-radius: 0.4rem;
+    padding: 5px;
+    box-sizing: border-box;
+    color: var(--neutral-text-colour);
+    font-weight: var(--font-thickness-300d-400l)
+}
 
 /* User Page User Section */
-.user-user-section {
+.profile-user-section {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -74,100 +98,105 @@
     box-shadow: var(--box-shadow-small);
 }
 
-.user-section-top {
+
+/* Profile Edit Section  - - - - - - - - - */
+.profile-edit-section {
+    position: relative;
     display: flex;
+    flex-direction: column;
+    padding: 15px;
     gap: 10px;
-    align-items: center;
-    width: 100%;
-    padding-bottom: 15px;
-    border-bottom: var(--separator-line);
+    background-color: var(--background-container);
+    border-radius: var(--bg-container-br);
+    box-shadow: var(--box-shadow-small);
 }
 
-.userpage-user-section-name {
+.profile-edit-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-edit-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-edit-form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-edit-form-item > label {
+    color: var(--neutral-text-colour);
+    font-size: 0.6rem;
+    margin-left: 4px;
+}
+
+.profile-edit-buttons {
+    position: absolute;
+    right: 15px;
+    z-index: 1;
+    display: flex;
+    gap: 10px;
+}
+
+.profile-edit-button {
+    padding: 8px 14px;
+    /* border: 2px var(--primary-colour) solid; */
+    border: 0;
+    font-size: 0.8rem;
+    font-weight: var(--font-thickness-300d-400l);
+    border-radius: 0.3rem;
+    background-color: var(--background);
+    color: var(--neutral-text-colour);
+    box-shadow: var(--box-shadow-small);
+    cursor: pointer;
+}
+
+.profile-edit-button-cancel {
+    padding: 8px 14px;
+    /* border: 2px var(--primary-colour) solid; */
+    border: 0;
+    font-size: 0.8rem;
+    font-weight: var(--font-thickness-300d-400l);
+    border-radius: 0.3rem;
+    background-color: var(--background);
+    color: var(--neutral-text-colour);
+    box-shadow: var(--box-shadow-small);
+    cursor: pointer;
+}
+
+.profile-edit-input {
+    background-color: var(--background);
+    border: 0;
+    padding: 5px;
+    border-radius: 0.4rem;
+}
+
+.profile-edit-title {
     font-size: 1.4rem;
     color: var(--neutral-text-colour);
     line-height: 1.1rem;
     font-weight: 400;
-    padding-bottom: 20px;
-    padding-top: 10px;
 }
 
-.user-section-info {
-    display: flex;
-    flex-direction: column;
-    /* gap: 15px; */
-}
-
-.user-section-info-bio {
-    color: var(--neutral-text-colour);
-    font-size: 0.9rem;
-    font-weight: var(--font-thickness-300d-400l);
-}
-
-.user-section-info-item {
-    color: var(--neutral-text-colour);
+.profile-edit-button-confirm {
+    padding: 8px 14px;
+    /* border: 2px var(--primary-colour) solid; */
+    border: 0;
     font-size: 0.8rem;
-    line-height: 0.8rem;
     font-weight: var(--font-thickness-300d-400l);
-    padding-bottom: 5px;
-}
-
-.user-profilepicture-large {
-    width: 120px;
-    height: 120px;
-    border-radius: 0.5rem;
-}
-/* User Page Friends Section */
-.user-contacts-loading, .user-photos-loading, .user-post-loading {
-    padding: 15px;
+    border-radius: 0.3rem;
+    background-color: var(--background);
     color: var(--neutral-text-colour);
-    font-size: 0.9rem;
-    font-weight: 400;
-}
-
-.user-contacts-section {
-    background-color: var(--background-container);
-    border-radius: var(--bg-container-br);
     box-shadow: var(--box-shadow-small);
-    display: flex;
-    flex-direction: column;
-    padding: 0px 15px;
-}
-
-.contact-section-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 5px;
-    border-bottom: var(--separator-line);
-}
-
-.user-contacts-section > :last-child {
-    border: 0
-}
-
-/* User Photos Section */
-.user-photos-section {
-    background-color: var(--background-container);
-    border-radius: var(--bg-container-br);
-    box-shadow: var(--box-shadow-small);
-    padding: 15px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 1fr;
-    grid-gap: 15px;
-    /* align-items: start; */
-}
-
-.photo-wrapper {
-    width: 100%;
-    height: 100%;
-}
-
-.user-photos-photo {
-    border-radius: 0.4rem;
-    width: 100%;
-    height: 100%;
-    /* object-position: center;
-    object-fit: cover; */
+    cursor: pointer;
 }

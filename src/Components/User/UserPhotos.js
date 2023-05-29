@@ -16,7 +16,7 @@ const UserContacts = ({ targetUser }) => {
 
     return (
         <div className="user-photos-outer">
-            <h4 className='outer-title'>Photos</h4>
+            <h4 className='outer-title'>{targetUser.first_name}'s Photos</h4>
             <div className='user-photos-section'>
                 { targetUser.posts.length > 0 ? (
                     targetUser.posts.map((post, index) => {

@@ -24,6 +24,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
+  const [refreshMainUserData, setRefreshMainUserData] = useState(false);
 
   // Verify Token on page load up.
   useEffect(() => {
@@ -44,6 +45,7 @@ const App = () => {
           setUserData(userData);
           setIsLoggedIn(true);
           setLoading(false);
+          setRefreshMainUserData(false);
         } else {
           const errorData = await response.json();
           setError(errorData.message);
@@ -51,12 +53,14 @@ const App = () => {
           setLoading(false);
           setIsLoggedIn(false);
           // navigate("/login");
+          setRefreshMainUserData(false);
         }
       } catch (error) {
         console.error("Error verifiying token:", error);
         setError("An error occured while verifying the token");
         setIsLoggedIn(false);
         setLoading(false);
+        setRefreshMainUserData(false);
         // navigate("/login");
       }
     }
@@ -71,7 +75,7 @@ const App = () => {
       verifyToken();
       // There is a token
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, refreshMainUserData]);
 
 
 
@@ -85,7 +89,7 @@ const App = () => {
           <Route path={'/signup'} element={<SignupPage isLoggedIn={isLoggedIn} />} />
 
           <Route path={"/profile"} element={<ProfilePage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData}  />} />
-          <Route path={"/user/:userId"} element={<UserPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData}  />} />
+          <Route path={"/user/:userId"} element={<UserPage setRefreshMainUserData={setRefreshMainUserData} setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData}  />} />
 
           <Route path={"/user/:userId/post/:postId"} element={<PostPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}/>
           <Route path={"/users"} element={<UserIndexPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}/>

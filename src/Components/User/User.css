@@ -18,8 +18,10 @@
     object-fit: cover;
     object-position: center;
     box-shadow: var(--box-shadow-small);
-
+    /* border-bottom: var(--primary-border); */
 }
+
+
 
 .user-section-one, .user-section-two {
     display: flex;
@@ -37,6 +39,7 @@
 
 /* User Page User Section */
 .user-user-section {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -61,13 +64,14 @@
     color: var(--neutral-text-colour);
     line-height: 1.1rem;
     font-weight: 400;
-    padding-bottom: 20px;
-    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .user-section-info {
     display: flex;
     flex-direction: column;
+    justify-content: end;
+    height: 100%;
     /* gap: 15px; */
 }
 
@@ -75,6 +79,7 @@
     color: var(--neutral-text-colour);
     font-size: 0.9rem;
     font-weight: var(--font-thickness-300d-400l);
+    width: 100%;
 }
 
 .user-section-info-item {
@@ -96,6 +101,9 @@
     color: var(--neutral-text-colour);
     font-size: 0.9rem;
     font-weight: 400;
+    background-color: var(--background-container);
+    border-radius: var(--bg-container-br);
+    box-shadow: var(--box-shadow-small);
 }
 
 .user-contacts-section {
@@ -143,4 +151,26 @@
     height: 100%;
     /* object-position: center;
     object-fit: cover; */
+}
+
+/* User Request Buttons */
+.user-request-buttons {
+    position: absolute;
+    right: 15px;
+    z-index: 1;
+    display: flex;
+    gap: 10px;
+}
+
+.user-request-button {
+    padding: 8px 14px;
+    /* border: 2px var(--primary-colour) solid; */
+    border: 0;
+    font-size: 0.8rem;
+    font-weight: var(--font-thickness-300d-400l);
+    border-radius: 0.3rem;
+    background-color: var(--background);
+    color: var(--neutral-text-colour);
+    box-shadow: var(--box-shadow-small);
+    cursor: pointer;
 }

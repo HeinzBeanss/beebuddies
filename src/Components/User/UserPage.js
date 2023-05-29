@@ -9,7 +9,7 @@ import UserFriends from "./UserFriends";
 import Settings from "../Shared/Settings";
 
 
-const UserPage = ({ setIsLoggedIn, userData }) => {
+const UserPage = ({ setIsLoggedIn, userData, setRefreshMainUserData}) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -46,7 +46,7 @@ const UserPage = ({ setIsLoggedIn, userData }) => {
             <div className="user-banner"></div>}
             <div className="user-page-content">
                 <div className="user-section-one">
-                    <UserPageUser targetUser={targetUser} />
+                    <UserPageUser setRefreshMainUserData={setRefreshMainUserData} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
                     <UserFriends targetUser={targetUser} />
                     <UserPhotos targetUser={targetUser} />
                     <Settings setIsLoggedIn={setIsLoggedIn} userData={userData} />

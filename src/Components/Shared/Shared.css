@@ -21,7 +21,7 @@
     border-radius: 0.5rem;
 }
 
-.user-section-info {
+.home-user-section-info {
     display: flex;
     flex-direction: column;
 }

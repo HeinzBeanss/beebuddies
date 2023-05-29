@@ -31,11 +31,13 @@ const ProfilePage = ({ setIsLoggedIn, userData }) => {
     }, [refreshData, userData])
 
     const handleFileUpload = () => {
-        const fileInput = document.querySelector('.createpost-file');
+        const fileInput = document.querySelector('.createpost-file-banner');
+        setbannerFeedback("");
         fileInput.click();
     };
 
     const handleFileChange = async (e) => {
+        console.log("pressed the handlefilechange banner");
         const file = e.target.files[0];
         if (!file) {
             console.log("actually no file was chosen");
@@ -78,11 +80,16 @@ const ProfilePage = ({ setIsLoggedIn, userData }) => {
         setRefreshData(true);
     }
 
+    if (profileUser) {
+        console.log("BELOW THIS IS PROFULE USER");
+        console.log(profileUser);
+    }
+
     return (
         <div className="profile-page">
             {profileUser ? (
                 <div className="profile-banner">
-                    <input className="createpost-file" type="file" accept="image/*" onChange={handleFileChange}/>
+                    <input className="createpost-file-banner" type="file" accept="image/*" onChange={handleFileChange}/>
                     <button className="banner-button" onClick={handleFileUpload}>Update Banner</button>
                     <img className="profile-banner" src={`data:${profileUser.banner.contentType};base64,${profileUser.banner.data}`} alt="Image" />
                 </div>
@@ -90,7 +97,7 @@ const ProfilePage = ({ setIsLoggedIn, userData }) => {
             <div className="profile-banner"></div>}
             <div className="profile-page-content">
             <div className="profile-section-one">
-                <ProfilePageUser profileUser={profileUser} />
+                <ProfilePageUser profileUser={profileUser} setRefreshData={setRefreshData}/>
                 <UserFriends targetUser={profileUser} />
                 <UserPhotos targetUser={profileUser} />
                 <Settings setIsLoggedIn={setIsLoggedIn} userData={userData} />

@@ -12,6 +12,7 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
     const [fileName, setFileName] = useState("");
 
     const handleFileUpload = () => {
+        setFileError(<div></div>)
         const fileInput = document.querySelector('.createpost-file');
         fileInput.click();
     };

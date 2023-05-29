@@ -24,7 +24,7 @@ const UserPostContainer = ({ setRefreshData, userData, targetUser }) => {
                     )
                 })
             ) : (
-                <div>This user has no posts!</div>
+                <div className='user-post-loading'>This user has no posts!</div>
             )}
         </div>
     )

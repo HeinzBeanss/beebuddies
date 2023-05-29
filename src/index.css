@@ -5,6 +5,7 @@ body.light {
   --primary-colour: rgb(228, 228, 106);
   --box-shadow-small: rgba(0, 0, 0, 0.04) 0px 1px 8px;
   --separator-line: 1px rgb(230, 230, 230) solid;
+  --primary-border: 2px rgb(228, 228, 106) solid;
   
   --neutral-text-colour: rgb(37, 37, 37);
   --lighter-text-colour: rgb(58, 58, 58);
@@ -31,7 +32,8 @@ body.dark {
   --primary-colour: rgb(236, 236, 167);
   --box-shadow-small: rgba(0, 0, 0, 0.04) 0px 1px 8px;
   --separator-line: 1px rgb(63, 63, 63) solid;
-
+  --primary-border: 2px rgb(236, 236, 167) solid;
+  
   --neutral-text-colour: #ebebeb;
   --lighter-text-colour: #a8a8a8;
   --neutral-text-colour-opposite: rgb(37, 37, 37);
@@ -64,7 +66,9 @@ h1, h2, h3, h4, h5, h6, p {
   width: 25px;
   height: 25px;
 } */
-
+textarea {
+  resize: none;
+}
 
 a {
   color: var(--neutral-text-colour);

@@ -16,7 +16,7 @@ const UserContacts = ({ targetUser }) => {
 
     return (
         <div className="user-contacts-outer">
-            <h4 className='outer-title'>Buddies</h4>
+            <h4 className='outer-title'>{targetUser.first_name}'s Buddies</h4>
             <div className='user-contacts-section'>
                 { targetUser.friends.length > 0 ? (
                     targetUser.friends.map((user, index) => {
