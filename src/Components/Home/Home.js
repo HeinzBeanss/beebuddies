@@ -26,8 +26,8 @@ const Home = ({ loading, userData, setIsLoggedIn}) => {
                 <HomePostContainer refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
             </div>
             <div className='home-section-three'>
-                <HomeRequests userData={userData}/>
-                <HomeContacts userData={userData}/>
+                <HomeRequests userData={userData} refreshData={refreshData} setRefreshData={setRefreshData}/>
+                <HomeContacts userData={userData} refreshData={refreshData} setRefreshData={setRefreshData}/>
             </div>
 
 

@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
-const HomeRequests = ({ loading, userData }) => {
+const HomeRequests = ({ loading, userData, refreshData, setRefreshData }) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
-    const [refreshData, setRefreshData] = useState(true);
 
     const acceptFriendRequest = async (e, user) => {
         e.preventDefault();
@@ -31,7 +30,7 @@ const HomeRequests = ({ loading, userData }) => {
     }
 
     useEffect(() => {
-        if (userData && refreshData) {
+        if (userData) {
             const fetchData = async () => {
                 try {
                     console.log("retrieving friend requests")

@@ -29,6 +29,7 @@ const App = () => {
   // Verify Token on page load up.
   useEffect(() => {
     // Function
+    setUserData(null);
     const verifyToken = async () => {
       try {
         console.log("Attempting to verify token");
