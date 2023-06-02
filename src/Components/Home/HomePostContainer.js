@@ -6,21 +6,22 @@ const HomePostContainer = ({refreshData, setRefreshData, userData }) => {
     const [posts, setPosts] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [refreshPostData, setRefreshPostData] = useState(true);
 
 
     useEffect(() => {
-        if (userData && refreshData) {
+        if (userData && refreshPostData) {
             const fetchPosts = async () => {
                 const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/friends/posts`);
                 const postData = await response.json();
                 console.log(postData);
                 setPosts(postData);
-                setRefreshData(false);
+                setRefreshPostData(false);
                 setIsLoading(false);
             };    
             fetchPosts();
         }
-    }, [userData, refreshData]);
+    }, [userData, refreshPostData]);
 
     if (isLoading) {
         return <div className='home-postcontainer-loading'>Loading...</div>
@@ -36,7 +37,7 @@ const HomePostContainer = ({refreshData, setRefreshData, userData }) => {
             { posts.length > 0 ? (
                 posts.map((post, index) => {
                     return (
-                        <Post setRefreshData={setRefreshData} userData={userData} post={post} key={index}/>
+                        <Post setRefreshData={setRefreshPostData} userData={userData} post={post} key={index}/>
                     )
                 })
             ) : (

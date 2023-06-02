@@ -1,12 +1,11 @@
 .userindex-component {
     display: flex;
     justify-content: center;
-    display: flex;
     gap: 35px;
     margin-top: 35px;
 }
 
-.userindex-section-one {
+.userindex-section-one, .userindex-section-two {
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -17,7 +16,7 @@
 }
 
 .userindex-section-two {
-    width: 550px;    
+    width: 700px;
 }
 
 .userindex-user-card {
@@ -29,16 +28,4 @@
 .userindex-user-profilepicture {
     width: 100px;
     height: 100px;
-}
-
-/* SHARED */
-
-.small-user-profilepicture {
-    width: 40px;
-    height: 40px;
-    border-radius: 0.3rem;
-}
-
-.small-user-name {
-    margin: 0;
 }

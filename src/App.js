@@ -3,19 +3,22 @@ import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 
 import './App.css';
+import "./Components/Home/Home.css";
 import './Components/Shared/Shared.css';
+import './Components/Friends/Friends.css';
+import './Components/Profile/Profile.css';
+import './Components/User/User.css';
+import './Components/UserList/UserIndexPage.css';
+
 import NavBar from "./Components/NavBar";
 import LoginPage from "./Components/LoginPage";
 import SignupPage from "./Components/SignupPage";
 import Home from "./Components/Home/Home";
-import "./Components/Home/Home.css";
-import PostPage from  "./Components/PostPage";
 import UserPage from "./Components/User/UserPage";
-import './Components/User/User.css';
 import ProfilePage from "./Components/Profile/ProfilePage";
-import './Components/Profile/Profile.css';
 import UserIndexPage from "./Components/UserList/UserIndexPage";
 import FriendsPage from "./Components/Friends/FriendsPage";
+
 
 const App = () => {
 
@@ -92,7 +95,6 @@ const App = () => {
           <Route path={"/profile"} element={<ProfilePage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData}  />} />
           <Route path={"/user/:userId"} element={<UserPage setRefreshMainUserData={setRefreshMainUserData} setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData}  />} />
 
-          <Route path={"/user/:userId/post/:postId"} element={<PostPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}/>
           <Route path={"/users"} element={<UserIndexPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}/>
           <Route path={"/friends"} element={<FriendsPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />} />
         </Routes>

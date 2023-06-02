@@ -1,10 +1,9 @@
-import '../Home/Home.css';
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 import SharedUser from "../Shared/User";
 import SharedNavigation from "../Shared/Navigation";
-import SharedSettings from "../Shared/Settings"
+import SharedSettings from "../Shared/Settings";
 import HomeContacts from "./HomeContacts";
 import HomeCreatePost from "./HomeCreatePost";
 import HomeRequests from "./HomeRequests";

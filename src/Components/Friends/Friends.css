@@ -1,0 +1,64 @@
+.friends-component {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 35px;
+}
+
+.friends-section-one, .friends-section-two {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.friends-section-one {
+    width: 200px;
+}
+
+.friends-section-two {
+    width: 700px;
+}
+
+/* Friend List Section */
+.friendlist-section {
+    background-color: var(--background-container);
+    border-radius: var(--);
+    box-shadow: var(--box-shadow-small);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.friendlist-section-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+}
+
+.friendlist-card {
+    padding: 15px;
+    border: var(--separator-line);
+    border-radius: 0.8rem;
+}
+
+.friend-pfp {
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.friendlist-username {
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-bottom: var(--separator-line);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.friendlist-bio {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--neutral-text-colour);
+    line-height: 1rem;
+}
