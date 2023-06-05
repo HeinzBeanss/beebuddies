@@ -9,7 +9,7 @@ import UserFriends from "../User/UserFriends";
 import Settings from "../Shared/Settings";
 
 
-const ProfilePage = ({ setIsLoggedIn, userData }) => {
+const ProfilePage = ({ setRefreshMainUserData, setIsLoggedIn, userData }) => {
 
     const [profileUser, setProfileUser] = useState(null);
     const [refreshData, setRefreshData] = useState(true);
@@ -97,9 +97,9 @@ const ProfilePage = ({ setIsLoggedIn, userData }) => {
             <div className="profile-banner"></div>}
             <div className="profile-page-content">
             <div className="profile-section-one">
-                <ProfilePageUser profileUser={profileUser} setRefreshData={setRefreshData}/>
+                <ProfilePageUser setRefreshMainUserData={setRefreshMainUserData} profileUser={profileUser} setRefreshData={setRefreshData}/>
                 <UserFriends targetUser={profileUser} />
-                <UserPhotos targetUser={profileUser} />
+                <UserPhotos setRefreshData={setRefreshData} userData={userData} targetUser={profileUser} />
                 <Settings setIsLoggedIn={setIsLoggedIn} userData={userData} />
             </div>
             <div className="profile-section-two">

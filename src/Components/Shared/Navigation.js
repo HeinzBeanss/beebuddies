@@ -60,7 +60,7 @@ const Navigation = () => {
       title: 'Photos',
       svg: Photos,
       svgHover: PhotosHover,
-      path: '',
+      path: '/photos',
       isLast: true,
     },
     ];

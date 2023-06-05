@@ -97,8 +97,8 @@ const UserPageUser = ({setRefreshData, userData, targetUser, setRefreshMainUserD
                             <button className='user-request-button' onClick={resindFriendRequest}>Rescind Request</button>
                         ) : targetUser.friend_requests_out.includes(userData.updatedUser._id) ? (
                             <div className='user-page-request-container'>
-                                <button className='user-request-button' onClick={acceptFriendRequest}>Accept Friend Request</button>
-                                <button className='user-request-button' onClick={denyFriendRequest}>Deny Friend Request</button>
+                                <button className='user-request-button' onClick={acceptFriendRequest}>Accept Request</button>
+                                <button className='user-request-button' onClick={denyFriendRequest}>Deny Request</button>
                             </div>
                         ) : !targetUser.friends.some(friend => friend._id === userData.updatedUser._id) ? (
                             <button className='user-request-button' onClick={sendFriendRequest}>Add Friend</button>

@@ -3,6 +3,8 @@
     justify-content: center;
     gap: 35px;
     margin-top: 35px;
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .home-section-one, .home-section-two, .home-section-three {
@@ -13,10 +15,39 @@
 
 .home-section-one {
     width: 200px;
+
+    position: sticky;
+    top: 95px;
+    bottom: 35px;
+    left: 0;
+    height: calc(100dvh - 130px);
+    overflow-y: auto;
 }
+
+.home-section-one::-webkit-scrollbar, .home-section-three::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.home-section-one, .home-section-three {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+}
+
+/* .profile-section-two {
+    position: relative;
+    width: 550px;
+} */
 
 .home-section-three {
     width: 240px;
+
+    position: sticky;
+    top: 95px;
+    bottom: 35px;
+    left: 0;
+    height: calc(100dvh - 130px);
+    overflow-y: auto;
 }
 
 .home-section-two {
@@ -208,7 +239,7 @@ input[type="file"] {
     line-height: 0.8rem;
 }
 
-.request-accept-button:hover, .request-deny-button:hover {
+.request-accept-button:hover, .request-deny-button:hover, .user-request-button:hover {
     border: 1px solid var(--primary-colour);
 }
 

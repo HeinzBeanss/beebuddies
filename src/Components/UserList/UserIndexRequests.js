@@ -32,35 +32,51 @@ const UserIndexRequests = ({ data, setRefreshData, userData}) => {
     }
 
     return (
-        <div className='userindex-requests-in'>
-          {data.length > 0 ? (
-            <div>
-              <h4>Friend Requests</h4>
-              {data.map((user, index) => {
-                if (user.friend_requests_out.includes(userData.updatedUser._id)) {
-                  return (
-                    <div key={index}>
-                      <Link to={`/user/${user._id}`}>
-                        <h5>{user.first_name} {user.last_name}</h5>
-                      </Link>
-                      <Link to={`/user/${user._id}`}>
-                        <img className="small-user-profilepicture" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt="Image" />
-                      </Link>
-                      <div className="userindex-item-bottom">
-                        <button className='userindex-accept-button' onClick={(e) => acceptFriendRequest(e, user)}>Accept</button>
-                        <button className='userindex-deny-button' onClick={(e) => denyFriendRequest(e, user)}>Deny</button>
-                      </div>
+      <div className='userindex-requests-in'>
+        {data.filter((user) => user.friend_requests_out.includes(userData.updatedUser._id)).length > 0 ? (
+          <div>
+            <h4 className="userindex-requests-title">Friend Requests</h4>
+            <div className="index-requests-grid">
+              {data
+                .filter((user) =>
+                  user.friend_requests_out.includes(userData.updatedUser._id)
+                )
+                .map((user, index) => (
+                  <div className="friendlist-card" key={index}>
+                    <Link to={`/user/${user._id}`}>
+                      <h5 className="userindex-username">{user.first_name} {user.last_name}</h5>
+                    </Link>
+                    <Link to={`/user/${user._id}`}>
+                      <img
+                        className="friend-pfp"
+                        src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`}
+                        alt="Image"
+                      />
+                    </Link>
+                    <div className="userindex-item-bottom">
+                      <button
+                        className="userindex-accept-button"
+                        onClick={(e) => acceptFriendRequest(e, user)}
+                      >
+                        Accept
+                      </button>
+                      <button
+                        className="userindex-deny-button"
+                        onClick={(e) => denyFriendRequest(e, user)}
+                      >
+                        Deny
+                      </button>
                     </div>
-                  );
-                }
-                return null;
-              })}
+                  </div>
+                ))}
             </div>
-          ) : (
-            <div className="userindex-section-userlist">You have no incoming friend requests.</div>
-          )}
-        </div>
-      );
+          </div>
+        ) : (
+          <div>You have no incoming friend requests.</div>
+        )}
+      </div>
+    );
+    
       
 }
 

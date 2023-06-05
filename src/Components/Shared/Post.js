@@ -163,7 +163,7 @@ const Post = ({setRefreshData, userData, post}) => {
                 <img onClick={enlargeImage} className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
             ) : null}
             {/* Note - add hover like thing displaying users. */}
-            <div className="post-section-feedback">
+            <div className="post-section-feedback minus">
                 <div className="post-section-likes" onMouseOver={() => displayLikes(post.likes)} onMouseLeave={() => setLikes(null)}>
                     {likes}
                     <img className="comment-item-likesvg" src={post.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={toggleLikePost}></img>
@@ -192,7 +192,7 @@ const Post = ({setRefreshData, userData, post}) => {
                                 
                                 <div className="comment-item-right-bot">
                                     <p className="comment-item-content">{comment.content}</p>
-                                    <div className="comment-item-likes"     onMouseEnter={() => handleCommentMouseEnter(comment._id)} onMouseLeave={handleCommentMouseLeave}>
+                                    <div className="comment-item-likes minus"     onMouseEnter={() => handleCommentMouseEnter(comment._id)} onMouseLeave={handleCommentMouseLeave}>
                                     {hoveredComment === comment._id && (
                                     <>{displayCommentLikes(comment.likes)}</>
                                     )}

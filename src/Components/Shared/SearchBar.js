@@ -17,20 +17,44 @@ const SearchBar = ({ friends }) => {
 
     return (
         <div className="friendlist-section-search">
-                <input className="search-section-searchbar" placeholder="Search for buddies" value={value} onChange={onChange}></input>
-                <div className="search-section-dropdown">
-                    {friends.filter(friend => {
-                        const searchTerm = value.toLowerCase();
-                        const friendsName = friend.first_name.toLowerCase();
-
-                        return searchTerm && friendsName.startsWith(searchTerm)
-                    })
-                    .map((friend) => ( 
-                        <Link className="search-section-dropdown-row" key={friend._id} to={`/user/${friend._id}`}>{friend.first_name} {friend.last_name}</Link>
-                    ))}
-                </div>
+          <h4 className="search-section-title">Search for users</h4>
+          <input
+            className="search-section-searchbar"
+            placeholder="John Smith"
+            value={value}
+            onChange={onChange}
+          />
+          {value.length > 0 && (
+            <div className="searchbar-container">
+              <div className="search-section-dropdown">
+                {friends
+                  .filter((friend) => {
+                    const searchTerm = value.toLowerCase();
+                    const friendsName = friend.first_name.toLowerCase();
+                    return searchTerm && friendsName.startsWith(searchTerm);
+                  })
+                  .map((friend) => (
+                    <Link
+                      className="search-section-dropdown-row"
+                      key={friend._id}
+                      to={`/user/${friend._id}`}
+                    >
+                      {friend.first_name} {friend.last_name}
+                    </Link>
+                  ))}
+                {value.length > 0 && friends.filter((friend) => {
+                  const searchTerm = value.toLowerCase();
+                  const friendsName = friend.first_name.toLowerCase();
+                  return searchTerm && friendsName.startsWith(searchTerm);
+                }).length === 0 && (
+                  <p className="search-section-dropdown-row">No users found</p>
+                )}
+              </div>
             </div>
-    )
+          )}
+        </div>
+      );
+      
 }
 
 export default SearchBar;

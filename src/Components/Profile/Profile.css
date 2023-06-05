@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: 20px;
+
 }
 
 .profile-page-content {
@@ -11,6 +13,8 @@
     align-self: center;
     gap: 35px;
     margin-top: 35px;
+
+    /* position: relative; */
 }
 
 .profile-banner {
@@ -31,10 +35,27 @@
 
 .profile-section-one {
     width: 400px;
+    position: sticky;
+    z-index: 200;
+    top: 95px;
+    bottom: 35px;
+    left: 0;
+    height: calc(100dvh - 130px);
+    overflow-y: auto;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.profile-section-one::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.profile-section-one {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
 }
 
 .profile-section-two {
-    position: relative;
     width: 550px;
 }
 
@@ -200,3 +221,5 @@
     box-shadow: var(--box-shadow-small);
     cursor: pointer;
 }
+
+

@@ -33,7 +33,7 @@ const PostPage = ({post, setDisplayLargePost, scrollPosition, stopEnlargeImage, 
             }
           
             return (
-              <div className="display-likes-component">
+              <div className="display-likes-component-postpage">
                 {users.map((user, index) => (
                   <p key={index}>{user.first_name} {user.last_name}</p>
                 ))}
@@ -66,7 +66,7 @@ const PostPage = ({post, setDisplayLargePost, scrollPosition, stopEnlargeImage, 
             </div>
             <div className="post-section-content">{post.content}</div>
             {/* Note - add hover like thing displaying users. */}
-            <div className="post-section-feedback">
+            <div className="post-section-feedback postpage">
             <div className="post-section-likes" onMouseOver={() => displayLikes(post.likes)} onMouseLeave={() => setLikes(null)}>
                     {likes}
                     <img className="comment-item-likesvg" src={post.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={toggleLikePost}></img>
@@ -95,7 +95,7 @@ const PostPage = ({post, setDisplayLargePost, scrollPosition, stopEnlargeImage, 
                                 
                                 <div className="comment-item-right-bot">
                                     <p className="comment-item-content">{comment.content}</p>
-                                    <div className="comment-item-likes"     onMouseEnter={() => handleCommentMouseEnter(comment._id)} onMouseLeave={handleCommentMouseLeave}>
+                                    <div className="comment-item-likes postpage" onMouseEnter={() => handleCommentMouseEnter(comment._id)} onMouseLeave={handleCommentMouseLeave}>
                                     {hoveredComment === comment._id && (
                                     <>{displayCommentLikes(comment.likes)}</>
                                     )}

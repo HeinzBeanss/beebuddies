@@ -3,6 +3,8 @@
     justify-content: center;
     gap: 35px;
     margin-top: 35px;
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .friends-section-one, .friends-section-two {
@@ -13,6 +15,23 @@
 
 .friends-section-one {
     width: 200px;
+
+    position: sticky;
+    top: 95px;
+    bottom: 35px;
+    left: 0;
+    height: calc(100dvh - 130px);
+    overflow-y: auto;
+}
+
+.friends-section-one::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.friends-section-one {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
 }
 
 .friends-section-two {

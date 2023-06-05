@@ -1,0 +1,211 @@
+.component-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    height: 100vh;
+    /* position: relative; */
+    z-index: -10;
+
+}
+
+.component-login {
+    background-color: #fec600;
+    /* position: relative; */
+    z-index: 1;
+    max-height: 70%;
+    max-width: 70%;
+    height: 100vh; 
+    /* fix height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.login-content {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.typefaceimage {
+    max-width: 70%;
+    z-index: 12;
+}
+
+.wave-pattern {
+    position: absolute;
+    width: 100%;
+    height: 80dvh; /* Adjust the height to match your desired wave height */
+    bottom: 0px; /* Adjust the positioning to fit your layout */
+    /* left: 0; */
+    /* z-index: 1; */
+    fill: #d9a601;
+    opacity: 0.5;
+    border-radius: 1rem;
+  }
+  
+  .login-container {
+    min-width: 25%;
+    /* max-width: 40%; */
+    max-height: 40%;
+    padding: 30px;
+    background-color: #edeef5;
+    border-radius: 0.6rem;
+    position: relative;
+    /* z-index: 1; */
+    border: 4px solid rgb(46, 31, 28, 0.95);
+ 
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-container-border {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 100%;
+    height: 100%;
+    background-color: #d9a601;
+    border-radius: 0.5rem;
+    opacity: 1;
+    z-index: -1;
+    opacity: 0.5;
+  }
+
+  .login-form {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .login-title {
+    color: #2e1f1c;
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #2e1f1c;
+    line-height: 1rem;
+  }
+
+.input-label-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+
+}
+
+.login-label, .signup-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    
+}
+
+.login-input, .signup-input {
+    box-sizing: border-box;
+    height: 30px;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    color: #2e1f1c;
+    font-weight: 400;
+    padding: 10px;
+    border-radius: 0.2rem;
+    background-color: rgb(46, 31, 28, 0.03);
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+.login-input:focus, .login-input:active {
+    outline: 0;
+    border: 0;
+    border-bottom: #2e1f1c 1px solid;
+    border-radius: 0.2rem 0.2rem 0 0;
+}
+
+.login-button {
+    background-color: #2e1f1c;
+    border: 0;
+    width: 100%;
+    padding: 7px;
+    color: white;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.login-error, .error-container {
+    color: #ff0000;
+    font-size: 0.85rem;
+    position: absolute;
+    margin-top: 5px;
+}
+
+.login-account-message {
+    color: #2e1f1c;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-top: 5px;
+    margin-bottom: 50px;
+    z-index: 1;
+}
+
+.login-redirect {
+    font-weight: 500;
+    color: #2e1f1c;
+}
+
+.login-redirect:hover {
+    border-bottom: 1px solid #2e1f1c;
+}
+
+/* Signup Page */
+
+.signup-form {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.form-inputs {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+}
+
+.signup-form-side-one, .signup-form-side-two {
+    width: 100%;
+}
+
+.signup-container {
+    min-width: 40%;
+    max-width: 60%;
+    max-height: 40%;
+    padding: 30px;
+    background-color: #edeef5;
+    border-radius: 0.6rem;
+    position: relative;
+    /* z-index: 1; */
+    border: 4px solid rgb(46, 31, 28, 0.95);
+ 
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,8 +1,9 @@
-import '../Home/Home.css';
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
-const UserContacts = ({ targetUser }) => {
+import PhotoPost from "../Shared/PhotoPost";
+
+const UserContacts = ({ userData, setRefreshData, targetUser }) => {
 
     const [error, setError] = useState(null);
     
@@ -17,18 +18,15 @@ const UserContacts = ({ targetUser }) => {
     return (
         <div className="user-photos-outer">
             <h4 className='outer-title'>{targetUser.first_name}'s Photos</h4>
-            <div className='user-photos-section'>
+            <div className={targetUser.posts.length ? "user-photos-section" : "user-photos-loading"}>
                 { targetUser.posts.length > 0 ? (
                     targetUser.posts.map((post, index) => {
                         return (
-                            post.image ? (
-                                    <img key={index} className="user-photos-photo" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
-                            
-                            ) : null
+                            <PhotoPost setRefreshData={setRefreshData} userData={userData} key={index} post={post}/>
                         )
                     })
                 ) : (
-                    <div className='user-photos-loading'>This user has no photos.</div>
+                    <div>This user has no photos.</div>
                 )}
             
                 </div>

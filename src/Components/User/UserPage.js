@@ -48,7 +48,7 @@ const UserPage = ({ setIsLoggedIn, userData, setRefreshMainUserData}) => {
                 <div className="user-section-one">
                     <UserPageUser setRefreshMainUserData={setRefreshMainUserData} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
                     <UserFriends targetUser={targetUser} />
-                    <UserPhotos targetUser={targetUser} />
+                    <UserPhotos setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
                     <Settings setIsLoggedIn={setIsLoggedIn} userData={userData} />
                 </div>
                 <div className="user-section-two">

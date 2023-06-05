@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 
 import './App.css';
+import "./Components/LoginSignup.css";
+import './Components/Nav.css';
 import "./Components/Home/Home.css";
 import './Components/Shared/Shared.css';
 import './Components/Friends/Friends.css';
@@ -18,6 +20,7 @@ import UserPage from "./Components/User/UserPage";
 import ProfilePage from "./Components/Profile/ProfilePage";
 import UserIndexPage from "./Components/UserList/UserIndexPage";
 import FriendsPage from "./Components/Friends/FriendsPage";
+import PhotosPage from "./Components/Photos/PhotosPage";
 
 
 const App = () => {
@@ -86,21 +89,65 @@ const App = () => {
   return (
     <>
       <Router>
-        <NavBar userData={userData}/>
+        {isLoggedIn && ( // Check if the user is logged in
+          <NavBar userData={userData} />
+        )}
         <Routes>
-          <Route exact path={'/'} element={<Home setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />} />
-          <Route path={'/login'} element={<LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>} />
-          <Route path={'/signup'} element={<SignupPage isLoggedIn={isLoggedIn} />} />
-
-          <Route path={"/profile"} element={<ProfilePage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData}  />} />
-          <Route path={"/user/:userId"} element={<UserPage setRefreshMainUserData={setRefreshMainUserData} setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData}  />} />
-
-          <Route path={"/users"} element={<UserIndexPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}/>
-          <Route path={"/friends"} element={<FriendsPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />} />
+          <Route
+            exact
+            path={'/'}
+            element={<Home setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}
+          />
+          <Route
+            path={'/login'}
+            element={<LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />}
+          />
+          <Route path={'/signup'} element={<SignupPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
+  
+          {isLoggedIn && ( // Check if the user is logged in
+            <>
+              <Route
+                path={"/profile"}
+                element={
+                  <ProfilePage
+                    setRefreshMainUserData={setRefreshMainUserData}
+                    setIsLoggedIn={setIsLoggedIn}
+                    loading={loading}
+                    userData={userData}
+                  />
+                }
+              />
+              <Route
+                path={"/user/:userId"}
+                element={
+                  <UserPage
+                    setRefreshMainUserData={setRefreshMainUserData}
+                    setIsLoggedIn={setIsLoggedIn}
+                    loading={loading}
+                    userData={userData}
+                  />
+                }
+              />
+  
+              <Route
+                path={"/users"}
+                element={<UserIndexPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}
+              />
+              <Route
+                path={"/friends"}
+                element={<FriendsPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}
+              />
+              <Route
+                path={"/photos"}
+                element={<PhotosPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}
+              />
+            </>
+          )}
         </Routes>
       </Router>
     </>
   );
+  
 }
 
 export default App;

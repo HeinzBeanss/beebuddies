@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { DateTime } from 'luxon';
 
 
-const ProfilePageUser = ({profileUser, setRefreshData}) => {
+const ProfilePageUser = ({profileUser, setRefreshData, setRefreshMainUserData}) => {
 
     const [formData, setFormData] = useState({
         first_name: "",
@@ -111,6 +111,7 @@ const ProfilePageUser = ({profileUser, setRefreshData}) => {
         const message = await response.json();
         console.log(message);
         setRefreshData(true);
+        setRefreshMainUserData(true);
     }
      
     const formatTimestamp = (timestamp) => {

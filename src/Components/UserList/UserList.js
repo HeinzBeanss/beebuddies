@@ -39,30 +39,38 @@ const UserList = ({ data, setRefreshData, userData}) => {
 
     return (
         <div className='userindex-section-userlist'>
-
-            <div className='userlist-unadded-users'>
-                <h4>Users you may know</h4>
-                {data.map((user, index) => {
-                    if (!user.friend_requests_out.includes(userData.updatedUser._id)) {
-                        return (
-                            <div key={index} className='userindex-user-card'>
-                                <Link to={`/user/${user._id}`}><h5>{user.first_name} {user.last_name}</h5></Link>
-                                <Link to={`/user/${user._id}`}><img className="userindex-user-profilepicture" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt="Image" /></Link>
-                                { user.friends.includes(userData.updatedUser._id) ? (
-                                    <div>You're already friends!</div>
-                                ) : user.friend_requests_in.includes(userData.updatedUser._id) ? (
-                                    <button className='usercard-resind-request' onClick={(e) => resindFriendRequest(e, user)}> Rescind Friend Request</button>
-                                ) : (
-                                    <button className='usercard-send-request' onClick={(e) => sendFriendRequest(e, user)}>Send Friend Request</button>
-                                )
-                                }
-                            </div>       
-                            )
-                    }
-                })}
+            {data.filter((user) => !user.friend_requests_out.includes(userData.updatedUser._id)).length === 0 ? (
+              <h4 className="userindex-userlist-title">There are no users you haven't added or received a friend request from!</h4>
+            ) : (
+              <h4 className="userindex-userlist-title">Users you may know</h4>
+            )}
+            
+            {data.filter((user) => !user.friend_requests_out.includes(userData.updatedUser._id)).length > 0 ? (
+                <div className='userlist-unadded-users'>
+                {data
+                  .filter((user) => !user.friend_requests_out.includes(userData.updatedUser._id))
+                  .map((user, index) => (
+                    <div key={index} className='friendlist-card'>
+                      <Link to={`/user/${user._id}`}>
+                        <h5 className="userindex-username">{user.first_name} {user.last_name}</h5>
+                      </Link>
+                      <Link to={`/user/${user._id}`}>
+                        <img className="friend-pfp" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt="Image" />
+                      </Link>
+                      {user.friends.includes(userData.updatedUser._id) ? (
+                        <div>You're already friends!</div>
+                      ) : user.friend_requests_in.includes(userData.updatedUser._id) ? (
+                        <button className='usercard-rescind-request' onClick={(e) => resindFriendRequest(e, user)}>Rescind Friend Request</button>
+                      ) : (
+                        <button className='usercard-send-request' onClick={(e) => sendFriendRequest(e, user)}>Send Friend Request</button>
+                      )}
+                    </div>
+                  ))}
             </div>
+            ) : null}
         </div>
-    )
+      );
+      
 }
 
 export default UserList;
