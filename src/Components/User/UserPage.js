@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 import UserPostContainer from "./UserPostContainer";
 import UserPageUser from "./UserPageUser";
@@ -9,9 +9,17 @@ import UserFriends from "./UserFriends";
 import Settings from "../Shared/Settings";
 
 
-const UserPage = ({ setIsLoggedIn, userData, setRefreshMainUserData}) => {
+const UserPage = ({setGuestMode, guestMode, isLoggedIn, setIsLoggedIn, userData, setRefreshMainUserData}) => {
+
+    console.log(`guest mode: ${guestMode}`);
+
     const navigate = useNavigate();
-    const location = useLocation();
+    useEffect(() => {
+        if (!isLoggedIn && !guestMode) {
+            navigate("/login");
+        }
+    }, [isLoggedIn, guestMode]);
+    console.log(isLoggedIn);
 
     const { userId } = useParams();
     const [targetUser, setTargetUser] = useState(null);
@@ -46,13 +54,13 @@ const UserPage = ({ setIsLoggedIn, userData, setRefreshMainUserData}) => {
             <div className="user-banner"></div>}
             <div className="user-page-content">
                 <div className="user-section-one">
-                    <UserPageUser setRefreshMainUserData={setRefreshMainUserData} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
+                    <UserPageUser guestMode={guestMode} setRefreshMainUserData={setRefreshMainUserData} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
                     <UserFriends targetUser={targetUser} />
-                    <UserPhotos setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
-                    <Settings setIsLoggedIn={setIsLoggedIn} userData={userData} />
+                    <UserPhotos guestMode={guestMode} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
+                    <Settings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
                 </div>
                 <div className="user-section-two">
-                    <UserPostContainer setRefreshData={setRefreshData} targetUser={targetUser} userData={userData} />
+                    <UserPostContainer guestMode={guestMode} setRefreshData={setRefreshData} targetUser={targetUser} userData={userData} />
                 </div>
             </div>
         </div>

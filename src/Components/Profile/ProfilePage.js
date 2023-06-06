@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
+
 
 import CreatePost from "../Home/HomeCreatePost";
 import ProfilePostContainer from "./ProfilePostContainer";
@@ -9,7 +10,23 @@ import UserFriends from "../User/UserFriends";
 import Settings from "../Shared/Settings";
 
 
-const ProfilePage = ({ setRefreshMainUserData, setIsLoggedIn, userData }) => {
+const ProfilePage = ({setGuestMode, guestMode, isLoggedIn, setRefreshMainUserData, setIsLoggedIn, userData }) => {
+
+    console.log(`guest mode: ${guestMode}`);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLoggedIn && !guestMode) {
+            navigate("/login");
+        }
+    }, [isLoggedIn, guestMode]);
+    console.log(isLoggedIn);
+
+    useEffect(() => {
+        if (guestMode) {
+            navigate("/")
+        }
+    }, []);
 
     const [profileUser, setProfileUser] = useState(null);
     const [refreshData, setRefreshData] = useState(true);
@@ -100,7 +117,7 @@ const ProfilePage = ({ setRefreshMainUserData, setIsLoggedIn, userData }) => {
                 <ProfilePageUser setRefreshMainUserData={setRefreshMainUserData} profileUser={profileUser} setRefreshData={setRefreshData}/>
                 <UserFriends targetUser={profileUser} />
                 <UserPhotos setRefreshData={setRefreshData} userData={userData} targetUser={profileUser} />
-                <Settings setIsLoggedIn={setIsLoggedIn} userData={userData} />
+                <Settings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
             </div>
             <div className="profile-section-two">
                 <div className="banner-feedback">{bannerFeedback}</div>

@@ -1,8 +1,9 @@
 import './Home.css';
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import defaultpfp from "../../Assets/default_bee_profile.jpg";
 
-const HomeCreatePost = ({ setRefreshData, userData }) => {
+const HomeCreatePost = ({guestMode, setRefreshPostData, refreshPostData, setRefreshData, userData }) => {
 
     const [imageFile, setImageFile] = useState(null);
     const [postData, setPostData] = useState({
@@ -80,12 +81,18 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
             const message = await response.json();
             console.log(message);
             setRefreshData(true);
+            setRefreshPostData(true);
             setPostData({
                 content: "",
             })
         } else {
             return;
         }
+    }
+
+    const handleGuestError = (e) => {
+        e.preventDefault();
+        setFileError(<div className='createpost-file-error'>Login to post</div>)
     }
 
     return (
@@ -98,21 +105,22 @@ const HomeCreatePost = ({ setRefreshData, userData }) => {
                 </div>
             ) : (
                 <div className="createpost-top-section">
-                <img className="user-profilepicture-medium" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
+                <img className="user-profilepicture-medium" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
                 <h4 className='createpost-title'>What's on your mind, {userData.updatedUser.first_name}?</h4>
                 </div>
             )}
 
-        <form onSubmit={createPost} encType="multipart/form-data">
+        <form onSubmit={guestMode ? handleGuestError : createPost} encType="multipart/form-data">
             <textarea className='createpost-text' name="content" placeholder='Write your thoughts here' rows={4} value={postData.content} onChange={handleInputChange}></textarea>
             <div className="createpost-button-section">
                 {fileError}
                 <p className='createpost-file-name'>{fileName}</p>
                 <div className="createpost-upload-button">
-                    <input className="createpost-file" type="file" accept="image/*" onChange={handleFileChange}/>
-                    <button className="custom-file-upload" type="button" onClick={handleFileUpload}>Upload an image</button>
+                    <input disabled={guestMode} className="createpost-file" type="file" accept="image/*" onChange={handleFileChange}/>
+                    <button disabled={guestMode} className="custom-file-upload" type="button" onClick={handleFileUpload}>Upload an image</button>
                 </div>
-                <button className='createpost-input-button' type='submit'>Create Post</button>
+                <button
+                 className='createpost-input-button' type='submit'>Create Post</button>
             </div>
         </form>
     </div>

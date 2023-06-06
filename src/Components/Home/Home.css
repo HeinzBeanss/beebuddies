@@ -17,10 +17,10 @@
     width: 200px;
 
     position: sticky;
-    top: 95px;
+    top: 115px;
     bottom: 35px;
     left: 0;
-    height: calc(100dvh - 130px);
+    height: calc(100dvh - 150px);
     overflow-y: auto;
 }
 
@@ -215,12 +215,14 @@ input[type="file"] {
 
 .small-user-name {
     font-weight: 400;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     line-height: 1rem;
 }
 
 .small-user-name:hover {
-    font-weight: 600;
+    /* font-weight: 600; */
+    color: var(--primary-colour);
+
 }
 
 .request-item-mutuals {

@@ -1,4 +1,3 @@
-// css
 import React, { useState } from "react";
 
 const Post = ({ setRefreshData, userData, post, targetUser}) => {

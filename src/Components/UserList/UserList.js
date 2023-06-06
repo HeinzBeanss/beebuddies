@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
-const UserList = ({ data, setRefreshData, userData}) => {
+const UserList = ({guestMode, data, setRefreshData, userData}) => {
 
     const sendFriendRequest = async (e, user) => {
         e.preventDefault();
@@ -37,6 +37,7 @@ const UserList = ({ data, setRefreshData, userData}) => {
         
     }
 
+    if (!guestMode) {
     return (
         <div className='userindex-section-userlist'>
             {data.filter((user) => !user.friend_requests_out.includes(userData.updatedUser._id)).length === 0 ? (
@@ -70,7 +71,26 @@ const UserList = ({ data, setRefreshData, userData}) => {
             ) : null}
         </div>
       );
-      
+    } else {
+      return (
+        <div className='userindex-section-userlist'>
+            <h4 className="userindex-userlist-title">Other Bees in the Hive</h4>
+                <div className='userlist-unadded-users'>
+                {data.map((user, index) => (
+                    <div key={index} className='friendlist-card'>
+                      <Link to={`/user/${user._id}`}>
+                        <h5 className="userindex-username">{user.first_name} {user.last_name}</h5>
+                      </Link>
+                      <Link to={`/user/${user._id}`}>
+                        <img className="friend-pfp" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt="Image" />
+                      </Link>
+                        <button disabled={guestMode} className='usercard-send-request' onClick={(e) => sendFriendRequest(e, user)}>Send Friend Request</button>
+                    </div>
+                  ))}
+            </div>
+        </div>
+      )
+    }
 }
 
 export default UserList;

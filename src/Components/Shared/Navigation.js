@@ -14,19 +14,18 @@ import ProfileHover from "../../Assets/person-circle.svg";
 import FriendsHover from "../../Assets/people-circle.svg";
 import PhotosHover from "../../Assets/image.svg";
 
-const Navigation = () => {
+const Navigation = ({ guestMode }) => {
+  const [hoveredItem, setHoveredItem] = useState(null);
 
-    const [hoveredItem, setHoveredItem] = useState(null);
-    
-    const handleMouseEnter = (item) => {
-        setHoveredItem(item);
-    };
+  const handleMouseEnter = (item) => {
+    setHoveredItem(item);
+  };
 
-    const handleMouseLeave = () => {
-        setHoveredItem(null);
-    };
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+  };
 
-    const navItems = [
+  const navItems = [
     {
       id: 1,
       title: 'Home',
@@ -40,6 +39,7 @@ const Navigation = () => {
       svg: Profile,
       svgHover: ProfileHover,
       path: '/profile',
+      disabled: guestMode, // Disable if guestMode is true
     },
     {
       id: 3,
@@ -47,6 +47,7 @@ const Navigation = () => {
       svg: Friends,
       svgHover: FriendsHover,
       path: '/friends',
+      disabled: guestMode, // Disable if guestMode is true
     },
     {
       id: 4,
@@ -61,40 +62,45 @@ const Navigation = () => {
       svg: Photos,
       svgHover: PhotosHover,
       path: '/photos',
+      disabled: guestMode, // Disable if guestMode is true
       isLast: true,
     },
-    ];
+  ];
 
-    return (
-        <div className="nav-outer">
-            <h4 className='outer-title'>Navigation</h4>
-            <div className="nav-section">
-              {navItems.map((item, index) => (
-                <div
-                  key={item.id}
-                  className={`nav-section-item ${item.isLast ? 'last' : ''}`}
-                  onMouseEnter={() => handleMouseEnter(item.id)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <img
-                    className="nav-section-image"
-                    src={hoveredItem === item.id ? item.svgHover : item.svg}
-                    alt={item.title}
-                  />
-                  {item.path ? (
-                    <Link to={item.path}>
-                      <h4 className="nav-section-title">{item.title}</h4>
-                    </Link>
-                  ) : (
-                    <h4 className="nav-section-title">{item.title}</h4>
-                  )}
-                </div>
-              ))}
-            </div>
-        </div>
-
-      );
+  return (
+    <div className="nav-outer">
+      <h4 className="outer-title">Navigation</h4>
+      <div className="nav-section">
+        {navItems.map((item, index) => (
+          <div
+            key={item.id}
+            className={`nav-section-item ${item.isLast ? 'last' : ''}`}
+            onMouseEnter={() => handleMouseEnter(item.id)}
+            onMouseLeave={handleMouseLeave}
+          >
+            <img
+              className="nav-section-image"
+              src={hoveredItem === item.id ? item.svgHover : item.svg}
+              alt={item.title}
+            />
+            {item.path ? (
+              item.disabled ? (
+                <h4 className="nav-section-title disabled">{item.title}</h4>
+              ) : (
+                <Link to={item.path}>
+                  <h4 className="nav-section-title">{item.title}</h4>
+                </Link>
+              )
+            ) : (
+              <h4 className="nav-section-title">{item.title}</h4>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
+
 
 
 export default Navigation;

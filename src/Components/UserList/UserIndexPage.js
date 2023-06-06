@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import SharedUser from "../Shared/User";
 import SharedNavigation from "../Shared/Navigation";
@@ -8,7 +8,18 @@ import SearchBar from "../Shared/SearchBar";
 import UserList from "../UserList/UserList";
 import UserIndex from "../UserList/UserIndexRequests";
 
-const UserIndexPage = ({ userData, setIsLoggedIn, setRefreshUserData }) => {
+const UserIndexPage = ({setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn, setRefreshUserData }) => {
+
+    console.log(`guest mode: ${guestMode}`);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLoggedIn && !guestMode) {
+            navigate("/login");
+        }
+    }, [isLoggedIn, guestMode]);
+    console.log(isLoggedIn);
+
 
     const [refreshData, setRefreshData] = useState(true);
     const [data, setData] = useState(null);
@@ -17,8 +28,15 @@ const UserIndexPage = ({ userData, setIsLoggedIn, setRefreshUserData }) => {
         if (userData && refreshData) {
             const fetchUsers = async () => {
                 try {
+
+                    let url = `http://localhost:4000/api/user/${userData.updatedUser._id}/unadded-users`;
+
+                    if (guestMode) {
+                        url += '?guestMode=true';
+                      }
+                      
                     console.log("FETCHING USERS NOW")
-                    const response = await fetch(`http://localhost:4000/api/user/${userData.updatedUser._id}/unadded-users`);
+                    const response = await fetch(url);
                     const data = await response.json();
                     setData(data);
                     setRefreshData(false);
@@ -34,14 +52,14 @@ const UserIndexPage = ({ userData, setIsLoggedIn, setRefreshUserData }) => {
     return (
         <div className="userindex-component">
             <div className="userindex-section-one">
-                <SharedUser userData={userData} />
-                <SharedNavigation />
-                <SharedSettings setIsLoggedIn={setIsLoggedIn} />
+                <SharedUser guestMode={guestMode} userData={userData} />
+                <SharedNavigation guestMode={guestMode}/>
+                <SharedSettings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className='userindex-section-two'>
-                <UserIndex data={data} setRefreshData={setRefreshData} userData={userData}/>
-                <SearchBar friends={data}/>
-                <UserList data={data} setRefreshData={setRefreshData} userData={userData}/>
+                <UserIndex guestMode={guestMode} data={data} setRefreshData={setRefreshData} userData={userData}/>
+                <SearchBar guestMode={guestMode} friends={data}/>
+                <UserList guestMode={guestMode} data={data} setRefreshData={setRefreshData} userData={userData}/>
             </div>
             
         </div>

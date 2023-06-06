@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import SharedUser from "../Shared/User";
 import SharedNavigation from "../Shared/Navigation";
@@ -9,24 +9,34 @@ import HomeCreatePost from "./HomeCreatePost";
 import HomeRequests from "./HomeRequests";
 import HomePostContainer from "../Home/HomePostContainer";
 
-const Home = ({ loading, userData, setIsLoggedIn}) => {
+const Home = ({guestMode, setGuestMode, loading, userData, isLoggedIn, setIsLoggedIn}) => {
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLoggedIn && !guestMode) {
+            navigate("/login");
+        }
+    }, [isLoggedIn, guestMode]);
+    console.log(`guest mode: ${guestMode}`);
+    console.log(`isLoggedin: ${isLoggedIn}`);
     
     const [refreshData, setRefreshData] = useState(true);
+    const [refreshPostData, setRefreshPostData] = useState(true);
 
     return (
         <div className="home-component">
             <div className='home-section-one'>
-                <SharedUser loading={loading} userData={userData} />
-                <SharedNavigation />
-                <SharedSettings setIsLoggedIn={setIsLoggedIn} />
+                <SharedUser guestMode={guestMode} loading={loading} userData={userData} />
+                <SharedNavigation guestMode={guestMode}/>
+                <SharedSettings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className='home-section-two'>
-                <HomeCreatePost refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
-                <HomePostContainer refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
+                <HomeCreatePost setRefreshPostData={setRefreshPostData} refreshPostData={refreshPostData} guestMode={guestMode} refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
+                <HomePostContainer setRefreshPostData={setRefreshPostData} refreshPostData={refreshPostData} guestMode={guestMode} refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
             </div>
             <div className='home-section-three'>
-                <HomeRequests userData={userData} refreshData={refreshData} setRefreshData={setRefreshData}/>
-                <HomeContacts userData={userData} refreshData={refreshData} setRefreshData={setRefreshData}/>
+                <HomeRequests guestMode={guestMode} userData={userData} refreshData={refreshData} setRefreshData={setRefreshData}/>
+                <HomeContacts guestMode={guestMode} userData={userData} refreshData={refreshData} setRefreshData={setRefreshData}/>
             </div>
 
 

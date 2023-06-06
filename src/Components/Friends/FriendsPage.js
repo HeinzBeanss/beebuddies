@@ -7,7 +7,23 @@ import SharedSettings from "../Shared/Settings";
 import SearchBar from "../Shared/SearchBar";
 import FriendsList from "../Friends/FriendList";
 
-const FriendsPage = ({ loading, userData, setIsLoggedIn }) => {
+const FriendsPage = ({setGuestMode, guestMode, isLoggedIn, loading, userData, setIsLoggedIn }) => {
+
+    console.log(`guest mode: ${guestMode}`);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLoggedIn && !guestMode) {
+            navigate("/login");
+        }
+    }, [isLoggedIn, guestMode]);
+    console.log(isLoggedIn);
+
+    useEffect(() => {
+        if (guestMode) {
+            navigate("/")
+        }
+    }, []);
 
     const [friends, setFriends] = useState(null);
 
@@ -28,7 +44,7 @@ const FriendsPage = ({ loading, userData, setIsLoggedIn }) => {
             <div className="friends-section-one">
                 <SharedUser loading={loading} userData={userData} />
                 <SharedNavigation />
-                <SharedSettings setIsLoggedIn={setIsLoggedIn} />
+                <SharedSettings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className="friends-section-two">
                 <SearchBar friends={friends}/>

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import defaultpfp from "../../Assets/default_bee_profile.jpg";
 import heart from "../../Assets/heart-outline.svg";
 import heartfull from "../../Assets/heart.svg";
 
-const PostPage = ({post, setDisplayLargePost, scrollPosition, stopEnlargeImage, formatTimestamp, userData, toggleLikeComment, toggleLikePost, postComment, handleInputChange, comment}) => {
+const PostPage = ({guestMode, post, setDisplayLargePost, scrollPosition, stopEnlargeImage, formatTimestamp, userData, toggleLikeComment, toggleLikePost, postComment, handleInputChange, comment}) => {
 
         // Display Likes
         const [likes, setLikes] = useState(null);
@@ -69,15 +70,15 @@ const PostPage = ({post, setDisplayLargePost, scrollPosition, stopEnlargeImage, 
             <div className="post-section-feedback postpage">
             <div className="post-section-likes" onMouseOver={() => displayLikes(post.likes)} onMouseLeave={() => setLikes(null)}>
                     {likes}
-                    <img className="comment-item-likesvg" src={post.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={toggleLikePost}></img>
+                    <img className="comment-item-likesvg" src={post.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={guestMode ? null : toggleLikePost}></img>
                     <p className="post-section-likecount">{post.likes.length}</p>
                 </div>
                 <p className="post-section-comments">{post.comments.length} Comments</p>
             </div>
             <div className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
-                <img className="user-profilepicture-small" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
-                <input className="writecomment-section-comment" type="text" name="comment" placeholder="Write a comment..." onChange={handleInputChange} value={comment}></input>
-                <button className="writecomment-section-post" onClick={postComment}>Post Comment</button>
+                <img className="user-profilepicture-small" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
+                <input className="writecomment-section-comment" type="text" name="comment" placeholder={guestMode ? "Login to post a comment" : "Write a comment..."} onChange={handleInputChange} value={comment}></input>
+                <button disabled={guestMode} className="writecomment-section-post" onClick={postComment}>Post Comment</button>
             </div>
             {post.comments.length > 0 ? (
             <div className="comment-section">
@@ -100,7 +101,7 @@ const PostPage = ({post, setDisplayLargePost, scrollPosition, stopEnlargeImage, 
                                     <>{displayCommentLikes(comment.likes)}</>
                                     )}
                                         <p className="comment-section-likecount">{comment.likes.length}</p>
-                                        <img className="comment-item-likesvg" src={comment.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={(e) => toggleLikeComment(e, comment)}></img>
+                                        <img className="comment-item-likesvg" src={comment.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={guestMode ? null : (e) => toggleLikeComment(e, comment)}></img>
 
                                     </div>
                                 </div>

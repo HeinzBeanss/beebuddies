@@ -7,7 +7,7 @@ body.light {
   --background: #edeef5;
   --background-container: #ffffff;
   --background-lighter: #dbdbdb;
-  --primary-colour: rgb(228, 228, 106);
+  --primary-colour: rgb(254, 198, 0);
   --box-shadow-small: rgba(0, 0, 0, 0.04) 0px 1px 8px;
   --separator-line: 1px rgb(230, 230, 230) solid;
   --primary-border: 2px rgb(228, 228, 106) solid;
@@ -34,7 +34,7 @@ body.dark {
   --background: rgb(19, 20, 21);
   --background-container: rgb(28, 29, 30);
   --background-lighter: #222020;
-  --primary-colour: rgb(236, 236, 167);
+  --primary-colour: #fec600;
   --box-shadow-small: rgba(0, 0, 0, 0.04) 0px 1px 8px;
   --separator-line: 1px rgb(63, 63, 63) solid;
   --primary-border: 2px rgb(236, 236, 167) solid;
@@ -45,7 +45,7 @@ body.dark {
   --lighter-text-colour-opposite: rgb(58, 58, 58);
   --font-thickness-300d-400l: 300;
   --font-thickness-400d-500l: 400;
-  --svg-filter: invert(100%) sepia(17%) saturate(7490%) hue-rotate(317deg) brightness(115%) contrast(107%);
+  --svg-filter: invert(79%) sepia(31%) saturate(1709%) hue-rotate(359deg) brightness(99%) contrast(102%);
   --success-text-colour: rgb(140, 190, 140);
   --error-text-colour: rgb(192, 68, 68);
 }
@@ -77,3 +77,9 @@ textarea {
 a {
   color: var(--neutral-text-colour);
 }
+
+:disabled, .disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+

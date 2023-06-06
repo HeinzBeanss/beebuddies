@@ -2,7 +2,7 @@ import '../Home/Home.css';
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const SharedSettings = ({setIsLoggedIn}) => {
+const SharedSettings = ({setGuestMode, setIsLoggedIn}) => {
     const navigate = useNavigate();
 
     // DARK/LIGHT THEME
@@ -22,10 +22,12 @@ const SharedSettings = ({setIsLoggedIn}) => {
     const handleLogoutSubmit = async (e) => {
         e.preventDefault();
         localStorage.removeItem("token");
+        localStorage.removeItem("isGuest");
         const response = await fetch("http://localhost:4000/auth/logout");
         const message = await response.json();
         console.log(message);
         setIsLoggedIn(false);
+        setGuestMode(false);
         navigate("/login");
     };
 

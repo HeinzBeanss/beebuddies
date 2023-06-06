@@ -3,16 +3,18 @@ import React, { useState, useEffect } from "react";
 
 import typeface from "../Assets/transparent.png";
 
-const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
+const LoginPage = ({guestMode, setGuestMode, isLoggedIn, setIsLoggedIn }) => {
     const navigate = useNavigate();
 
     // Check if the user is logged in already
     useEffect(() => {
-        if (isLoggedIn === true) {
-            console.log("User alerady logged in");
+        if (isLoggedIn || guestMode) {
+            console.log("user already logged in or a guest");
             navigate("/");
-        };
-    }, []);
+        }
+    }, [isLoggedIn, guestMode])
+    console.log(`guest mode: ${guestMode}`);
+    console.log(`isLoggedin: ${isLoggedIn}`);
 
     // Form Data
     const [formData, setFormData] = useState({
@@ -42,6 +44,7 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
         console.log(data);
         localStorage.setItem("token", data.token);
         if (response.ok) {
+            localStorage.removeItem("isGuest");
             setError("");
             setIsLoggedIn(true);
             navigate("/");
@@ -53,6 +56,12 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
     // Error Messages
     const [error, setError] = useState("");
+
+    const handleContinueAsGuest = () => {
+        localStorage.setItem("isGuest", "true");
+        setGuestMode(true);
+        navigate("/");
+    }
 
     return (
         <div className="component-login-container">
@@ -80,7 +89,9 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
                         <div className="login-container-border"></div>
                     </div>
                     <p className="login-account-message">Don't have an account? <Link className="login-redirect" to={"/signup"}><span className="login-redirect">Signup here.</span></Link></p>
+                    <p className="guest-button" onClick={handleContinueAsGuest}>Continue as guest</p>
                 </div>
+
             </div>
         </div>
     )

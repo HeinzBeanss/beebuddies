@@ -38,10 +38,10 @@
     /*  */
     position: sticky;
     z-index: 200;
-    top: 95px;
+    top: 115px;
     bottom: 35px;
     left: 0;
-    height: calc(100dvh - 130px);
+    height: calc(100dvh - 150px);
     overflow-y: auto;
     /* overflow: hidden; */    
 }

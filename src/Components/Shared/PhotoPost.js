@@ -5,7 +5,7 @@ import PostDisplay from "../Shared/PostPage";
 import heart from "../../Assets/heart-outline.svg";
 import heartfull from "../../Assets/heart.svg";
 
-const PhotoPost = ({setRefreshData, userData, post, index}) => {
+const PhotoPost = ({guestMode, setRefreshData, userData, post, index}) => {
     
         const formatTimestamp = (timestamp) => {
             const formattedTime = DateTime.fromISO(timestamp).toFormat("MMMM d' at 'HH:mm");
@@ -93,6 +93,7 @@ const PhotoPost = ({setRefreshData, userData, post, index}) => {
         post.image ? (
             <div className="container-test">
                     {displayLargePost ? <PostDisplay
+                    guestMode={guestMode}
                     userData={userData}
                     post={post} 
                     setDisplayLargePost={setDisplayLargePost}

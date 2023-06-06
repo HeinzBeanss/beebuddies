@@ -2,7 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: rgb(252, 245, 230);
+
+    /* background-color: white; */
     height: 100vh;
     /* position: relative; */
     z-index: -10;
@@ -13,8 +15,8 @@
     background-color: #fec600;
     /* position: relative; */
     z-index: 1;
-    max-height: 70%;
-    max-width: 70%;
+    max-height: 50%;
+    max-width: 50%;
     height: 100vh; 
     /* fix height */
     display: flex;
@@ -22,7 +24,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 0px 38px, rgba(0, 0, 0, 0.14) 0px 0px 12px;
 }
 
 .login-content {
@@ -37,14 +39,15 @@
 }
 
 .typefaceimage {
-    max-width: 70%;
+    max-width: 45%;
     z-index: 12;
+    margin-bottom: 20px;
 }
 
 .wave-pattern {
     position: absolute;
     width: 100%;
-    height: 80dvh; /* Adjust the height to match your desired wave height */
+    height: 60dvh; /* Adjust the height to match your desired wave height */
     bottom: 0px; /* Adjust the positioning to fit your layout */
     /* left: 0; */
     /* z-index: 1; */
@@ -54,8 +57,8 @@
   }
   
   .login-container {
-    min-width: 25%;
-    /* max-width: 40%; */
+    /* min-width: 25%; */
+    min-width: 45%;
     max-height: 40%;
     padding: 30px;
     background-color: #edeef5;
@@ -163,7 +166,7 @@ input:-webkit-autofill:active {
     font-weight: 400;
     font-size: 1rem;
     margin-top: 5px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     z-index: 1;
 }
 
@@ -194,9 +197,10 @@ input:-webkit-autofill:active {
 }
 
 .signup-container {
+    
     min-width: 40%;
     max-width: 60%;
-    max-height: 40%;
+    max-height: 60%;
     padding: 30px;
     background-color: #edeef5;
     border-radius: 0.6rem;
@@ -208,4 +212,11 @@ input:-webkit-autofill:active {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.guest-button {
+    position: absolute;
+    z-index: 20;
+    bottom: -30px;
+    cursor: pointer;
 }

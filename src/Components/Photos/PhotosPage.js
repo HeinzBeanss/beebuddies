@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 import SharedUser from "../Shared/User";
 import SharedNavigation from "../Shared/Navigation";
 import SharedSettings from "../Shared/Settings";
 import UserPhotos from "../User/UserPhotos";
 
-const PhotosPage = ({userData, setIsLoggedIn}) => {
+const PhotosPage = ({setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn}) => {
+
+    console.log(`guest mode: ${guestMode}`);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLoggedIn && !guestMode) {
+            navigate("/login");
+        }
+    }, [isLoggedIn, guestMode]);
+    console.log(isLoggedIn);
+
+    useEffect(() => {
+        if (guestMode) {
+            navigate("/")
+        }
+    }, []);
 
     const [refreshData, setRefreshData] = useState(true);
     const [data, setData] = useState(null);
@@ -34,7 +51,7 @@ const PhotosPage = ({userData, setIsLoggedIn}) => {
             <div className="userindex-section-one">
                 <SharedUser userData={userData} />
                 <SharedNavigation />
-                <SharedSettings setIsLoggedIn={setIsLoggedIn} />
+                <SharedSettings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className='userindex-section-two'>
                 <UserPhotos targetUser={data} setRefreshData={setRefreshData} userData={userData}/>

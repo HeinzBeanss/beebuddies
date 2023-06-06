@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import defaultpfp from "../../Assets/default_bee_profile.jpg";
 
-const HomeRequests = ({ loading, userData, refreshData, setRefreshData }) => {
+const HomeRequests = ({ guestMode, loading, userData, refreshData, setRefreshData }) => {
 
-    const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
 
@@ -30,7 +30,7 @@ const HomeRequests = ({ loading, userData, refreshData, setRefreshData }) => {
     }
 
     useEffect(() => {
-        if (userData) {
+        if (userData && !guestMode) {
             const fetchData = async () => {
                 try {
                     console.log("retrieving friend requests")
@@ -38,11 +38,9 @@ const HomeRequests = ({ loading, userData, refreshData, setRefreshData }) => {
                     const data = await response.json();
                     setData(data);
                     console.log(data);
-                    setIsLoading(false);
                     setRefreshData(false);
                 } catch (err) {
                     setError(err);
-                    setIsLoading(false);
                     setRefreshData(false);
                 }
             } 
@@ -63,15 +61,11 @@ const HomeRequests = ({ loading, userData, refreshData, setRefreshData }) => {
         return mutualsCount;
       };
 
-    if (isLoading) {
-        return <div className='home-request-loading'>Loading...</div>
-        
-    }
-
     if (error) {
         return <div className='home-request-loading'>Error: {error.message}</div>
     }
 
+    if (data) {
     return (
         <div className="home-requests-outer">
             <h4 className='outer-title'>Friend Requests</h4>
@@ -95,11 +89,21 @@ const HomeRequests = ({ loading, userData, refreshData, setRefreshData }) => {
                     )
                 })
                 ) : (
-                <div className="home-request-loading">You have no requests</div>
+                <div className="home-request-loading">You have no incoming friend requests.</div>
                 )}
             </div>
         </div>
     )
+    } else if (!data && guestMode) {
+        return (
+            <div className="home-requests-outer">
+                <h4 className='outer-title'>Friend Requests</h4>
+                <div className='home-request-section'>
+                <div className="home-request-loading">Login to receive friend requests!</div>
+                </div>
+            </div>
+            )
+    }
 }
 
 export default HomeRequests;

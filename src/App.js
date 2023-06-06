@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 
+import defaultpfp from "./Assets/default_bee_profile.jpg";
+
 import './App.css';
 import "./Components/LoginSignup.css";
 import './Components/Nav.css';
@@ -27,15 +29,15 @@ const App = () => {
 
   // const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
   const [refreshMainUserData, setRefreshMainUserData] = useState(false);
+  const [guestMode, setGuestMode] = useState(false);
 
   // Verify Token on page load up.
   useEffect(() => {
-    // Function
     setUserData(null);
+
     const verifyToken = async () => {
       try {
         console.log("Attempting to verify token");
@@ -47,26 +49,24 @@ const App = () => {
         });
 
         if (response.ok) {
+          console.log("ok");
           const userData = await response.json();
           console.log(userData);
           setUserData(userData);
+          setGuestMode(false);
           setIsLoggedIn(true);
-          setLoading(false);
           setRefreshMainUserData(false);
         } else {
+          console.log("not ok");
           const errorData = await response.json();
           setError(errorData.message);
-          setIsLoggedIn(false);
-          setLoading(false);
-          setIsLoggedIn(false);
-          // navigate("/login");
+          // window.location.href = "/login";
           setRefreshMainUserData(false);
         }
       } catch (error) {
         console.error("Error verifiying token:", error);
         setError("An error occured while verifying the token");
         setIsLoggedIn(false);
-        setLoading(false);
         setRefreshMainUserData(false);
         // navigate("/login");
       }
@@ -74,45 +74,64 @@ const App = () => {
 
     // Get the token in storage
     const token = localStorage.getItem("token");
-    if (!token) {
-      // No token, go to login page
-      setIsLoggedIn(false);
-      // navigate("/login");
-    } else {
-      verifyToken();
-      // There is a token
-    }
-  }, [isLoggedIn, refreshMainUserData]);
+    const isGuest = localStorage.getItem("isGuest");
 
+    if (!token && !isGuest) {
+      setIsLoggedIn(false);
+      console.log("NO TOKEN OR GUEST LS");
+    } else if (isGuest === "true") {
+      console.log("GUEST LOCAL STORAGE IS TRUE");
+      setGuestMode(true);
+      setUserData({
+        updatedUser: {
+          first_name: "Guest",
+          last_name: "Account",
+          profile_picture: defaultpfp,
+          friends: [],
+          friend_requests_in: [],
+          friend_requests_out: [],
+          posts: [],
+          _id: 0,
+        }
+      })
+    } else {
+      console.log("VERIFYING TOKEN NOW");
+      console.log(isGuest);
+      console.log((isGuest === "true"));
+      verifyToken();
+    }
+  }, [isLoggedIn, guestMode, refreshMainUserData]);
 
 
   return (
     <>
       <Router>
-        {isLoggedIn && ( // Check if the user is logged in
-          <NavBar userData={userData} />
-        )}
+      {isLoggedIn || guestMode ? (
+        <NavBar guestMode={guestMode} userData={userData} />
+        ) : null}
         <Routes>
           <Route
             exact
             path={'/'}
-            element={<Home setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}
+            element={<Home setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
           />
           <Route
             path={'/login'}
-            element={<LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />}
+            element={<LoginPage guestMode={guestMode} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />}
           />
-          <Route path={'/signup'} element={<SignupPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
+          <Route path={'/signup'} guestMode={guestMode} element={<SignupPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
   
-          {isLoggedIn && ( // Check if the user is logged in
+
             <>
               <Route
                 path={"/profile"}
                 element={
                   <ProfilePage
+                    guestMode={guestMode}
+                    setGuestMode={setGuestMode}
+                    isLoggedIn={isLoggedIn}
                     setRefreshMainUserData={setRefreshMainUserData}
                     setIsLoggedIn={setIsLoggedIn}
-                    loading={loading}
                     userData={userData}
                   />
                 }
@@ -121,9 +140,11 @@ const App = () => {
                 path={"/user/:userId"}
                 element={
                   <UserPage
+                    guestMode={guestMode}
+                    setGuestMode={setGuestMode}
                     setRefreshMainUserData={setRefreshMainUserData}
+                    isLoggedIn={isLoggedIn}
                     setIsLoggedIn={setIsLoggedIn}
-                    loading={loading}
                     userData={userData}
                   />
                 }
@@ -131,18 +152,21 @@ const App = () => {
   
               <Route
                 path={"/users"}
-                element={<UserIndexPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}
+                setGuestMode={setGuestMode}
+                element={<UserIndexPage setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
               />
               <Route
                 path={"/friends"}
-                element={<FriendsPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}
+                setGuestMode={setGuestMode}
+                element={<FriendsPage  guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
               />
               <Route
                 path={"/photos"}
-                element={<PhotosPage setIsLoggedIn={setIsLoggedIn} loading={loading} userData={userData} />}
+                setGuestMode={setGuestMode}
+                element={<PhotosPage  guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
               />
             </>
-          )}
+  
         </Routes>
       </Router>
     </>

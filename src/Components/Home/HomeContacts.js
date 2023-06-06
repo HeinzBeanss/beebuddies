@@ -2,7 +2,7 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
-const HomeContacts = ({ userData, refreshData}) => {
+const HomeContacts = ({guestMode, userData, refreshData}) => {
 
     const [friends, setFriends] = useState(null);
     const [error, setError] = useState(null);
@@ -11,7 +11,13 @@ const HomeContacts = ({ userData, refreshData}) => {
     useEffect(() => {
         if (userData) {
             const fetchFriends = async () => {
-                const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/friends`);
+                let url = `http://localhost:4000/api/users/${userData.updatedUser._id}/friends`;
+
+                if (guestMode) {
+                  url += '?guestMode=true';
+                }
+
+                const response = await fetch(url);
                 const friends = await response.json();
                 console.log("friends below here");
                 console.log(friends);
@@ -33,7 +39,7 @@ const HomeContacts = ({ userData, refreshData}) => {
 
     return (
         <div className="home-contacts-outer">
-            <h4 className='outer-title'>Buddies</h4>
+            <h4 className='outer-title'>{guestMode ? "Bees in the Hive" : "Buddies"}</h4>
             <div className='home-contacts-section'>
                 { friends.length > 0 ? (
                     friends.map((user, index) => {

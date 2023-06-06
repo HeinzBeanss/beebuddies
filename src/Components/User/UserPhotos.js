@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import PhotoPost from "../Shared/PhotoPost";
 
-const UserContacts = ({ userData, setRefreshData, targetUser }) => {
+const UserContacts = ({ guestMode, userData, setRefreshData, targetUser }) => {
 
     const [error, setError] = useState(null);
     
@@ -22,7 +22,7 @@ const UserContacts = ({ userData, setRefreshData, targetUser }) => {
                 { targetUser.posts.length > 0 ? (
                     targetUser.posts.map((post, index) => {
                         return (
-                            <PhotoPost setRefreshData={setRefreshData} userData={userData} key={index} post={post}/>
+                            <PhotoPost guestMode={guestMode} setRefreshData={setRefreshData} userData={userData} key={index} post={post}/>
                         )
                     })
                 ) : (

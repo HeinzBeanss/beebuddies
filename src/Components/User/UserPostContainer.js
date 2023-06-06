@@ -2,7 +2,7 @@ import '../Home/Home.css';
 import React, { useState, useEffect } from "react";
 import Post from "../Shared/Post";
 
-const UserPostContainer = ({ setRefreshData, userData, targetUser }) => {
+const UserPostContainer = ({guestMode, setRefreshData, userData, targetUser }) => {
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +20,7 @@ const UserPostContainer = ({ setRefreshData, userData, targetUser }) => {
             { targetUser.posts.length > 0 ? (
                 targetUser.posts.map((post, index) => {
                     return (
-                        <Post setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} post={post} key={index}/>
+                        <Post guestMode={guestMode} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} post={post} key={index}/>
                     )
                 })
             ) : (

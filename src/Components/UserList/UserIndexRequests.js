@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const UserIndexRequests = ({ data, setRefreshData, userData}) => {
+const UserIndexRequests = ({ guestMode, data, setRefreshData, userData}) => {
 
     console.log(data);
 
@@ -31,6 +31,7 @@ const UserIndexRequests = ({ data, setRefreshData, userData}) => {
         return <div className='userindex-section-userlist'>Loading...</div>
     }
 
+    if (!guestMode) {
     return (
       <div className='userindex-requests-in'>
         {data.filter((user) => user.friend_requests_out.includes(userData.updatedUser._id)).length > 0 ? (
@@ -76,7 +77,13 @@ const UserIndexRequests = ({ data, setRefreshData, userData}) => {
         )}
       </div>
     );
-    
+  } else if (guestMode) {
+    return (
+      <div className='userindex-requests-in'>
+        <div>Login to receive friend requests.</div>
+      </div>
+    )
+  }
       
 }
 

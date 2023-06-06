@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { DateTime } from 'luxon';
 
-const UserPageUser = ({setRefreshData, userData, targetUser, setRefreshMainUserData}) => {
+const UserPageUser = ({guestMode, setRefreshData, userData, targetUser, setRefreshMainUserData}) => {
 
     const formatTimestamp = (timestamp) => {
         console.log(targetUser);
@@ -92,16 +92,16 @@ const UserPageUser = ({setRefreshData, userData, targetUser, setRefreshMainUserD
             <div className='user-user-section'>
                  <div className="user-request-buttons">
                         {targetUser.friends.some(friend => friend._id === userData.updatedUser._id) ? (
-                            <button className='user-request-button' onClick={removeFriend}>Remove Friend</button>
+                            <button disabled={guestMode} className='user-request-button' onClick={guestMode ? null : removeFriend}>Remove Friend</button>
                         ) : targetUser.friend_requests_in.includes(userData.updatedUser._id) ? (
-                            <button className='user-request-button' onClick={resindFriendRequest}>Rescind Request</button>
+                            <button disabled={guestMode} className='user-request-button' onClick={guestMode ? null : resindFriendRequest}>Rescind Request</button>
                         ) : targetUser.friend_requests_out.includes(userData.updatedUser._id) ? (
                             <div className='user-page-request-container'>
-                                <button className='user-request-button' onClick={acceptFriendRequest}>Accept Request</button>
-                                <button className='user-request-button' onClick={denyFriendRequest}>Deny Request</button>
+                                <button disabled={guestMode} className='user-request-button' onClick={guestMode ? null : acceptFriendRequest}>Accept Request</button>
+                                <button disabled={guestMode} className='user-request-button' onClick={guestMode ? null : denyFriendRequest}>Deny Request</button>
                             </div>
                         ) : !targetUser.friends.some(friend => friend._id === userData.updatedUser._id) ? (
-                            <button className='user-request-button' onClick={sendFriendRequest}>Add Friend</button>
+                            <button className='user-request-button' disabled={guestMode} onClick={guestMode ? null : sendFriendRequest}>Add Friend</button>
                         ) : null}
                         </div>
                 <div className="user-section-top">
