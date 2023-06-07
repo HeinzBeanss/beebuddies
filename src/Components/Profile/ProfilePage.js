@@ -10,23 +10,23 @@ import UserFriends from "../User/UserFriends";
 import Settings from "../Shared/Settings";
 
 
-const ProfilePage = ({setGuestMode, guestMode, isLoggedIn, setRefreshMainUserData, setIsLoggedIn, userData }) => {
+const ProfilePage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, setRefreshMainUserData, setIsLoggedIn, userData }) => {
 
     console.log(`guest mode: ${guestMode}`);
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isLoggedIn && !guestMode) {
+        if (!isLoggedIn && !guestMode && !loadingStatus) {
             navigate("/login");
         }
-    }, [isLoggedIn, guestMode]);
+    }, [isLoggedIn, guestMode, loadingStatus]);
     console.log(isLoggedIn);
 
     useEffect(() => {
         if (guestMode) {
             navigate("/")
         }
-    }, []);
+    }, [loadingStatus]);
 
     const [profileUser, setProfileUser] = useState(null);
     const [refreshData, setRefreshData] = useState(true);
@@ -69,9 +69,10 @@ const ProfilePage = ({setGuestMode, guestMode, isLoggedIn, setRefreshMainUserDat
         'image/webp'
         ];
 
+        console.log(file);
         // Validate File Size
         if (file.size > 4 * 1024 * 1024) {
-            setbannerFeedback(<div className='createpost-file-error'>Sorry, your file was too big. (Over 4MB)</div>)
+            setbannerFeedback(<div className='createpost-file-error'>Sorry, your file was too big for your banner. (Over 4MB)</div>)
             e.target.value = "";
             return;
         } 
@@ -97,11 +98,6 @@ const ProfilePage = ({setGuestMode, guestMode, isLoggedIn, setRefreshMainUserDat
         setRefreshData(true);
     }
 
-    if (profileUser) {
-        console.log("BELOW THIS IS PROFULE USER");
-        console.log(profileUser);
-    }
-
     return (
         <div className="profile-page">
             {profileUser ? (
@@ -114,7 +110,7 @@ const ProfilePage = ({setGuestMode, guestMode, isLoggedIn, setRefreshMainUserDat
             <div className="profile-banner"></div>}
             <div className="profile-page-content">
             <div className="profile-section-one">
-                <ProfilePageUser setRefreshMainUserData={setRefreshMainUserData} profileUser={profileUser} setRefreshData={setRefreshData}/>
+                <ProfilePageUser setBannerFeedback={setbannerFeedback} setRefreshMainUserData={setRefreshMainUserData} profileUser={profileUser} setRefreshData={setRefreshData}/>
                 <UserFriends targetUser={profileUser} />
                 <UserPhotos setRefreshData={setRefreshData} userData={userData} targetUser={profileUser} />
                 <Settings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { DateTime } from 'luxon';
 
 
-const ProfilePageUser = ({profileUser, setRefreshData, setRefreshMainUserData}) => {
+const ProfilePageUser = ({setBannerFeedback, profileUser, setRefreshData, setRefreshMainUserData}) => {
 
     const [formData, setFormData] = useState({
         first_name: "",
@@ -63,11 +63,11 @@ const ProfilePageUser = ({profileUser, setRefreshData, setRefreshMainUserData}) 
 
     const handleFileUpload = () => {
         const fileInput = document.querySelector('.createpost-file-avatar');
-        setAvatarFeedback("");
+        setBannerFeedback("");
         fileInput.click();
     };
 
-    const [avatarFeedback, setAvatarFeedback] = useState("");
+    // const [avatarFeedback, setAvatarFeedback] = useState("");
     
     const handleFileChange = async (e) => {
         console.log("pressed the handlefilechange avatar");
@@ -87,16 +87,16 @@ const ProfilePageUser = ({profileUser, setRefreshData, setRefreshMainUserData}) 
 
         // Validate File Size
         if (file.size > 2 * 1024 * 1024) {
-            setAvatarFeedback(<div className='createpost-file-error'>Sorry, your file was too big. (Over 2MB)</div>)
+            setBannerFeedback(<div className='createpost-file-error'>Sorry, your file was too big for a profile picture. (Over 2MB)</div>)
             e.target.value = "";
             return;
         } 
         if (!allowedFileTypes.includes(file.type)) {
-            setAvatarFeedback(<div className='createpost-file-error'>{file.type} isn't a supported file type for your banner.</div>);
+            setBannerFeedback(<div className='createpost-file-error'>{file.type} isn't a supported file type for a profile picture.</div>);
             e.target.value = "";
             return;
         }
-        setAvatarFeedback("");
+        setBannerFeedback("");
         console.log(file);
 
         // It's all good, now upload the photo, then refresh the data.
@@ -132,7 +132,7 @@ const ProfilePageUser = ({profileUser, setRefreshData, setRefreshMainUserData}) 
         if (!isEditing) {
             return (
                 <div className='profile-user-section'>
-                    <div className='avatar-feedback'>{avatarFeedback}</div>
+                    {/* <div className='avatar-feedback'>{avatarFeedback}</div> */}
                     <div className="profile-edit-buttons">
                         <button className='profile-edit-button' onClick={openEditWindow}>Edit Profile</button>
                         <button className='profile-edit-button' onClick={handleFileUpload}>Change Avatar</button>

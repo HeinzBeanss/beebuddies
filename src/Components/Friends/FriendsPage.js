@@ -7,23 +7,23 @@ import SharedSettings from "../Shared/Settings";
 import SearchBar from "../Shared/SearchBar";
 import FriendsList from "../Friends/FriendList";
 
-const FriendsPage = ({setGuestMode, guestMode, isLoggedIn, loading, userData, setIsLoggedIn }) => {
+const FriendsPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, loading, userData, setIsLoggedIn }) => {
 
     console.log(`guest mode: ${guestMode}`);
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isLoggedIn && !guestMode) {
+        if (!isLoggedIn && !guestMode && !loadingStatus) {
             navigate("/login");
         }
-    }, [isLoggedIn, guestMode]);
+    }, [isLoggedIn, guestMode, loadingStatus]);
     console.log(isLoggedIn);
 
     useEffect(() => {
         if (guestMode) {
             navigate("/")
         }
-    }, []);
+    }, [loadingStatus]);
 
     const [friends, setFriends] = useState(null);
 

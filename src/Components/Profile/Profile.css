@@ -13,8 +13,8 @@
     align-self: center;
     gap: 35px;
     margin-top: 35px;
-
-    /* position: relative; */
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .profile-banner {
@@ -36,7 +36,7 @@
 .profile-section-one {
     width: 400px;
     position: sticky;
-    z-index: 200;
+    z-index: 9999;
     top: 115px;
     bottom: 35px;
     left: 0;
@@ -76,7 +76,19 @@
     cursor: pointer;
 }
 
-.banner-feedback, .avatar-feedback {
+.profile-section-two {
+    position: relative;
+}
+
+.banner-feedback {
+    position: absolute;
+    z-index: 20;
+    top: -25px;
+    left: 5px;
+}
+
+.avatar-feedback {
+    z-index: 9999;
     position: absolute;
     top: -25px;
     left: 5px;
@@ -178,8 +190,9 @@
     border-radius: 0.3rem;
     background-color: var(--background);
     color: var(--neutral-text-colour);
-    box-shadow: var(--box-shadow-small);
     cursor: pointer;
+    border: 1px solid transparent;
+
 }
 
 .profile-edit-button-cancel {
@@ -191,8 +204,9 @@
     border-radius: 0.3rem;
     background-color: var(--background);
     color: var(--neutral-text-colour);
-    box-shadow: var(--box-shadow-small);
     cursor: pointer;
+    border: 1px solid transparent;
+
 }
 
 .profile-edit-input {
@@ -218,8 +232,100 @@
     border-radius: 0.3rem;
     background-color: var(--background);
     color: var(--neutral-text-colour);
-    box-shadow: var(--box-shadow-small);
     cursor: pointer;
+    border: 1px solid transparent;
 }
 
+.profile-edit-button:hover, .profile-edit-button-cancel:hover, .profile-edit-button-confirm:hover {
+    border: 1px solid var(--primary-colour);
+}
+
+@media (max-width: 1199px) {
+    /* Profile Page */
+    .profile-page-content {
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .profile-banner {
+        height: 200px;
+    }
+
+    .profile-section-one, .profile-section-two {
+        gap: 20px;
+    }
+
+    .profile-section-one {
+        width: 300px;
+        top: 100px;
+        bottom: 20px;
+        height: calc(100dvh - 135px);
+    }
+
+    .profile-section-two {
+        width: 400px;
+    }
+
+    .banner-button {
+        bottom: -15px;
+        padding: 10px;
+        border: 3px solid var(--background-container);
+        font-size: 0.8rem;
+        border-radius: 0.4rem;
+    }
+
+    .banner-feedback {
+        top: -20px;
+    }
+
+    .createpost-file-name, .createpost-file-error {
+        font-size: 0.75rem;
+    }
+
+    .profile-edit-textarea {
+        border-radius: 0.3rem;
+        font-size: 0.8rem;
+    }
+
+    /* User Page User Section */
+    .profile-user-section {
+        padding: 10px;
+    }
+
+    /* Profile Edit Section  - - - - - - - - - */
+    .profile-edit-section {
+        padding: 10px;
+    }
+
+    .profile-edit-content {
+        gap: 10px;
+    }
+
+    .profile-edit-buttons {
+        right: 10px;
+    }
+
+    .profile-edit-button {
+        padding: 7px 10px;
+        font-size: 0.75rem;
+    }
+
+    .profile-edit-button-cancel {
+        padding: 7px 10px;
+        font-size: 0.75rem;
+    }
+
+    .profile-edit-input {
+        font-size: 0.8rem;
+        border-radius: 0.2rem;
+    }
+
+    .profile-edit-title {
+        font-size: 1rem;
+    }
+
+    .profile-edit-button:hover, .profile-edit-button-cancel:hover, .profile-edit-button-confirm:hover {
+        border: 1px solid var(--primary-colour);
+    }
+}
 

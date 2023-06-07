@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 const UserIndexRequests = ({ guestMode, data, setRefreshData, userData}) => {
 
-    console.log(data);
-
     const acceptFriendRequest = async (e, user) => {
         e.preventDefault();
         // Note - Could add validation

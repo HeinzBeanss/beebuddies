@@ -7,23 +7,23 @@ import SharedNavigation from "../Shared/Navigation";
 import SharedSettings from "../Shared/Settings";
 import UserPhotos from "../User/UserPhotos";
 
-const PhotosPage = ({setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn}) => {
+const PhotosPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn}) => {
 
     console.log(`guest mode: ${guestMode}`);
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isLoggedIn && !guestMode) {
+        if (!isLoggedIn && !guestMode && !loadingStatus) {
             navigate("/login");
         }
-    }, [isLoggedIn, guestMode]);
+    }, [isLoggedIn, guestMode, loadingStatus]);
     console.log(isLoggedIn);
 
     useEffect(() => {
         if (guestMode) {
             navigate("/")
         }
-    }, []);
+    }, [loadingStatus]);
 
     const [refreshData, setRefreshData] = useState(true);
     const [data, setData] = useState(null);

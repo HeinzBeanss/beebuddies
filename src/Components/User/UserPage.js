@@ -9,16 +9,16 @@ import UserFriends from "./UserFriends";
 import Settings from "../Shared/Settings";
 
 
-const UserPage = ({setGuestMode, guestMode, isLoggedIn, setIsLoggedIn, userData, setRefreshMainUserData}) => {
+const UserPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, setIsLoggedIn, userData, setRefreshMainUserData}) => {
 
     console.log(`guest mode: ${guestMode}`);
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isLoggedIn && !guestMode) {
+        if (!isLoggedIn && !guestMode && !loadingStatus) {
             navigate("/login");
         }
-    }, [isLoggedIn, guestMode]);
+    }, [isLoggedIn, guestMode, loadingStatus]);
     console.log(isLoggedIn);
 
     const { userId } = useParams();

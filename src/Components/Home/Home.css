@@ -5,6 +5,8 @@
     margin-top: 35px;
     margin-bottom: 20px;
     position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .home-section-one, .home-section-two, .home-section-three {
@@ -130,7 +132,7 @@
     background-color: var(--background);
     border: transparent 1px solid;
     font-size: 0.8rem;
-    padding: 5px 12px;
+    padding: 8px 12px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -270,3 +272,83 @@ input[type="file"] {
 .home-contacts-section > :last-child {
     border: 0
 }
+
+/* Media Query => 800 - 1199px width */
+
+@media (max-width: 1199px) {
+
+    .home-component {
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .home-section-one, .home-section-two, .home-section-three {
+        gap: 20px;
+    }
+
+    .home-section-one {
+        width: 180px;
+        top: 100px;
+        height: calc(100dvh - 135px);
+        bottom: 20px;
+    }
+
+    .home-section-two {
+        width: 400px;    
+    }
+
+    .home-section-three {
+        width: 220px;
+    }
+
+    .shared-settings-section {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .home-createpost-section {
+        padding: 10px;
+    }
+
+    .createpost-top-section {
+        padding-bottom: 10px;
+    }
+
+    .createpost-text {
+        margin-top: 10px;
+    }
+
+    .createpost-button-section {
+        padding-top: 5px;
+    }
+
+    .home-request-loading {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    .home-request-section {
+        padding: 0px 10px;
+    }
+
+    .request-section-item {
+        padding: 10px 5px;
+    }
+
+    .home-contacts-loading {
+        padding: 10px;
+    }
+    
+    .home-contacts-section {
+        padding: 0px 10px;
+    }
+    
+    .contact-section-item {
+        gap: 10px;
+        padding: 10px 5px;
+    }
+
+    .small-user-name {
+        font-size: 0.8rem;
+    }
+} 

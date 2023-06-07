@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: center;
     margin-bottom: 20px;
-
 }
 
 .user-page-content {
@@ -12,7 +11,8 @@
     align-self: center;
     gap: 35px;
     margin-top: 35px;
-
+    margin-left: 10px;
+    margin-right: 10px;
     /*  */
     position: relative;
 }
@@ -37,7 +37,7 @@
 
     /*  */
     position: sticky;
-    z-index: 200;
+    z-index: 9999;
     top: 115px;
     bottom: 35px;
     left: 0;
@@ -120,7 +120,7 @@
     border-radius: 0.5rem;
 }
 /* User Page Friends Section */
-.user-contacts-loading, .user-photos-loading, .user-post-loading {
+.user-photos-loading, .user-post-loading {
     padding: 15px;
     color: var(--neutral-text-colour);
     font-size: 0.9rem;
@@ -130,6 +130,18 @@
     box-shadow: var(--box-shadow-small);
 }
 
+.user-contacts-loading {
+    color: var(--neutral-text-colour);
+    font-size: 0.9rem;
+    font-weight: 400;
+    background-color: var(--background-container);
+    border-radius: var(--bg-container-br);
+    box-shadow: var(--box-shadow-small);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
 .user-contacts-section {
     background-color: var(--background-container);
     border-radius: var(--bg-container-br);
@@ -137,14 +149,6 @@
     display: flex;
     flex-direction: column;
     padding: 0px 15px;
-}
-
-.contact-section-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 5px;
-    border-bottom: var(--separator-line);
 }
 
 .user-contacts-section > :last-child {
@@ -213,11 +217,111 @@
     border-radius: 0.3rem;
     background-color: var(--background);
     color: var(--neutral-text-colour);
-    box-shadow: var(--box-shadow-small);
     cursor: pointer;
 }
 
 .user-page-request-container {
     display: flex;
     gap: 10px;
+}
+
+@media (max-width: 1199px) {
+    
+    .user-page-content {
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .user-banner {
+        height: 200px;
+    }
+    
+    .user-section-one, .user-section-two {
+        gap: 20px;
+    }
+    
+    .user-section-one {
+        width: 300px;
+        top: 100px;
+        bottom: 20px;
+        height: calc(100dvh - 135px); 
+    }
+    
+    .user-section-two {
+        width: 400px;
+    }
+    
+    /* User Page User Section */
+    .user-user-section {
+        padding: 10px;
+    }
+    
+    .user-section-top {
+        padding-bottom: 10px;
+    }
+    
+    .userpage-user-section-name {
+        font-size: 1.1rem;
+        line-height: 1rem;
+        padding-bottom: 5px;
+    }
+    
+    .user-section-info-bio {
+        font-size: 0.85rem;
+    }
+    
+    .user-section-info-item {
+        font-size: 0.75rem;
+        line-height: 0.75rem;
+        padding-bottom: 1px;
+    }
+    
+    .user-profilepicture-large {
+        width: 80px;
+        height: 80px;
+        border-radius: 0.5rem;
+    }
+    /* User Page Friends Section */
+    .user-photos-loading, .user-post-loading {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+    
+    .user-contacts-loading {
+        font-size: 0.8rem;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+    
+    .user-contacts-section {
+        padding: 0px 10px;
+    }
+    
+    /* User Photos Section */
+    .user-photos-section {
+        padding: 10px;
+        grid-gap: 10px;
+    }
+    
+    .user-photos-photo {
+        border-radius: 0.2rem;
+    }
+    
+    /* User Request Buttons */
+    .user-request-buttons {
+        right: 10px;
+    }
+    
+    .user-request-button {
+        padding: 7px 10px;
+        font-size: 0.75rem;
+        border-radius: 0.2rem;
+    }
+    
+    .user-page-request-container {
+        display: flex;
+        gap: 10px;
+    }
+
 }

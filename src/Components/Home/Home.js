@@ -9,14 +9,14 @@ import HomeCreatePost from "./HomeCreatePost";
 import HomeRequests from "./HomeRequests";
 import HomePostContainer from "../Home/HomePostContainer";
 
-const Home = ({guestMode, setGuestMode, loading, userData, isLoggedIn, setIsLoggedIn}) => {
+const Home = ({loadingStatus, guestMode, setGuestMode, loading, userData, isLoggedIn, setIsLoggedIn}) => {
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isLoggedIn && !guestMode) {
+        if (!isLoggedIn && !guestMode && !loadingStatus) {
             navigate("/login");
         }
-    }, [isLoggedIn, guestMode]);
+    }, [isLoggedIn, guestMode, loadingStatus]);
     console.log(`guest mode: ${guestMode}`);
     console.log(`isLoggedin: ${isLoggedIn}`);
     

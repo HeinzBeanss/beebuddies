@@ -324,7 +324,7 @@ input {
     width: calc(100% - 80px);
     height: calc(100% - 80px);
     background-color: rgba(0, 0, 0, 0.9);
-    z-index: 9990;
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -466,4 +466,122 @@ input {
     border-bottom: 0;
   }
 
+  @media (max-width: 1199px) {
+    .user-section {
+        padding: 10px;
+    }
 
+    .user-profilepicture-small {
+        width: 30px;
+        height: 30px;
+        border-radius: 0.5rem;
+    }
+    
+    .user-profilepicture-medium {
+        width: 40px;
+        height: 40px;
+        border-radius: 0.5rem;
+    }
+
+    .nav-section {
+        padding: 5px 10px;
+    }
+    
+    .nav-section-item {
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .nav-section-image {
+        width: 20px;
+        height: 20px;
+    }
+
+    .nav-section-title {
+        font-size: 0.8rem;
+    }
+
+    .post-section {
+        gap: 20px;
+    }
+
+    .post-item {
+        padding: 10px;
+    }
+
+    .home-postcontainer-loading, .userindex-section-userlist, .friendlist-loading {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    .post-user-name {
+        font-size: 0.8rem;
+    }
+
+    .post-section-content {
+        font-size: 0.75rem;
+    }
+
+    .comment-item-likesvg {
+        width: 12px;
+        height: 12px;    
+    }
+    
+    .post-section-likecount {
+        font-size: 0.75rem;
+        line-height: 1.1rem;
+    }
+    
+    .post-section-comments {
+        font-size: 0.65rem;
+    }
+    
+    .writecomment-section-comment {
+        font-size: 0.7rem;
+    }
+    
+    .comment-section {
+        gap: 10px;
+    }
+    
+    .comment-item-author {
+        font-size: 0.8rem;
+        line-height: 0.75rem;
+    }
+    
+    .comment-item-content {
+        font-size: 0.7rem;
+        line-height: 0.8rem;
+    }
+    
+    .comment-section-likecount {
+        font-size: 0.75rem;
+    }
+    
+    /* Large Image Component */
+      .large-post-info {
+        padding: 10px;
+      }
+    
+      /* Display Likes */
+      .display-likes-component, .display-likes-component-postpage {
+        top: 15px;
+      }
+    
+      /* Search Bar */
+      .friendlist-section-search {
+        padding: 10px;
+      }
+    
+      .search-section-title {
+        font-size: 0.85rem;
+      }
+      
+      .search-section-searchbar {
+        margin-top: 5px;
+      }
+    
+      .search-section-dropdown {
+        font-size: 0.75rem;
+      }
+  }

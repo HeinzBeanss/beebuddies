@@ -28,7 +28,7 @@ const UserContacts = ({ targetUser }) => {
                         )
                     })
                 ) : (
-                    <div className='user-contacts-loading'>You have no friends added, find some at <Link to={"/users"}>the Hive!</Link></div>
+                    <div className='user-contacts-loading'>This user has no friends added.</div>
                 )}
             
                 </div>

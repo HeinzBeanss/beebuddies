@@ -21,7 +21,7 @@ const HomeUser = ({guestMode, loading, userData}) => {
     if (userData) {
         return (
             <div className='user-section'>
-                    <Link className="user-profilepicture-medium" to={`/profile`}><img className="user-profilepicture-medium" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" /></Link>
+                    {guestMode ? <img className="user-profilepicture-medium" src={defaultpfp} alt="Image" /> : <Link className="user-profilepicture-medium" to={`/profile`}><img className="user-profilepicture-medium" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" /></Link>}
                 <div className='home-user-section-info'>
                     <p className='user-section-signinas'>Signed in as...</p>
                     {guestMode ? <h4 className='user-section-name link'>{userData.updatedUser.first_name}</h4> : <Link to={`/profile`}><h4 className='user-section-name link'>{userData.updatedUser.first_name}</h4></Link>}

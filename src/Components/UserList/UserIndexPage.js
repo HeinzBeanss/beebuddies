@@ -8,16 +8,16 @@ import SearchBar from "../Shared/SearchBar";
 import UserList from "../UserList/UserList";
 import UserIndex from "../UserList/UserIndexRequests";
 
-const UserIndexPage = ({setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn, setRefreshUserData }) => {
+const UserIndexPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn, setRefreshUserData }) => {
 
     console.log(`guest mode: ${guestMode}`);
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isLoggedIn && !guestMode) {
+        if (!isLoggedIn && !guestMode && !loadingStatus) {
             navigate("/login");
         }
-    }, [isLoggedIn, guestMode]);
+    }, [isLoggedIn, guestMode, loadingStatus]);
     console.log(isLoggedIn);
 
 

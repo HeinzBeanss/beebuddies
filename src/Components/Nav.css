@@ -1,20 +1,24 @@
 .navigation-component {
     width: 100%;
-    height: 50px;
+    height: 60px;
     /* If updating, update sticky elements in other components. */
-    padding: 15px 0;
-    background-color: var(--background-container);
+    padding: 10px 0;
+
+    /* background-color: var(--background-container); */
+    background-color: var(--primary-colour);
+    border-bottom: 8px solid var(--background-container);
+
     box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 8px;
     position: sticky;
     top: 0;
     z-index: 9990;
-    border-bottom: 1px solid var(--primary-colour);
+
 }
 
 .navigation-content {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
@@ -33,7 +37,10 @@
 }
 
 .nav-logo {
-    width: 200px;
+    /* width: 270px; */
+    height: 60px;
+    border-radius: 0.8rem;
+    /* border-bottom: 1px solid var(--primary-colour); */
 }
 
 .navbar-name {

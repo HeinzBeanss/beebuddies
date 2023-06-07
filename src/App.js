@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 
 import defaultpfp from "./Assets/default_bee_profile.jpg";
 
-import './App.css';
 import "./Components/LoginSignup.css";
 import './Components/Nav.css';
 import "./Components/Home/Home.css";
@@ -33,6 +32,7 @@ const App = () => {
   const [error, setError] = useState("");
   const [refreshMainUserData, setRefreshMainUserData] = useState(false);
   const [guestMode, setGuestMode] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState(true);
 
   // Verify Token on page load up.
   useEffect(() => {
@@ -55,6 +55,7 @@ const App = () => {
           setUserData(userData);
           setGuestMode(false);
           setIsLoggedIn(true);
+          setLoadingStatus(false);
           setRefreshMainUserData(false);
         } else {
           console.log("not ok");
@@ -78,6 +79,7 @@ const App = () => {
 
     if (!token && !isGuest) {
       setIsLoggedIn(false);
+      setLoadingStatus(false);
       console.log("NO TOKEN OR GUEST LS");
     } else if (isGuest === "true") {
       console.log("GUEST LOCAL STORAGE IS TRUE");
@@ -93,7 +95,8 @@ const App = () => {
           posts: [],
           _id: 0,
         }
-      })
+      });
+      setLoadingStatus(false);
     } else {
       console.log("VERIFYING TOKEN NOW");
       console.log(isGuest);
@@ -113,7 +116,7 @@ const App = () => {
           <Route
             exact
             path={'/'}
-            element={<Home setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
+            element={<Home loadingStatus={loadingStatus} setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
           />
           <Route
             path={'/login'}
@@ -126,7 +129,8 @@ const App = () => {
               <Route
                 path={"/profile"}
                 element={
-                  <ProfilePage
+                  <ProfilePage 
+                    loadingStatus={loadingStatus}
                     guestMode={guestMode}
                     setGuestMode={setGuestMode}
                     isLoggedIn={isLoggedIn}
@@ -140,6 +144,7 @@ const App = () => {
                 path={"/user/:userId"}
                 element={
                   <UserPage
+                    loadingStatus={loadingStatus}
                     guestMode={guestMode}
                     setGuestMode={setGuestMode}
                     setRefreshMainUserData={setRefreshMainUserData}
@@ -152,18 +157,16 @@ const App = () => {
   
               <Route
                 path={"/users"}
-                setGuestMode={setGuestMode}
-                element={<UserIndexPage setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
+                element={<UserIndexPage loadingStatus={loadingStatus} setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
               />
               <Route
                 path={"/friends"}
-                setGuestMode={setGuestMode}
-                element={<FriendsPage  guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
+                element={<FriendsPage setGuestMode={setGuestMode} loadingStatus={loadingStatus} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
               />
               <Route
                 path={"/photos"}
-                setGuestMode={setGuestMode}
-                element={<PhotosPage  guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
+
+                element={<PhotosPage setGuestMode={setGuestMode} loadingStatus={loadingStatus} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
               />
             </>
   
