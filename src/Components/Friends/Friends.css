@@ -88,6 +88,9 @@
     .friends-component {
         gap: 20px;
         margin-top: 20px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .friends-section-one, .friends-section-two {
@@ -98,10 +101,13 @@
         top: 100px;
         bottom: 20px;
         height: calc(100dvh - 135px);
+        width: 30%;
+        max-width: 200px;
     }
     
     .friends-section-two {
-        width: 500px;
+        width: 70%;
+        max-width: 700px;
     }
     
     /* Friend List Section */
@@ -129,5 +135,52 @@
     .friendlist-bio {
         font-size: 0.75rem;
         line-height: 0.9rem;
+    }
+}
+
+.mobile-friends-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 799px) {
+
+    /* Friend List Section */
+    .friendlist-section {
+        border-radius: 0;
+    }
+    
+    .friendlist-section-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .friendlist-card {
+        padding: 10px;
+        border: var(--separator-line);
+        border-radius: 0.8rem;
+    }
+    
+    .friend-pfp {
+        width: 100%;
+        border-radius: 0.5rem;
+    }
+    
+    .friendlist-username {
+        font-size: 1rem;
+        font-weight: var(--font-thickness-400d-500l);
+        border-bottom: var(--separator-line);
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .friendlist-bio {
+        font-size: 0.8rem;
+        font-weight: var(--font-thickness-300d-400l);
+        color: var(--neutral-text-colour);
+        line-height: 1rem;
     }
 }

@@ -11,7 +11,7 @@
 
 }
 
-.component-login {
+.component-login, .component-signup {
     background-color: #fec600;
     /* position: relative; */
     z-index: 1;
@@ -27,7 +27,7 @@
     box-shadow: rgba(0, 0, 0, 0.20) 0px 0px 38px, rgba(0, 0, 0, 0.14) 0px 0px 12px;
 }
 
-.login-content {
+.login-content, .signup-content {
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -219,4 +219,115 @@ input:-webkit-autofill:active {
     z-index: 20;
     bottom: -30px;
     cursor: pointer;
+}
+
+@media (max-width: 1199px) {
+    .component-signup {
+        max-width: 70%;
+    }
+}
+
+@media (max-width: 799px) { 
+    
+    .component-login {
+        max-height: 80%;
+        max-width: 90%;
+    }
+    
+    .login-content {
+        width: 100%;
+    }
+    
+    .typefaceimage {
+        max-width: 80%;
+        margin-bottom: 10px;
+    }
+    
+    .wave-pattern {
+        height: 80dvh;
+      }
+      
+    .login-container {
+        max-width: 65%;
+        max-height: 100%;
+        padding: 20px;
+        border: 3px solid rgb(46, 31, 28, 0.95);
+    }
+    
+    .login-form {
+        margin-top: 10px;
+    }
+    
+    .login-title {
+        font-size: 1rem;
+        padding-bottom: 10px;
+    }
+    
+    .input-label-group {
+        margin-bottom: 15px;
+    }
+    
+    .login-input, .signup-input {
+        font-size: 0.90rem;
+    }
+    
+    .login-input:focus, .login-input:active {
+        outline: 0;
+        border: 0;
+        border-bottom: #2e1f1c 1px solid;
+        border-radius: 0.2rem 0.2rem 0 0;
+    }
+    
+    .login-button {
+        font-size: 0.9rem;
+    }
+    
+    .login-error, .error-container {
+        font-size: 0.8rem;
+        margin-top: 1px;
+        font-weight: 300;
+    }
+    
+    .login-account-message {
+        font-size: 0.9rem;
+        margin-top: 5px;
+        margin-bottom: 0px;
+        max-width: 70%;
+        text-align: center;
+    }
+    
+    /* Signup Page */
+
+    .component-signup {
+        min-height: 95%;
+        min-width: 90%;
+    }
+    
+    .signup-form {
+        width: 100%;
+        margin-top: 5px;
+    }
+    
+    .form-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        width: 100%;
+    }
+    
+    .signup-form-side-one, .signup-form-side-two {
+        width: 100%;
+    }
+
+    .signup-form-side-one > .input-label-group, .signup-form-side-two > .input-label-group {
+        margin-bottom: 5px;
+    }
+    
+    .signup-container {
+        min-width: 70%;
+        max-width: 60%;
+        max-height: 70%;
+        padding: 10px;
+        border: 3px solid rgb(46, 31, 28, 0.95);
+    }
 }

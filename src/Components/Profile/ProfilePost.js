@@ -7,7 +7,7 @@ import PostDisplay from  "../Shared/PostPage";
 import heart from "../../Assets/heart-outline.svg";
 import heartfull from "../../Assets/heart.svg";
 
-const ProfilePost = ({setRefreshData, userData, post}) => {
+const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
 
     // Display Likes
     const [likes, setLikes] = useState(null);
@@ -161,7 +161,7 @@ const ProfilePost = ({setRefreshData, userData, post}) => {
             </div>
             <div className="post-section-content">{post.content}</div>
             {post.image ? (
-                <img onClick={enlargeImage} className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
+                <img onClick={isMobile ? null : enlargeImage} className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
             ) : null}
             {/* Note - add hover like thing displaying users. */}
             <div className="post-section-feedback">

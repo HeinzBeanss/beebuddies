@@ -7,7 +7,7 @@ import defaultpfp from "../../Assets/default_bee_profile.jpg";
 import heart from "../../Assets/heart-outline.svg";
 import heartfull from "../../Assets/heart.svg";
 
-const Post = ({guestMode, setRefreshData, userData, post}) => {
+const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
 
     // Display Likes
     const [likes, setLikes] = useState(null);
@@ -135,6 +135,12 @@ const Post = ({guestMode, setRefreshData, userData, post}) => {
         window.scrollTo(0, scrollPosition);
     };
 
+    if (!userData) {
+        return (
+            <div className="post-section-loading">Loading</div>
+        )
+    } 
+
     return (
         <div className="post-item">
             {displayLargePost ? <PostDisplay
@@ -161,7 +167,7 @@ const Post = ({guestMode, setRefreshData, userData, post}) => {
             </div>
             <div className="post-section-content">{post.content}</div>
             {post.image ? (
-                <img onClick={enlargeImage} className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
+                <img className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" onClick={isMobile ? null : enlargeImage} />
             ) : null}
             {/* Note - add hover like thing displaying users. */}
             <div className="post-section-feedback minus">
@@ -175,7 +181,7 @@ const Post = ({guestMode, setRefreshData, userData, post}) => {
             <div className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
                 <img className="user-profilepicture-small" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
                 <input className="writecomment-section-comment" type="text" name="comment" placeholder={guestMode ? "Login to post a comment" : "Write a comment..."} onChange={handleInputChange} value={comment}></input>
-                <button disabled={guestMode} className="writecomment-section-post" onClick={postComment}>Post Comment</button>
+                <button disabled={guestMode} className="writecomment-section-post" onClick={postComment}>{isMobile ? "Comment" : "Post Comment"}</button>
             </div>
             {post.comments.length > 0 ? (
             <div className="comment-section">

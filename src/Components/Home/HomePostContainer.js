@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Post from "../Shared/Post";
 
-const HomePostContainer = ({guestMode, refreshPostData, setRefreshPostData, userData }) => {
+const HomePostContainer = ({isMobile, guestMode, refreshPostData, setRefreshPostData, userData }) => {
 
     const [posts, setPosts] = useState(null);
+    useEffect(() => {
+        setRefreshPostData(true);
+    }, [])
 
     useEffect(() => {
         if (userData && refreshPostData) {
@@ -35,7 +38,7 @@ const HomePostContainer = ({guestMode, refreshPostData, setRefreshPostData, user
             { posts.length > 0 ? (
                 posts.map((post, index) => {
                     return (
-                        <Post guestMode={guestMode} setRefreshData={setRefreshPostData} userData={userData} post={post} key={index}/>
+                        <Post isMobile={isMobile} guestMode={guestMode} setRefreshData={setRefreshPostData} userData={userData} post={post} key={index}/>
                     )
                 })
             ) : (

@@ -7,7 +7,7 @@ import SharedSettings from "../Shared/Settings";
 import SearchBar from "../Shared/SearchBar";
 import FriendsList from "../Friends/FriendList";
 
-const FriendsPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, loading, userData, setIsLoggedIn }) => {
+const FriendsPage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, loading, userData, setIsLoggedIn }) => {
 
     console.log(`guest mode: ${guestMode}`);
 
@@ -39,12 +39,21 @@ const FriendsPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, loadin
         }
     }, [userData])
 
+    if (isMobile) {
+        return (
+            <div className="mobile-friends-container">
+                <SearchBar friends={friends}/>
+                <FriendsList friends={friends}/>
+            </div>
+        )
+    }
+
     return(
         <div className="friends-component">
             <div className="friends-section-one">
                 <SharedUser loading={loading} userData={userData} />
                 <SharedNavigation />
-                <SharedSettings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
+                <SharedSettings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className="friends-section-two">
                 <SearchBar friends={friends}/>

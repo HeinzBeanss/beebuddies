@@ -5,7 +5,7 @@
     padding: 10px 0;
 
     /* background-color: var(--background-container); */
-    background-color: var(--primary-colour);
+    background-color: var(--logo-colour);
     border-bottom: 8px solid var(--background-container);
 
     box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 8px;
@@ -47,5 +47,31 @@
     font-size: 1.2rem;
     font-weight: var(--font-thickness-400d-500l);
     color: var(--neutral-text-colour);
+}
 
+
+
+/* MOBILE LAYOUT */
+.mobile-nav {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--background-container);
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    z-index: 999999;
+    bottom: 0;
+}
+
+.mobile-nav-item {
+    /* height: 30px; */
+    width: 28px;
+    height: 28px;
+    padding: 10px;
+    filter: var(--svg-filter);
+    cursor: pointer;
+}
+
+.mobile-nav-link {
+    height: 28px;
 }

@@ -5,7 +5,7 @@ import PostDisplay from "../Shared/PostPage";
 import heart from "../../Assets/heart-outline.svg";
 import heartfull from "../../Assets/heart.svg";
 
-const PhotoPost = ({guestMode, setRefreshData, userData, post, index}) => {
+const PhotoPost = ({isMobile, guestMode, setRefreshData, userData, post, index}) => {
     
         const formatTimestamp = (timestamp) => {
             const formattedTime = DateTime.fromISO(timestamp).toFormat("MMMM d' at 'HH:mm");
@@ -107,7 +107,7 @@ const PhotoPost = ({guestMode, setRefreshData, userData, post, index}) => {
                     comment={comment}
                     setComment={setComment}
                     /> : null}
-                <img key={index} onClick={enlargeImage} className="user-photos-photo" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
+                <img key={index} onClick={isMobile ? null : enlargeImage} className="user-photos-photo" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
                 </div>
     
     ) : null

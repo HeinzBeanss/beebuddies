@@ -10,7 +10,7 @@ import UserFriends from "../User/UserFriends";
 import Settings from "../Shared/Settings";
 
 
-const ProfilePage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, setRefreshMainUserData, setIsLoggedIn, userData }) => {
+const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, setRefreshMainUserData, setIsLoggedIn, userData }) => {
 
     console.log(`guest mode: ${guestMode}`);
 
@@ -112,13 +112,13 @@ const ProfilePage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, setRef
             <div className="profile-section-one">
                 <ProfilePageUser setBannerFeedback={setbannerFeedback} setRefreshMainUserData={setRefreshMainUserData} profileUser={profileUser} setRefreshData={setRefreshData}/>
                 <UserFriends targetUser={profileUser} />
-                <UserPhotos setRefreshData={setRefreshData} userData={userData} targetUser={profileUser} />
-                <Settings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
+                <UserPhotos isMobile={isMobile} setRefreshData={setRefreshData} userData={userData} targetUser={profileUser} />
+                <Settings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
             </div>
             <div className="profile-section-two">
                 <div className="banner-feedback">{bannerFeedback}</div>
                 <CreatePost refreshData={refreshData} setRefreshData={setRefreshData} userData={userData} />
-                <ProfilePostContainer setRefreshData={setRefreshData} profileUser={profileUser} userData={userData} />
+                <ProfilePostContainer isMobile={isMobile} setRefreshData={setRefreshData} profileUser={profileUser} userData={userData} />
             </div>
             </div>
         </div>

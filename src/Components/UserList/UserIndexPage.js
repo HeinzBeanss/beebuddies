@@ -8,7 +8,7 @@ import SearchBar from "../Shared/SearchBar";
 import UserList from "../UserList/UserList";
 import UserIndex from "../UserList/UserIndexRequests";
 
-const UserIndexPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn, setRefreshUserData }) => {
+const UserIndexPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn, setRefreshUserData }) => {
 
     console.log(`guest mode: ${guestMode}`);
 
@@ -49,12 +49,21 @@ const UserIndexPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, user
         }
     }, [userData, refreshData]);
 
+    if (isMobile) {
+        return (
+            <div className="mobile-userindex-container">
+                <UserIndex guestMode={guestMode} data={data} setRefreshData={setRefreshData} userData={userData}/>
+                <SearchBar guestMode={guestMode} friends={data}/>
+                <UserList guestMode={guestMode} data={data} setRefreshData={setRefreshData} userData={userData}/>
+            </div>
+        )
+    }
     return (
         <div className="userindex-component">
             <div className="userindex-section-one">
                 <SharedUser guestMode={guestMode} userData={userData} />
                 <SharedNavigation guestMode={guestMode}/>
-                <SharedSettings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
+                <SharedSettings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className='userindex-section-two'>
                 <UserIndex guestMode={guestMode} data={data} setRefreshData={setRefreshData} userData={userData}/>

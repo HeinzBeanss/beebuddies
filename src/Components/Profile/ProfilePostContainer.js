@@ -2,7 +2,7 @@ import '../Home/Home.css';
 import React, { useState, useEffect } from "react";
 import ProfilePost from "./ProfilePost";
 
-const ProfilePostContainer = ({ setRefreshData, userData, profileUser }) => {
+const ProfilePostContainer = ({isMobile, setRefreshData, userData, profileUser }) => {
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +20,7 @@ const ProfilePostContainer = ({ setRefreshData, userData, profileUser }) => {
             { profileUser.posts.length > 0 ? (
                 profileUser.posts.map((post, index) => {
                     return (
-                        <ProfilePost setRefreshData={setRefreshData} userData={userData} profileUser={profileUser} post={post} key={index}/>
+                        <ProfilePost isMobile={isMobile} setRefreshData={setRefreshData} userData={userData} profileUser={profileUser} post={post} key={index}/>
                     )
                 })
             ) : (

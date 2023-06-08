@@ -9,7 +9,7 @@ import UserFriends from "./UserFriends";
 import Settings from "../Shared/Settings";
 
 
-const UserPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, setIsLoggedIn, userData, setRefreshMainUserData}) => {
+const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, setIsLoggedIn, userData, setRefreshMainUserData}) => {
 
     console.log(`guest mode: ${guestMode}`);
 
@@ -56,11 +56,11 @@ const UserPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, setIsLogg
                 <div className="user-section-one">
                     <UserPageUser guestMode={guestMode} setRefreshMainUserData={setRefreshMainUserData} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
                     <UserFriends targetUser={targetUser} />
-                    <UserPhotos guestMode={guestMode} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
-                    <Settings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
+                    <UserPhotos isMobile={isMobile} guestMode={guestMode} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
+                    <Settings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
                 </div>
                 <div className="user-section-two">
-                    <UserPostContainer guestMode={guestMode} setRefreshData={setRefreshData} targetUser={targetUser} userData={userData} />
+                    <UserPostContainer isMobile={isMobile} guestMode={guestMode} setRefreshData={setRefreshData} targetUser={targetUser} userData={userData} />
                 </div>
             </div>
         </div>

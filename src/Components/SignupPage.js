@@ -100,8 +100,8 @@ const SignupPage = ({ setIsLoggedIn, isLoggedIn }) => {
 
     return (
         <div className="component-login-container">
-            <div className="component-login">
-                <div className="login-content">
+            <div className="component-signup">
+                <div className="signup-content">
                     <img className="typefaceimage" src={typeface}></img>
                     <svg className="wave-pattern" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
                         <path d="M0,50 Q33.3,70 66.6,50 Q100,30 100,50 L100,100 L0,100 Z"></path>

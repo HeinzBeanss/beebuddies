@@ -2,8 +2,9 @@ import './Home.css';
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import defaultpfp from "../../Assets/default_bee_profile.jpg";
+import upload from "../../Assets/upload.svg";
 
-const HomeCreatePost = ({guestMode, setRefreshPostData, refreshPostData, setRefreshData, userData }) => {
+const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, refreshPostData, setRefreshData, userData }) => {
 
     const [imageFile, setImageFile] = useState(null);
     const [postData, setPostData] = useState({
@@ -82,6 +83,7 @@ const HomeCreatePost = ({guestMode, setRefreshPostData, refreshPostData, setRefr
             console.log(message);
             setRefreshData(true);
             setRefreshPostData(true);
+            setFileName("");
             setPostData({
                 content: "",
             })
@@ -111,17 +113,19 @@ const HomeCreatePost = ({guestMode, setRefreshPostData, refreshPostData, setRefr
             )}
 
         <form onSubmit={guestMode ? handleGuestError : createPost} encType="multipart/form-data">
-            <textarea className='createpost-text' name="content" placeholder='Write your thoughts here' rows={4} value={postData.content} onChange={handleInputChange}></textarea>
+            <textarea className='createpost-text' name="content" placeholder='Write your thoughts here' rows={isMobile ? 2 : 4} value={postData.content} onChange={handleInputChange}></textarea>
             <div className="createpost-button-section">
-                {fileError}
-                <p className='createpost-file-name'>{fileName}</p>
-                <div className="createpost-upload-button">
-                    <input disabled={guestMode} className="createpost-file" type="file" accept="image/*" onChange={handleFileChange}/>
-                    <button disabled={guestMode} className="custom-file-upload" type="button" onClick={handleFileUpload}>Upload an image</button>
-                </div>
-                <button
-                 className='createpost-input-button' type='submit'>Create Post</button>
+            {fileError}
+            <p className='createpost-file-name'>{fileName}</p>
+            <div className="createpost-upload-button">
+                <input disabled={guestMode} className="createpost-file" type="file" accept="image/*" onChange={handleFileChange}/>
+                {isMobile ? 
+                <div className="mobile-upload-button" disabled={guestMode} onClick={handleFileUpload}><img  className="upload-svg" src={upload}></img></div> :
+                <button disabled={guestMode}className="custom-file-upload" type="button" onClick={handleFileUpload}>Upload an image</button> }
             </div>
+            <button
+             className='createpost-input-button' type='submit'>Create Post</button>
+        </div>
         </form>
     </div>
     )

@@ -7,7 +7,7 @@ import SharedNavigation from "../Shared/Navigation";
 import SharedSettings from "../Shared/Settings";
 import UserPhotos from "../User/UserPhotos";
 
-const PhotosPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn}) => {
+const PhotosPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn}) => {
 
     console.log(`guest mode: ${guestMode}`);
 
@@ -46,12 +46,19 @@ const PhotosPage = ({loadingStatus, setGuestMode, guestMode, isLoggedIn, userDat
         }
     }, [userData, refreshData]);
 
+    if (isMobile) {
+        return (
+            <div className="mobile-userindex-container">
+                <UserPhotos isMobile={isMobile} targetUser={data} setRefreshData={setRefreshData} userData={userData}/>
+            </div>
+        )
+    }
     return (
         <div className="userindex-component">
             <div className="userindex-section-one">
                 <SharedUser userData={userData} />
                 <SharedNavigation />
-                <SharedSettings setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
+                <SharedSettings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
             </div>
             <div className='userindex-section-two'>
                 <UserPhotos targetUser={data} setRefreshData={setRefreshData} userData={userData}/>
