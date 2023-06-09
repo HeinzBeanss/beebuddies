@@ -17,12 +17,12 @@
 
 .home-section-one {
     width: 200px;
-
+    z-index: 10;
     position: sticky;
-    top: 115px;
+    top: 125px;
     bottom: 35px;
     left: 0;
-    height: calc(100dvh - 150px);
+    height: calc(100dvh - 160px);
     overflow-y: auto;
 }
 
@@ -43,12 +43,13 @@
 
 .home-section-three {
     width: 240px;
-
+    /* z-index: -1; */
+    /* !!!!!! */
     position: sticky;
-    top: 95px;
+    top: 125px;
     bottom: 35px;
     left: 0;
-    height: calc(100dvh - 130px);
+    height: calc(100dvh - 160px);
     overflow-y: auto;
 }
 
@@ -279,8 +280,8 @@ input[type="file"] {
     .home-section-one {
         width: 22%;
         max-width: 200px;
-        top: 100px;
-        height: calc(100dvh - 135px);
+        top: 108px;
+        height: calc(100dvh - 128px);
         bottom: 20px;
     }
 
@@ -292,6 +293,9 @@ input[type="file"] {
     .home-section-three {
         width: 28%;
         max-width: 240px;
+        top: 108px;
+        height: calc(100dvh - 128px);
+        bottom: 20px;
     }
 
     .shared-settings-section {

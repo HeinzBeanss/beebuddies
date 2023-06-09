@@ -63,7 +63,7 @@ const UserIndexPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, 
             <div className="userindex-section-one">
                 <SharedUser guestMode={guestMode} userData={userData} />
                 <SharedNavigation guestMode={guestMode}/>
-                <SharedSettings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
+                <SharedSettings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData}/>
             </div>
             <div className='userindex-section-two'>
                 <UserIndex guestMode={guestMode} data={data} setRefreshData={setRefreshData} userData={userData}/>

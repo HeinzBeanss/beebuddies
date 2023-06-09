@@ -79,6 +79,8 @@ const NavBar = ({isMobile, guestMode, theme, setTheme, userData, setIsLoggedIn, 
                  })}
                 <img src={Menu} className={`mobile-nav-item`} onClick={openSettings}></img>
                 {openSettingsComponent ? <SharedSettings
+                guestMode={guestMode}
+                userData={userData}
                 setTheme={setTheme} theme={theme}
                 openSettingsComponent={openSettingsComponent}
                 setOpenSettingsComponent={setOpenSettingsComponent}

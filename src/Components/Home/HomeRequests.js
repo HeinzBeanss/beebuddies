@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import defaultpfp from "../../Assets/default_bee_profile.jpg";
 
-const HomeRequests = ({ guestMode, loading, userData, refreshData, setRefreshData }) => {
+const HomeRequests = ({ guestMode, loading, userData, refreshData, setRefreshData, setRefreshPostData }) => {
 
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
@@ -15,6 +15,7 @@ const HomeRequests = ({ guestMode, loading, userData, refreshData, setRefreshDat
         });
         const message = await response.json();
         setRefreshData(true);
+        setRefreshPostData(true);
         console.log(message);
     }
     

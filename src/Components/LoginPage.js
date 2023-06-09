@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 import React, { useState, useEffect } from "react";
 
 import typeface from "../Assets/transparent.png";
@@ -15,6 +16,21 @@ const LoginPage = ({guestMode, setGuestMode, isLoggedIn, setIsLoggedIn }) => {
     }, [isLoggedIn, guestMode])
     console.log(`guest mode: ${guestMode}`);
     console.log(`isLoggedin: ${isLoggedIn}`);
+
+    useEffect(() => {
+        const token = Cookies.get('token');
+        if (token) {
+            console.log(token);
+            // Do something with the user and token data
+            // For example, save them to the state or localStorage
+            localStorage.setItem("token", token);
+            localStorage.removeItem("isGuest");
+            setError("");
+            setIsLoggedIn(true);
+            navigate("/");
+        }
+        console.log("done");
+    } ,[])
 
     // Form Data
     const [formData, setFormData] = useState({
@@ -63,6 +79,15 @@ const LoginPage = ({guestMode, setGuestMode, isLoggedIn, setIsLoggedIn }) => {
         navigate("/");
     }
 
+    const handleFacebookLogin = async (e) => {
+        console.log("Logging in with facebook");
+        // e.preventDefault();
+        // // window.location.href = "http://localhost:4000/auth/login-facebook";
+        // const response = await fetch(`http://localhost:4000/auth/login-facebook`);
+        // const data = await response.json();
+        // console.log(data);
+    }
+
     return (
         <div className="component-login-container">
             <div className="component-login">
@@ -90,6 +115,7 @@ const LoginPage = ({guestMode, setGuestMode, isLoggedIn, setIsLoggedIn }) => {
                     </div>
                     <p className="login-account-message">Don't have an account? <Link className="login-redirect" to={"/signup"}><span className="login-redirect">Signup here.</span></Link></p>
                     <p className="guest-button" onClick={handleContinueAsGuest}>Continue as guest</p>
+                    <a href="http://localhost:4000/auth/login-facebook" className="fblogin"><button className="fbbutton" onClick={handleFacebookLogin}>Login with Facebook</button></a>
                 </div>
 
             </div>

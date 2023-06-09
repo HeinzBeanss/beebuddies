@@ -53,7 +53,7 @@ const FriendsPage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
             <div className="friends-section-one">
                 <SharedUser loading={loading} userData={userData} />
                 <SharedNavigation />
-                <SharedSettings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
+                <SharedSettings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData}/>
             </div>
             <div className="friends-section-two">
                 <SearchBar friends={friends}/>

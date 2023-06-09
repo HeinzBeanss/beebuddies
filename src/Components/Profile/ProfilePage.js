@@ -113,7 +113,7 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
                 <ProfilePageUser setBannerFeedback={setbannerFeedback} setRefreshMainUserData={setRefreshMainUserData} profileUser={profileUser} setRefreshData={setRefreshData}/>
                 <UserFriends targetUser={profileUser} />
                 <UserPhotos isMobile={isMobile} setRefreshData={setRefreshData} userData={userData} targetUser={profileUser} />
-                <Settings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
+                <Settings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
             </div>
             <div className="profile-section-two">
                 <div className="banner-feedback">{bannerFeedback}</div>

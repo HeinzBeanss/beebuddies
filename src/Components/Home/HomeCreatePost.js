@@ -1,4 +1,3 @@
-import './Home.css';
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import defaultpfp from "../../Assets/default_bee_profile.jpg";
@@ -113,7 +112,7 @@ const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, refreshPostDat
             )}
 
         <form onSubmit={guestMode ? handleGuestError : createPost} encType="multipart/form-data">
-            <textarea className='createpost-text' name="content" placeholder='Write your thoughts here' rows={isMobile ? 2 : 4} value={postData.content} onChange={handleInputChange}></textarea>
+            <textarea className='createpost-text' name="content" placeholder={guestMode ? "Login to post something!" : 'Write your thoughts here'} rows={isMobile ? 2 : 4} value={postData.content} onChange={handleInputChange}></textarea>
             <div className="createpost-button-section">
             {fileError}
             <p className='createpost-file-name'>{fileName}</p>

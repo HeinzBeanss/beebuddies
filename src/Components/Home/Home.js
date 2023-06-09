@@ -35,15 +35,15 @@ const Home = ({setTheme, theme, isMobile, loadingStatus, guestMode, setGuestMode
             <div className='home-section-one'>
                 <SharedUser guestMode={guestMode} loading={loading} userData={userData} />
                 <SharedNavigation guestMode={guestMode}/>
-                <SharedSettings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
+                <SharedSettings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData}/>
             </div>
             <div className='home-section-two'>
                 <HomeCreatePost isMobile={isMobile} setRefreshPostData={setRefreshPostData} refreshPostData={refreshPostData} guestMode={guestMode} refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
                 <HomePostContainer isMobile={isMobile} setRefreshPostData={setRefreshPostData} refreshPostData={refreshPostData} guestMode={guestMode} refreshData={refreshData} setRefreshData={setRefreshData} userData={userData}/>
             </div>
             <div className='home-section-three'>
-                <HomeRequests guestMode={guestMode} userData={userData} refreshData={refreshData} setRefreshData={setRefreshData}/>
-                <HomeContacts guestMode={guestMode} userData={userData} refreshData={refreshData} setRefreshData={setRefreshData}/>
+                <HomeRequests guestMode={guestMode} userData={userData} refreshData={refreshData} setRefreshData={setRefreshData} setRefreshPostData={setRefreshPostData}/>
+                <HomeContacts guestMode={guestMode} userData={userData} refreshData={refreshData} setRefreshData={setRefreshData} setRefreshPostData={setRefreshPostData}/>
             </div>
         </div>
     )

@@ -58,7 +58,7 @@ const PhotosPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, gue
             <div className="userindex-section-one">
                 <SharedUser userData={userData} />
                 <SharedNavigation />
-                <SharedSettings setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} />
+                <SharedSettings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData}/>
             </div>
             <div className='userindex-section-two'>
                 <UserPhotos targetUser={data} setRefreshData={setRefreshData} userData={userData}/>

@@ -13,6 +13,7 @@ import './Components/Profile/Profile.css';
 import './Components/User/User.css';
 import './Components/UserList/UserIndexPage.css';
 
+import MobileNav from "./Components/Shared/MobileNav";
 import NavBar from "./Components/NavBar";
 import LoginPage from "./Components/LoginPage";
 import SignupPage from "./Components/SignupPage";
@@ -26,7 +27,22 @@ import PhotosPage from "./Components/Photos/PhotosPage";
 
 const App = () => {
 
-  // const location = useLocation();
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 799);
+    };
+
+    handleResize(); // Check initial width
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  console.log(`${window.innerWidth} + ${isMobile}`);
+  
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
@@ -63,6 +79,7 @@ const App = () => {
           setError(errorData.message);
           // window.location.href = "/login";
           setRefreshMainUserData(false);
+          setLoadingStatus(false);
         }
       } catch (error) {
         console.error("Error verifiying token:", error);
@@ -105,24 +122,33 @@ const App = () => {
     }
   }, [isLoggedIn, guestMode, refreshMainUserData]);
 
+  // DARK/LIGHT THEME
+  const storedTheme = localStorage.getItem('theme');
+  const [theme, setTheme] = useState(storedTheme || 'light');
+  
+  useEffect(() => {
+    console.log(theme);
+    document.body.className = theme;
+  }, [theme])
 
   return (
     <>
       <Router>
+      {isMobile && (isLoggedIn || guestMode) ? < MobileNav /> : null}
       {isLoggedIn || guestMode ? (
-        <NavBar guestMode={guestMode} userData={userData} />
+        <NavBar setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} isMobile={isMobile} guestMode={guestMode} userData={userData} />
         ) : null}
         <Routes>
           <Route
             exact
             path={'/'}
-            element={<Home loadingStatus={loadingStatus} setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
+            element={<Home setTheme={setTheme} theme={theme} isMobile={isMobile} loadingStatus={loadingStatus} setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
           />
           <Route
             path={'/login'}
-            element={<LoginPage guestMode={guestMode} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />}
+            element={<LoginPage isMobile={isMobile} guestMode={guestMode} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />}
           />
-          <Route path={'/signup'} guestMode={guestMode} element={<SignupPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
+          <Route path={'/signup'} guestMode={guestMode} element={<SignupPage isMobile={isMobile} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
   
 
             <>
@@ -130,6 +156,8 @@ const App = () => {
                 path={"/profile"}
                 element={
                   <ProfilePage 
+                    setTheme={setTheme} theme={theme}
+                    isMobile={isMobile}
                     loadingStatus={loadingStatus}
                     guestMode={guestMode}
                     setGuestMode={setGuestMode}
@@ -144,6 +172,8 @@ const App = () => {
                 path={"/user/:userId"}
                 element={
                   <UserPage
+                    setTheme={setTheme} theme={theme}
+                    isMobile={isMobile}
                     loadingStatus={loadingStatus}
                     guestMode={guestMode}
                     setGuestMode={setGuestMode}
@@ -157,16 +187,16 @@ const App = () => {
   
               <Route
                 path={"/users"}
-                element={<UserIndexPage loadingStatus={loadingStatus} setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
+                element={<UserIndexPage setTheme={setTheme} theme={theme} isMobile={isMobile} loadingStatus={loadingStatus} setGuestMode={setGuestMode} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
               />
               <Route
                 path={"/friends"}
-                element={<FriendsPage setGuestMode={setGuestMode} loadingStatus={loadingStatus} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
+                element={<FriendsPage setTheme={setTheme} theme={theme} isMobile={isMobile} setGuestMode={setGuestMode} loadingStatus={loadingStatus} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
               />
               <Route
                 path={"/photos"}
 
-                element={<PhotosPage setGuestMode={setGuestMode} loadingStatus={loadingStatus} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
+                element={<PhotosPage setTheme={setTheme} theme={theme} isMobile={isMobile} setGuestMode={setGuestMode} loadingStatus={loadingStatus} guestMode={guestMode} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
               />
             </>
   

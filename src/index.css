@@ -7,7 +7,7 @@ body.light {
   --background: #edeef5;
   --background-container: #ffffff;
   --background-lighter: #dbdbdb;
-  --primary-colour: rgb(254, 198, 0);
+  --primary-colour: #2e1f1c;
   --box-shadow-small: rgba(0, 0, 0, 0.04) 0px 1px 8px;
   --separator-line: 1px rgb(230, 230, 230) solid;
   --primary-border: 2px rgb(228, 228, 106) solid;
@@ -20,7 +20,7 @@ body.light {
 
   --font-thickness-300d-400l: 400;
   --font-thickness-400d-500l: 500;
-  --svg-filter: invert(63%) sepia(8%) saturate(1838%) hue-rotate(165deg) brightness(87%) contrast(100%);
+  --svg-filter: invert(10%) sepia(8%) saturate(2643%) hue-rotate(322deg) brightness(94%) contrast(90%);
   --success-text-colour: rgb(52, 175, 52);
   --error-text-colour: rgb(134, 0, 0);
 }
@@ -45,7 +45,7 @@ body.dark {
   --lighter-text-colour-opposite: rgb(58, 58, 58);
   --font-thickness-300d-400l: 300;
   --font-thickness-400d-500l: 400;
-  --svg-filter: invert(79%) sepia(31%) saturate(1709%) hue-rotate(359deg) brightness(99%) contrast(102%);
+  --svg-filter: invert(65%) sepia(99%) saturate(795%) hue-rotate(1deg) brightness(110%) contrast(104%);
   --success-text-colour: rgb(140, 190, 140);
   --error-text-colour: rgb(192, 68, 68);
 }
@@ -57,8 +57,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background);
+  --logo-colour: #fec600;
   --bg-container-br: 0.4rem;
-
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -83,4 +83,6 @@ a {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
 
