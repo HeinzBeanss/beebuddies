@@ -11,6 +11,12 @@ import Settings from "../Shared/Settings";
 
 
 const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, setRefreshMainUserData, setIsLoggedIn, userData }) => {
+
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  }
+
+
     console.log(window.innerHeight);
     console.log(document.documentElement.scrollTop);
     console.log(document.documentElement.offsetHeight);

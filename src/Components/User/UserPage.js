@@ -11,6 +11,15 @@ import Settings from "../Shared/Settings";
 
 const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, setIsLoggedIn, userData, setRefreshMainUserData}) => {
 
+    window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+    }
+
+    const [page, setPage] = useState(1);
+    console.log(`PAGE COUNT: ${page}`);
+    const [hasMore, setHasMore] = useState(true);
+
+
     console.log(`guest mode: ${guestMode}`);
 
     const navigate = useNavigate();
@@ -27,6 +36,8 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
 
     useEffect(() => {
         setRefreshData(true);
+        setPage(1);
+        setHasMore(true);
     }, [userId]);
 
     useEffect(() => {
@@ -46,6 +57,59 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
             }
         }
     }, [refreshData, userData])
+
+    // New stuff ------------------------------------------------------------
+    const handleScroll = () => {
+        if (hasMore && window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+          setPage(prevPage => prevPage + 1);
+        }
+      };
+
+      useEffect(() => {
+        setPage(1);
+    }, []);
+    
+      useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, [hasMore]);
+
+      useEffect(() => {
+        if (userData) {
+        console.log(`${page} pages`)
+        if (page > 1) {
+          const fetchMorePosts = async () => {
+            let url = `http://localhost:4000/api/users/${userId}?page=${page}`;
+    
+            if (guestMode) {
+              url += '&guestMode=true';
+            }
+    
+            try {
+              const response = await fetch(url);
+              const morePosts = await response.json();
+              console.log(morePosts);
+              if (morePosts.posts.length === 0) {
+                setHasMore(false);
+              } else {
+                setTargetUser(prevTargetUser => ({
+                    ...prevTargetUser,
+                    posts: [...prevTargetUser.posts, ...morePosts.posts]
+                  }));                  
+              }
+            } catch (error) {
+              console.error('Error fetching more posts:', error);
+            }
+          };
+          fetchMorePosts();
+        }
+    }
+      }, [page, userData, guestMode]);
+
+      // END OF NEW STUFF ------------------------------------------------------------
+
     return (
         <div className="user-page">
             {targetUser ? (
