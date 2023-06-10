@@ -57,7 +57,7 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
                     <UserPageUser guestMode={guestMode} setRefreshMainUserData={setRefreshMainUserData} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
                     <UserFriends targetUser={targetUser} />
                     <UserPhotos isMobile={isMobile} guestMode={guestMode} setRefreshData={setRefreshData} userData={userData} targetUser={targetUser} />
-                    <Settings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
+                    {isMobile ? null : <Settings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} /> }
                 </div>
                 <div className="user-section-two">
                     <UserPostContainer isMobile={isMobile} guestMode={guestMode} setRefreshData={setRefreshData} targetUser={targetUser} userData={userData} />

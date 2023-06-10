@@ -117,7 +117,7 @@
     color: var(--neutral-text-colour);
     background-color: var(--background);
     border: transparent 1px solid;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     padding: 8px 12px;
     display: flex;
     justify-content: center;

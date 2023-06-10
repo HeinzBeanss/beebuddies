@@ -5,7 +5,7 @@ import defaultpfp from "../../Assets/default_bee_profile.jpg";
 import heart from "../../Assets/heart-outline.svg";
 import heartfull from "../../Assets/heart.svg";
 
-const PostPage = ({guestMode, post, setDisplayLargePost, scrollPosition, stopEnlargeImage, formatTimestamp, userData, toggleLikeComment, toggleLikePost, postComment, handleInputChange, comment}) => {
+const PostPage = ({guestMode, post, setDisplayLargePost, scrollPosition, stopEnlargeImage, formatTimestamp, userData, toggleLikeComment, toggleLikePost, postComment, handleInputChange, comment, deletePost}) => {
 
         // Display Likes
         const [likes, setLikes] = useState(null);
@@ -60,10 +60,18 @@ const PostPage = ({guestMode, post, setDisplayLargePost, scrollPosition, stopEnl
                 <div className="large-post-info">
                 <div className="post-section-header">
                 <Link className="user-profilepicture-medium" to={`/user/${post.author._id}`}><img className="user-profilepicture-medium" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt="Image" /></Link>
+                {post.author._id === userData.updatedUser._id ? 
+                <div className="profilepost-section-header">
                 <div className="post-section-header-info">
-                <Link to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
+                    <Link to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
                     <p className="post-timestamp">{formatTimestamp(post.timestamp)}</p>
                 </div>
+                <button className="profilepost-delete" onClick={deletePost}>Delete Post</button>
+            </div> :
+            <div className="post-section-header-info">
+            <Link to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
+                <p className="post-timestamp">{formatTimestamp(post.timestamp)}</p>
+            </div>}
             </div>
             <div className="post-section-content">{post.content}</div>
             {/* Note - add hover like thing displaying users. */}

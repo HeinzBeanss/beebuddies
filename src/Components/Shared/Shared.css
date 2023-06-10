@@ -122,7 +122,26 @@ a {
     align-items: center;
     gap: 10px;
     /* border-bottom: var(--separator-line); */
+}
 
+.profilepost-section-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profilepost-delete {
+    background-color: var(--background);
+    color: var(--neutral-text-colour);
+    padding: 8px 12px;
+    border: 1px transparent solid;
+    border-radius: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.profilepost-delete:hover {
+    border: 1px solid var(--primary-colour);
 }
 
 .post-section-header-info {
@@ -720,6 +739,12 @@ input {
         border-radius: 0.3rem;
         border: 1px solid var(--primary-colour);
         font-size: 1rem;
+    }
+
+    .profilepost-delete {
+        padding: 8px 12px;
+        border-radius: 0.3rem;
+        font-size: 0.8rem;
     }
 
 }

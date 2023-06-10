@@ -342,6 +342,7 @@
         margin-left: 0px;
         margin-right: 0px;
         margin-bottom: 50px;
+        width: 100%;
     }
     
     .profile-banner {
@@ -362,6 +363,7 @@
     .profile-section-one, .profile-section-two {
         gap: 10px;
         width: 100%;
+        max-width: unset;
     }
     
     .banner-button {
@@ -408,5 +410,6 @@
     .profile-section-two {
         margin-bottom: 50px;
     }
+
 }
 

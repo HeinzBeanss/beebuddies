@@ -11,6 +11,15 @@ import Settings from "../Shared/Settings";
 
 
 const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, setRefreshMainUserData, setIsLoggedIn, userData }) => {
+    console.log(window.innerHeight);
+    console.log(document.documentElement.scrollTop);
+    console.log(document.documentElement.offsetHeight);
+
+
+    const [page, setPage] = useState(1);
+    console.log(`PAGE COUNT: ${page}`);
+    const [hasMore, setHasMore] = useState(true);
+
 
     console.log(`guest mode: ${guestMode}`);
 
@@ -33,7 +42,6 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
 
     // const [bannerFile, setBannerFile] = useState(null);
     const [bannerFeedback, setbannerFeedback] = useState("");
-
 
     useEffect(() => {
         if (userData && refreshData) {
@@ -98,6 +106,58 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
         setRefreshData(true);
     }
 
+    // New stuff ------------------------------------------------------------
+    const handleScroll = () => {
+        if (hasMore && window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+          setPage(prevPage => prevPage + 1);
+        }
+      };
+
+      useEffect(() => {
+        setPage(1);
+    }, []);
+    
+      useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, [hasMore]);
+
+      useEffect(() => {
+        if (userData) {
+        console.log(`${page} pages`)
+        if (page > 1) {
+          const fetchMorePosts = async () => {
+            let url = `http://localhost:4000/api/users/${userData.updatedUser._id}?page=${page}`;
+    
+            if (guestMode) {
+              url += '&guestMode=true';
+            }
+    
+            try {
+              const response = await fetch(url);
+              const morePosts = await response.json();
+              console.log(morePosts);
+              if (morePosts.posts.length === 0) {
+                setHasMore(false);
+              } else {
+                setProfileUser(prevProfileUser => ({
+                    ...prevProfileUser,
+                    posts: [...prevProfileUser.posts, ...morePosts.posts]
+                  }));                  
+              }
+            } catch (error) {
+              console.error('Error fetching more posts:', error);
+            }
+          };
+          fetchMorePosts();
+        }
+    }
+      }, [page, userData, guestMode]);
+
+      // END OF NEW STUFF ------------------------------------------------------------
+
     return (
         <div className="profile-page">
             {profileUser ? (
@@ -113,11 +173,11 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
                 <ProfilePageUser setBannerFeedback={setbannerFeedback} setRefreshMainUserData={setRefreshMainUserData} profileUser={profileUser} setRefreshData={setRefreshData}/>
                 <UserFriends targetUser={profileUser} />
                 <UserPhotos isMobile={isMobile} setRefreshData={setRefreshData} userData={userData} targetUser={profileUser} />
-                <Settings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />
+                {isMobile ? null : <Settings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />}
             </div>
             <div className="profile-section-two">
                 <div className="banner-feedback">{bannerFeedback}</div>
-                <CreatePost refreshData={refreshData} setRefreshData={setRefreshData} userData={userData} />
+                <CreatePost refreshData={refreshData} setRefreshPostData={setRefreshData} setRefreshData={setRefreshData} userData={userData} />
                 <ProfilePostContainer isMobile={isMobile} setRefreshData={setRefreshData} profileUser={profileUser} userData={userData} />
             </div>
             </div>

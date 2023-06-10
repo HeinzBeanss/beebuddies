@@ -338,6 +338,7 @@
         margin-left: 0px;
         margin-right: 0px;
         /* position: relative; */
+        width: 100%;
     }
     
     .user-banner {
@@ -348,6 +349,7 @@
     .user-section-one, .user-section-two {
         gap: 10px;
         width: 100%;
+        max-width: unset;
     }
     
     .user-section-one {

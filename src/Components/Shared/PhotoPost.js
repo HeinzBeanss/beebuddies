@@ -6,6 +6,16 @@ import heart from "../../Assets/heart-outline.svg";
 import heartfull from "../../Assets/heart.svg";
 
 const PhotoPost = ({isMobile, guestMode, setRefreshData, userData, post, index}) => {
+
+    const deletePost = async () => {
+        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}`, {
+            method: "DELETE",
+        })
+        const message = await response.json();
+        console.log(message);
+        setRefreshData(true);
+        stopEnlargeImage();
+    };
     
         const formatTimestamp = (timestamp) => {
             const formattedTime = DateTime.fromISO(timestamp).toFormat("MMMM d' at 'HH:mm");
@@ -106,6 +116,7 @@ const PhotoPost = ({isMobile, guestMode, setRefreshData, userData, post, index})
                     handleInputChange={handleInputChange}
                     comment={comment}
                     setComment={setComment}
+                    deletePost={deletePost}
                     /> : null}
                 <img key={index} onClick={isMobile ? null : enlargeImage} className="user-photos-photo" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
                 </div>

@@ -9,6 +9,15 @@ import heartfull from "../../Assets/heart.svg";
 
 const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
 
+    const deletePost = async () => {
+        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}`, {
+            method: "DELETE",
+        })
+        const message = await response.json();
+        console.log(message);
+        setRefreshData(true);
+    };
+
     // Display Likes
     const [likes, setLikes] = useState(null);
 
@@ -157,13 +166,22 @@ const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
             handleInputChange={handleInputChange}
             comment={comment}
             setComment={setComment}
+            deletePost={deletePost}
             /> : null}
             <div className="post-section-header">
                 <Link className="user-profilepicture-medium" to={`/user/${post.author._id}`}><img className="user-profilepicture-medium" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt="Image" /></Link>
+                {post.author._id === userData.updatedUser._id ? 
+                <div className="profilepost-section-header">
                 <div className="post-section-header-info">
-                <Link to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
+                    <Link to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
                     <p className="post-timestamp">{formatTimestamp(post.timestamp)}</p>
                 </div>
+                <button className="profilepost-delete" onClick={deletePost}>Delete Post</button>
+            </div> :
+            <div className="post-section-header-info">
+            <Link to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
+                <p className="post-timestamp">{formatTimestamp(post.timestamp)}</p>
+            </div>}
             </div>
             <div className="post-section-content">{post.content}</div>
             {post.image ? (
