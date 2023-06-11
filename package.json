@@ -42,5 +42,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://HeinzBeanss.github.io/BeeBook-Client"
+  "homepage": "http://HeinzBeanss.github.io/BeeBook-Client",
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
 }
