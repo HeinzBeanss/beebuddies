@@ -15,6 +15,10 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
     window.scrollTo(0, 0);
     }
 
+    useEffect(() => {
+      document.documentElement.scrollTop = 0;
+    }, [])
+
     const [page, setPage] = useState(1);
     console.log(`PAGE COUNT: ${page}`);
     const [hasMore, setHasMore] = useState(true);
@@ -77,7 +81,7 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
       }, [hasMore]);
 
       useEffect(() => {
-        if (userData) {
+        if (userData && targetUser) {
         console.log(`${page} pages`)
         if (page > 1) {
           const fetchMorePosts = async () => {

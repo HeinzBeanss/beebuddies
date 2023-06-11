@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
-
+import Cookies from 'js-cookie';
 import defaultpfp from "./Assets/default_bee_profile.jpg";
 
 import "./Components/LoginSignup.css";
@@ -80,6 +80,11 @@ const App = () => {
           // window.location.href = "/login";
           setRefreshMainUserData(false);
           setLoadingStatus(false);
+          localStorage.removeItem("token");
+          localStorage.removeItem("isGuest");
+          Cookies.remove("token");
+          setIsLoggedIn(false);
+          setGuestMode(false);
         }
       } catch (error) {
         console.error("Error verifiying token:", error);

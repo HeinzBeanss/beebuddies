@@ -75,7 +75,8 @@ const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
         setComment(e.target.value);
     }
 
-    const postComment = async () => {
+    const postComment = async (e) => {
+        e.preventDefault();
         if (!comment) {
             return;
         }
@@ -191,11 +192,11 @@ const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
                 </div>
                 <p className="post-section-comments">{post.comments.length} Comments</p>
             </div>
-            <div className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
+            <form onSubmit={postComment} className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
                 <img className="user-profilepicture-small" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
                 <input className="writecomment-section-comment" type="text" name="comment" placeholder="Write a comment..." onChange={handleInputChange} value={comment}></input>
-                <button className="writecomment-section-post" onClick={postComment}>Post Comment</button>
-            </div>
+                <button type="submit" className="writecomment-section-post" onClick={postComment}>Post Comment</button>
+            </form>
             {post.comments.length > 0 ? (
             <div className="comment-section">
             {post.comments.length > 0 && (

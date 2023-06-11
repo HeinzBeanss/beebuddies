@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { DateTime } from 'luxon';
 
 
-const ProfilePageUser = ({setBannerFeedback, profileUser, setRefreshData, setRefreshMainUserData}) => {
+const ProfilePageUser = ({isMobile, setBannerFeedback, profileUser, setRefreshData, setRefreshMainUserData}) => {
 
     const [formData, setFormData] = useState({
         first_name: "",
@@ -89,11 +89,23 @@ const ProfilePageUser = ({setBannerFeedback, profileUser, setRefreshData, setRef
         if (file.size > 2 * 1024 * 1024) {
             setBannerFeedback(<div className='createpost-file-error'>Sorry, your file was too big for a profile picture. (Over 2MB)</div>)
             e.target.value = "";
+
+            if (isMobile) {
+                setTimeout(() => {
+                  setBannerFeedback(null);
+                }, 3000);
+              }
             return;
         } 
         if (!allowedFileTypes.includes(file.type)) {
             setBannerFeedback(<div className='createpost-file-error'>{file.type} isn't a supported file type for a profile picture.</div>);
             e.target.value = "";
+
+            if (isMobile) {
+                setTimeout(() => {
+                  setBannerFeedback(null);
+                }, 3000);
+              }
             return;
         }
         setBannerFeedback("");

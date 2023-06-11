@@ -74,7 +74,8 @@ const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
         setComment(e.target.value);
     }
 
-    const postComment = async () => {
+    const postComment = async (e) => {
+        e.preventDefault();
         if (!comment) {
             return;
         }
@@ -196,11 +197,11 @@ const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
                 </div>
                 <p className="post-section-comments">{post.comments.length} Comments</p>
             </div>
-            <div className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
+            <form onSubmit={postComment} className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
                 <img className="user-profilepicture-small" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
                 <input className="writecomment-section-comment" type="text" name="comment" placeholder={guestMode ? "Login to post a comment" : "Write a comment..."} onChange={handleInputChange} value={comment}></input>
-                <button disabled={guestMode} className="writecomment-section-post" onClick={postComment}>{isMobile ? "Comment" : "Post Comment"}</button>
-            </div>
+                <button disabled={guestMode} type="submit" className="writecomment-section-post" onClick={postComment}>{isMobile ? "Comment" : "Post Comment"}</button>
+            </form>
             {post.comments.length > 0 ? (
             <div className="comment-section">
             {post.comments.length > 0 && (

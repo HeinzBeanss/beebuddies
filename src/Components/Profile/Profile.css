@@ -374,12 +374,23 @@
         border-radius: 0.4rem;
         box-shadow: 0;
     }
+
+    .banner-feedback > .createpost-file-error {
+        background-color: var(--background-container);
+        padding: 20px;
+        border-radius: 0.4rem;
+    }
+
+    .profile-section-two {
+        position: unset;
+    }
     
     .banner-feedback {
         position: absolute;
         z-index: 20;
-        top: -25px;
-        left: 5px;
+        left: 20%;
+        right: 20%;
+        top: 50px;
     }
     
     .profile-edit-textarea {
@@ -405,10 +416,6 @@
     
     .profile-edit-title {
         font-weight: var(--font-thickness-300d-400l);
-    }
-
-    .profile-section-two {
-        margin-bottom: 50px;
     }
 
 }

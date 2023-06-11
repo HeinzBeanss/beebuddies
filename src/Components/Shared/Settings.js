@@ -85,7 +85,7 @@ const SharedSettings = ({isMobile, theme, setTheme, openSettingsComponent, setOp
         title: "Delete Account",
         svg: remove,
         svgHover: removeHover,
-        action: guestMode ? null : (isMobile ? handleDeleteAccount : showPrompt),
+        action: guestMode ? (isMobile ? () => setOpenSettingsComponent(true) : null) : (isMobile ? handleDeleteAccount : showPrompt),
         isLast: true,
         disabled: guestMode,
       },
@@ -98,7 +98,7 @@ const SharedSettings = ({isMobile, theme, setTheme, openSettingsComponent, setOp
         {settingsItems.map((item) => (
                 <div key={item.id} className={item.isLast ? 'settings-section-item last' : 'settings-section-item'} onMouseEnter={() => handleMouseEnter(item.id)} onMouseLeave={handleMouseLeave} onClick={item.action}>
                     <img className="settings-section-svg" src={hoveredItem === item.id ? item.svgHover : item.svg} alt={item.title}></img>
-                    <h4 className="settings-section-title">{item.title}</h4>
+                    <h4 className={item.disabled ? "settings-section-title disabled" : "settings-section-title"}>{item.title}</h4>
                 </div>
             ))}
         </div>

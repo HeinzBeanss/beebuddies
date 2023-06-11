@@ -64,32 +64,42 @@ const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, refreshPostDat
     const createPost = async (e) => {
         e.preventDefault();
         if (userData) {
-            console.log("Attempting to post");
-            const formData = new FormData();
-            formData.append("content", postData.content);
-            formData.append("author", userData.updatedUser._id);
-            if (imageFile) {
-                formData.append("image", imageFile);
-                formData.append("mimeType", imageFile.type);
-            }
-            console.log([...formData]);
-            const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts`, {
-                method: "POST",
-                body: formData,
-                });
-            
+          console.log("Attempting to post");
+          const formData = new FormData();
+          formData.append("content", postData.content);
+          formData.append("author", userData.updatedUser._id);
+          if (imageFile) {
+            formData.append("image", imageFile);
+            formData.append("mimeType", imageFile.type);
+          }
+          console.log([...formData]);
+          const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts`, {
+            method: "POST",
+            body: formData,
+          });
+      
+          if (response.ok) {
             const message = await response.json();
             console.log(message);
             setRefreshData(true);
             setRefreshPostData(true);
             setFileName("");
+            setFileError(<div></div>);
             setPostData({
-                content: "",
-            })
+              content: "",
+            });
+          } else {
+            const errorData = await response.json();
+            console.error("Post creation failed:", errorData);
+            setFileName("");
+            // Handle the error, show an error message, or perform other actions
+            setFileError(<div className="createpost-file-error">Error: {errorData.errors[0].msg}</div>);
+          }
         } else {
-            return;
+          return;
         }
-    }
+      };
+      
 
     const handleGuestError = (e) => {
         e.preventDefault();

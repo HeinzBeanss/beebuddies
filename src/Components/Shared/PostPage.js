@@ -59,17 +59,17 @@ const PostPage = ({guestMode, post, setDisplayLargePost, scrollPosition, stopEnl
             
                 <div className="large-post-info">
                 <div className="post-section-header">
-                <Link className="user-profilepicture-medium" to={`/user/${post.author._id}`}><img className="user-profilepicture-medium" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt="Image" /></Link>
+                <Link onClick={stopEnlargeImage} className="user-profilepicture-medium t" to={`/user/${post.author._id}`}><img className="user-profilepicture-medium" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt="Image" /></Link>
                 {post.author._id === userData.updatedUser._id ? 
                 <div className="profilepost-section-header">
                 <div className="post-section-header-info">
-                    <Link to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
+                    <Link onClick={stopEnlargeImage} to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
                     <p className="post-timestamp">{formatTimestamp(post.timestamp)}</p>
                 </div>
                 <button className="profilepost-delete" onClick={deletePost}>Delete Post</button>
             </div> :
             <div className="post-section-header-info">
-            <Link to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
+            <Link onClick={stopEnlargeImage} to={`/user/${post.author._id}`}><h4 className="post-user-name">{post.author.first_name} {post.author.last_name}</h4></Link>
                 <p className="post-timestamp">{formatTimestamp(post.timestamp)}</p>
             </div>}
             </div>
@@ -83,11 +83,11 @@ const PostPage = ({guestMode, post, setDisplayLargePost, scrollPosition, stopEnl
                 </div>
                 <p className="post-section-comments">{post.comments.length} Comments</p>
             </div>
-            <div className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
+            <form className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
                 <img className="user-profilepicture-small" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
                 <input className="writecomment-section-comment" type="text" name="comment" placeholder={guestMode ? "Login to post a comment" : "Write a comment..."} onChange={handleInputChange} value={comment}></input>
-                <button disabled={guestMode} className="writecomment-section-post" onClick={postComment}>Post Comment</button>
-            </div>
+                <button disabled={guestMode} type="submit" className="writecomment-section-post" onClick={postComment}>Post Comment</button>
+            </form>
             {post.comments.length > 0 ? (
             <div className="comment-section">
             {post.comments.length > 0 && (
@@ -95,10 +95,10 @@ const PostPage = ({guestMode, post, setDisplayLargePost, scrollPosition, stopEnl
                 post.comments.map((comment, index) => {
                     return (
                         <div key={index} className="comment-section-item">
-                            <Link className="user-profilepicture-small" to={`/user/${comment.author._id}`}><img className="user-profilepicture-small" src={`data:${comment.author.profile_picture.contentType};base64,${comment.author.profile_picture.data}`} alt="Image" /></Link>
+                            <Link onClick={stopEnlargeImage} className="user-profilepicture-small" to={`/user/${comment.author._id}`}><img className="user-profilepicture-small" src={`data:${comment.author.profile_picture.contentType};base64,${comment.author.profile_picture.data}`} alt="Image" /></Link>
                             <div className="comment-item-right">
                                 <div className="comment-item-right-top">
-                                <Link to={`/user/${comment.author._id}`}><h5 className="comment-item-author">{comment.author.first_name} {comment.author.last_name}</h5></Link>
+                                <Link onClick={stopEnlargeImage} to={`/user/${comment.author._id}`}><h5 className="comment-item-author">{comment.author.first_name} {comment.author.last_name}</h5></Link>
                                     <p className="comment-item-timestamp">{formatTimestamp(comment.timestamp)}</p>
                                 </div>
                                 

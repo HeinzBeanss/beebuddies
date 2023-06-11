@@ -14,7 +14,11 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
 
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
-  }
+    }
+
+    useEffect(() => {
+      document.documentElement.scrollTop = 0;
+    }, [])
 
 
     console.log(window.innerHeight);
@@ -88,11 +92,22 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
         if (file.size > 4 * 1024 * 1024) {
             setbannerFeedback(<div className='createpost-file-error'>Sorry, your file was too big for your banner. (Over 4MB)</div>)
             e.target.value = "";
+
+            if (isMobile) {
+              setTimeout(() => {
+                setbannerFeedback(null);
+              }, 3000);
+            }
             return;
         } 
         if (!allowedFileTypes.includes(file.type)) {
             setbannerFeedback(<div className='createpost-file-error'>{file.type} isn't a supported file type for your banner.</div>);
             e.target.value = "";
+            if (isMobile) {
+              setTimeout(() => {
+                setbannerFeedback(null);
+              }, 3000);
+            }
             return;
         }
         setbannerFeedback("");
@@ -131,7 +146,7 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
       }, [hasMore]);
 
       useEffect(() => {
-        if (userData) {
+        if (userData && profileUser) {
         console.log(`${page} pages`)
         if (page > 1) {
           const fetchMorePosts = async () => {
@@ -176,7 +191,7 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
             <div className="profile-banner"></div>}
             <div className="profile-page-content">
             <div className="profile-section-one">
-                <ProfilePageUser setBannerFeedback={setbannerFeedback} setRefreshMainUserData={setRefreshMainUserData} profileUser={profileUser} setRefreshData={setRefreshData}/>
+                <ProfilePageUser isMobile={isMobile} setBannerFeedback={setbannerFeedback} setRefreshMainUserData={setRefreshMainUserData} profileUser={profileUser} setRefreshData={setRefreshData}/>
                 <UserFriends targetUser={profileUser} />
                 <UserPhotos isMobile={isMobile} setRefreshData={setRefreshData} userData={userData} targetUser={profileUser} />
                 {isMobile ? null : <Settings guestMode={guestMode} setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} userData={userData} />}

@@ -11,6 +11,10 @@ import HomePostContainer from "../Home/HomePostContainer";
 
 const Home = ({setTheme, theme, isMobile, loadingStatus, guestMode, setGuestMode, loading, userData, isLoggedIn, setIsLoggedIn}) => {
 
+    window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+        }
+
     const navigate = useNavigate();
     useEffect(() => {
         if (!isLoggedIn && !guestMode && !loadingStatus) {

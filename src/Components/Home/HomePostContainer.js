@@ -5,6 +5,11 @@ const HomePostContainer = ({ isMobile, guestMode, refreshPostData, setRefreshPos
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
+
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+      setPage(1);
+      }
   
     useEffect(() => {
       setRefreshPostData(true);
