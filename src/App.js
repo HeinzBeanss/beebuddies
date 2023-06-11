@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
@@ -138,7 +138,7 @@ const App = () => {
 
   return (
     <>
-      <Router>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
       {isMobile && (isLoggedIn || guestMode) ? < MobileNav /> : null}
       {isLoggedIn || guestMode ? (
         <NavBar setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} isMobile={isMobile} guestMode={guestMode} userData={userData} />
@@ -206,7 +206,7 @@ const App = () => {
             </>
   
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
   );
   
