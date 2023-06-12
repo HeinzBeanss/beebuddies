@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/beebuddies/static/css/main.5d33f7ac.css",
+    "main.css": "/beebuddies/static/css/main.f6c1590f.css",
     "main.js": "/beebuddies/static/js/main.8a21930c.js",
     "static/media/a4.png": "/beebuddies/static/media/a4.42b334be36203bdb769c.png",
     "static/media/default_bee_profile.jpg": "/beebuddies/static/media/default_bee_profile.99f7381ab1669505aeb9.jpg",
@@ -29,11 +29,11 @@
     "static/media/upload.svg": "/beebuddies/static/media/upload.d2d5f05d984b3ce92a8da88a979ea88b.svg",
     "static/media/log-out-outline.svg": "/beebuddies/static/media/log-out-outline.abf5588326f39de381fad4185fe1e81c.svg",
     "static/media/moon.svg": "/beebuddies/static/media/moon.7bdc22d5dc9770b97be8cc8d428c4dd3.svg",
-    "main.5d33f7ac.css.map": "/beebuddies/static/css/main.5d33f7ac.css.map",
+    "main.f6c1590f.css.map": "/beebuddies/static/css/main.f6c1590f.css.map",
     "main.8a21930c.js.map": "/beebuddies/static/js/main.8a21930c.js.map"
   },
   "entrypoints": [
-    "static/css/main.5d33f7ac.css",
+    "static/css/main.f6c1590f.css",
     "static/js/main.8a21930c.js"
   ]
 }
