@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from "react";
 
@@ -6,8 +6,7 @@ import typeface from "../Assets/transparent.png";
 
 const LoginPage = ({guestMode, setGuestMode, isLoggedIn, setIsLoggedIn }) => {
     const navigate = useNavigate();
-    const token = Cookies.get('token');
-    console.log(token);
+    const location = useLocation();
     // Check if the user is logged in already
     useEffect(() => {
         if (isLoggedIn || guestMode) {
@@ -16,15 +15,20 @@ const LoginPage = ({guestMode, setGuestMode, isLoggedIn, setIsLoggedIn }) => {
     }, [isLoggedIn, guestMode])
 
     useEffect(() => {
-        const token = Cookies.get('token');
-        if (token) {
+        const params = new URLSearchParams(location.search);
+        const encodedToken = params.get("token");
+        if (encodedToken) {
+            const token = decodeURIComponent(encodedToken);
             localStorage.setItem("token", token);
             localStorage.removeItem("isGuest");
             setError("");
             setIsLoggedIn(true);
             navigate("/");
+        } else {
+            
+            console.log("no token found");
         }
-    } ,[])
+    } ,[location.search])
 
     // Form Data
     const [formData, setFormData] = useState({
