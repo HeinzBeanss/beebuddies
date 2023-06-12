@@ -1,18 +1,11 @@
-import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import PhotoPost from "../Shared/PhotoPost";
 
 const UserContacts = ({isMobile, guestMode, userData, setRefreshData, targetUser }) => {
-
-    const [error, setError] = useState(null);
     
     if (!targetUser) {
         return <div className='user-photos-loading'>Loading...</div>
-    }
-
-    if (error) {
-        return <div className='user-photos-loading'>Error: {error.message}</div>
     }
 
     return (

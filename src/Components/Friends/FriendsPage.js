@@ -1,5 +1,5 @@
-import React, {useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import SharedUser from "../Shared/User";
 import SharedNavigation from "../Shared/Navigation";
@@ -9,15 +9,12 @@ import FriendsList from "../Friends/FriendList";
 
 const FriendsPage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, loading, userData, setIsLoggedIn }) => {
 
-    console.log(`guest mode: ${guestMode}`);
-
     const navigate = useNavigate();
     useEffect(() => {
         if (!isLoggedIn && !guestMode && !loadingStatus) {
             navigate("/login");
         }
     }, [isLoggedIn, guestMode, loadingStatus]);
-    console.log(isLoggedIn);
 
     useEffect(() => {
         if (guestMode) {
@@ -30,10 +27,9 @@ const FriendsPage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
     useEffect(() => {
         if (userData) {
             const fetchFriends = async () => {
-                const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/friends`);
+                const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/friends`);
                 const friendsData = await response.json();
                 setFriends(friendsData);
-                console.log(friendsData);
             };    
             fetchFriends();
         }

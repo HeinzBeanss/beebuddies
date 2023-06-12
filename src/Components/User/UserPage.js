@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import UserPostContainer from "./UserPostContainer";
 import UserPageUser from "./UserPageUser";
@@ -20,11 +20,7 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
     }, [])
 
     const [page, setPage] = useState(1);
-    console.log(`PAGE COUNT: ${page}`);
     const [hasMore, setHasMore] = useState(true);
-
-
-    console.log(`guest mode: ${guestMode}`);
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -32,7 +28,6 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
             navigate("/login");
         }
     }, [isLoggedIn, guestMode, loadingStatus]);
-    console.log(isLoggedIn);
 
     const { userId } = useParams();
     const [targetUser, setTargetUser] = useState(null);
@@ -49,10 +44,9 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
             if (userId === userData.updatedUser._id) {
                 navigate("/profile");
             }
-            console.log(refreshData);
             if (refreshData) {
                 const fetchUserInfo = async () => {
-                    const response = await fetch(`http://localhost:4000/api/users/${userId}`);
+                    const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userId}`);
                     const targetUserData = await response.json();
                     setTargetUser(targetUserData);
                     setRefreshData(false);
@@ -82,10 +76,9 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
 
       useEffect(() => {
         if (userData && targetUser) {
-        console.log(`${page} pages`)
         if (page > 1) {
           const fetchMorePosts = async () => {
-            let url = `http://localhost:4000/api/users/${userId}?page=${page}`;
+            let url = `https://beebuddies.up.railway.app/api/users/${userId}?page=${page}`;
     
             if (guestMode) {
               url += '&guestMode=true';
@@ -94,7 +87,6 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
             try {
               const response = await fetch(url);
               const morePosts = await response.json();
-              console.log(morePosts);
               if (morePosts.posts.length === 0) {
                 setHasMore(false);
               } else {
@@ -104,7 +96,7 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
                   }));                  
               }
             } catch (error) {
-              console.error('Error fetching more posts:', error);
+              // Handle error
             }
           };
           fetchMorePosts();
@@ -117,7 +109,7 @@ const UserPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guest
     return (
         <div className="user-page">
             {targetUser ? (
-                <img className="user-banner" src={`data:${targetUser.banner.contentType};base64,${targetUser.banner.data}`} alt="Image" />
+                <img className="user-banner" src={`data:${targetUser.banner.contentType};base64,${targetUser.banner.data}`} alt={`${targetUser.first_name} banner`} />
             ) :
             <div className="user-banner"></div>}
             <div className="user-page-content">

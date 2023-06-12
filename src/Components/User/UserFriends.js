@@ -22,7 +22,7 @@ const UserContacts = ({ targetUser }) => {
                     targetUser.friends.map((user, index) => {
                         return (
                             <div className='contact-section-item' key={index}>
-                                <Link className="user-profilepicture-medium" to={`/user/${user._id}`}><img className="user-profilepicture-medium" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt="Image" /></Link>
+                                <Link className="user-profilepicture-medium" to={`/user/${user._id}`}><img className="user-profilepicture-medium" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt={`${user.first_name} profile`} /></Link>
                                 <Link to={`/user/${user._id}`}><h5 className='small-user-name'>{user.first_name} {user.last_name}</h5></Link>
                             </div>
                         )

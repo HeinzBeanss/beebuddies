@@ -10,11 +10,10 @@ import heartfull from "../../Assets/heart.svg";
 const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
 
     const deletePost = async () => {
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/posts/${post._id}`, {
             method: "DELETE",
         })
         const message = await response.json();
-        console.log(message);
         setRefreshData(true);
         setDisplayLargePost(false);
     };
@@ -82,7 +81,7 @@ const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
         }
         const sanitizedComment = sanitizeComment(comment);
 
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}/comment`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/posts/${post._id}/comment`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -90,7 +89,6 @@ const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
             body: JSON.stringify({ comment }),
         })
         const message = await response.json();
-        console.log(message);
         setRefreshData(true);
         setComment("");
     };
@@ -102,25 +100,21 @@ const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
       };
 
     const toggleLikePost = async () => {
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}/toggle-like`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/posts/${post._id}/toggle-like`, {
             method: "PUT",
         })
         const message = await response.json();
-        console.log(message);
         setRefreshData(true);
     };
 
     const toggleLikeComment = async (e, comment) => {
-        console.log(post._id);
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}/comments/${comment._id}/toggle-like`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/posts/${post._id}/comments/${comment._id}/toggle-like`, {
             method: "PUT",
         })
         const message = await response.json();
-        console.log(message);
         setRefreshData(true);
     }
 
-    // const [largeImage, setLargeImage] = useState(null);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [displayLargePost, setDisplayLargePost] = useState(false);
 
@@ -165,7 +159,7 @@ const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
             deletePost={deletePost}
             /> : null}
             <div className="post-section-header">
-                <Link className="user-profilepicture-medium" to={`/user/${post.author._id}`}><img className="user-profilepicture-medium" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt="Image" /></Link>
+                <Link className="user-profilepicture-medium" to={`/user/${post.author._id}`}><img className="user-profilepicture-medium" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt={`${post.author.first_name} profile`} /></Link>
                 {post.author._id === userData.updatedUser._id ? 
                 <div className="profilepost-section-header">
                 <div className="post-section-header-info">
@@ -181,7 +175,7 @@ const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
             </div>
             <div className="post-section-content">{post.content}</div>
             {post.image ? (
-                <img onClick={isMobile ? null : enlargeImage} className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" />
+                <img onClick={isMobile ? null : enlargeImage} className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="post content" />
             ) : null}
             {/* Note - add hover like thing displaying users. */}
             <div className="post-section-feedback">
@@ -193,7 +187,7 @@ const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
                 <p className="post-section-comments">{post.comments.length} Comments</p>
             </div>
             <form onSubmit={postComment} className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
-                <img className="user-profilepicture-small" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
+                <img className="user-profilepicture-small" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt={`${userData.updatedUser.first_name} profile`} />
                 <input className="writecomment-section-comment" type="text" name="comment" placeholder="Write a comment..." onChange={handleInputChange} value={comment}></input>
                 <button type="submit" className="writecomment-section-post" onClick={postComment}>Post Comment</button>
             </form>
@@ -204,7 +198,7 @@ const ProfilePost = ({isMobile, setRefreshData, userData, post}) => {
                 post.comments.map((comment, index) => {
                     return (
                         <div key={index} className="comment-section-item">
-                            <Link className="user-profilepicture-small" to={`/user/${comment.author._id}`}><img className="user-profilepicture-small" src={`data:${comment.author.profile_picture.contentType};base64,${comment.author.profile_picture.data}`} alt="Image" /></Link>
+                            <Link className="user-profilepicture-small" to={`/user/${comment.author._id}`}><img className="user-profilepicture-small" src={`data:${comment.author.profile_picture.contentType};base64,${comment.author.profile_picture.data}`} alt={`${comment.author.first_name} profile`} /></Link>
                             <div className="comment-item-right">
                                 <div className="comment-item-right-top">
                                 <Link to={`/user/${comment.author._id}`}><h5 className="comment-item-author">{comment.author.first_name} {comment.author.last_name}</h5></Link>

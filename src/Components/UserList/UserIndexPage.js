@@ -10,16 +10,12 @@ import UserIndex from "../UserList/UserIndexRequests";
 
 const UserIndexPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn, setRefreshUserData }) => {
 
-    console.log(`guest mode: ${guestMode}`);
-
     const navigate = useNavigate();
     useEffect(() => {
         if (!isLoggedIn && !guestMode && !loadingStatus) {
             navigate("/login");
         }
     }, [isLoggedIn, guestMode, loadingStatus]);
-    console.log(isLoggedIn);
-
 
     const [refreshData, setRefreshData] = useState(true);
     const [data, setData] = useState(null);
@@ -28,19 +24,14 @@ const UserIndexPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, 
         if (userData && refreshData) {
             const fetchUsers = async () => {
                 try {
-
-                    let url = `http://localhost:4000/api/user/${userData.updatedUser._id}/unadded-users`;
-
+                    let url = `https://beebuddies.up.railway.app/api/user/${userData.updatedUser._id}/unadded-users`;
                     if (guestMode) {
                         url += '?guestMode=true';
                       }
-                      
-                    console.log("FETCHING USERS NOW")
                     const response = await fetch(url);
                     const data = await response.json();
                     setData(data);
                     setRefreshData(false);
-                    console.log(data);
                 } catch (err) {
 
                 }

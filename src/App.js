@@ -1,5 +1,4 @@
-import { BrowserRouter as BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import defaultpfp from "./Assets/default_bee_profile.jpg";
@@ -24,7 +23,6 @@ import UserIndexPage from "./Components/UserList/UserIndexPage";
 import FriendsPage from "./Components/Friends/FriendsPage";
 import PhotosPage from "./Components/Photos/PhotosPage";
 
-
 const App = () => {
 
   const [isMobile, setIsMobile] = useState(false);
@@ -40,12 +38,9 @@ const App = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  console.log(`${window.innerWidth} + ${isMobile}`);
-  
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
-  const [error, setError] = useState("");
   const [refreshMainUserData, setRefreshMainUserData] = useState(false);
   const [guestMode, setGuestMode] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState(true);
@@ -56,28 +51,20 @@ const App = () => {
 
     const verifyToken = async () => {
       try {
-        console.log("Attempting to verify token");
-        console.log(token);
-        const response = await fetch("http://localhost:4000/auth/verify-token", {
+        const response = await fetch("https://beebuddies.up.railway.app/auth/verify-token", {
           headers: { 
             Authorization: `Bearer ${token}`,
           },
         });
 
         if (response.ok) {
-          console.log("ok");
           const userData = await response.json();
-          console.log(userData);
           setUserData(userData);
           setGuestMode(false);
           setIsLoggedIn(true);
           setLoadingStatus(false);
           setRefreshMainUserData(false);
         } else {
-          console.log("not ok");
-          const errorData = await response.json();
-          setError(errorData.message);
-          // window.location.href = "/login";
           setRefreshMainUserData(false);
           setLoadingStatus(false);
           localStorage.removeItem("token");
@@ -87,11 +74,8 @@ const App = () => {
           setGuestMode(false);
         }
       } catch (error) {
-        console.error("Error verifiying token:", error);
-        setError("An error occured while verifying the token");
         setIsLoggedIn(false);
         setRefreshMainUserData(false);
-        // navigate("/login");
       }
     }
 
@@ -102,9 +86,7 @@ const App = () => {
     if (!token && !isGuest) {
       setIsLoggedIn(false);
       setLoadingStatus(false);
-      console.log("NO TOKEN OR GUEST LS");
     } else if (isGuest === "true") {
-      console.log("GUEST LOCAL STORAGE IS TRUE");
       setGuestMode(true);
       setUserData({
         updatedUser: {
@@ -120,9 +102,6 @@ const App = () => {
       });
       setLoadingStatus(false);
     } else {
-      console.log("VERIFYING TOKEN NOW");
-      console.log(isGuest);
-      console.log((isGuest === "true"));
       verifyToken();
     }
   }, [isLoggedIn, guestMode, refreshMainUserData]);
@@ -132,13 +111,12 @@ const App = () => {
   const [theme, setTheme] = useState(storedTheme || 'light');
   
   useEffect(() => {
-    console.log(theme);
     document.body.className = theme;
   }, [theme])
 
   return (
     <>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
       {isMobile && (isLoggedIn || guestMode) ? < MobileNav /> : null}
       {isLoggedIn || guestMode ? (
         <NavBar setTheme={setTheme} theme={theme} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} isMobile={isMobile} guestMode={guestMode} userData={userData} />
@@ -154,7 +132,6 @@ const App = () => {
             element={<LoginPage isMobile={isMobile} guestMode={guestMode} setGuestMode={setGuestMode} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />}
           />
           <Route path={'/signup'} guestMode={guestMode} element={<SignupPage isMobile={isMobile} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
-  
 
             <>
               <Route
@@ -206,7 +183,7 @@ const App = () => {
             </>
   
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
   

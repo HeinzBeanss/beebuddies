@@ -5,24 +5,20 @@ const UserIndexRequests = ({ guestMode, data, setRefreshData, userData}) => {
 
     const acceptFriendRequest = async (e, user) => {
         e.preventDefault();
-        // Note - Could add validation
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/add-friend/${user._id}`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/add-friend/${user._id}`, {
         method: "PUT",
         });
         const message = await response.json();
         setRefreshData(true);
-        console.log(message);
     }
     
     const denyFriendRequest = async (e, user) => {
         e.preventDefault();
-        // Note - Could add validation
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/deny-friend-request/${user._id}`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/deny-friend-request/${user._id}`, {
         method: "PUT",
         });
         const message = await response.json();
         setRefreshData(true);
-        console.log(message);
     }
 
     if (!data) {
@@ -49,7 +45,7 @@ const UserIndexRequests = ({ guestMode, data, setRefreshData, userData}) => {
                       <img
                         className="friend-pfp"
                         src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`}
-                        alt="Image"
+                        alt={`${user.first_name} profile`}
                       />
                     </Link>
                     <div className="userindex-item-bottom">

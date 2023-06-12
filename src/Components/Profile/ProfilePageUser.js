@@ -1,8 +1,5 @@
-import '../Home/Home.css';
-import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { DateTime } from 'luxon';
-
 
 const ProfilePageUser = ({isMobile, setBannerFeedback, profileUser, setRefreshData, setRefreshMainUserData}) => {
 
@@ -45,10 +42,9 @@ const ProfilePageUser = ({isMobile, setBannerFeedback, profileUser, setRefreshDa
     }
 
     const confirmEdit = async (e) => {
-        console.log("test");
         e.preventDefault();
         const { first_name, last_name, bio } = formData;
-        const response = await fetch(`http://localhost:4000/api/users/${profileUser._id}`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${profileUser._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -56,7 +52,6 @@ const ProfilePageUser = ({isMobile, setBannerFeedback, profileUser, setRefreshDa
             body: JSON.stringify({ first_name, last_name, bio }),
         });
         const message = await response.json();
-        console.log(message);
         setIsEditing(false);
         setRefreshData(true);
     };
@@ -66,14 +61,10 @@ const ProfilePageUser = ({isMobile, setBannerFeedback, profileUser, setRefreshDa
         setBannerFeedback("");
         fileInput.click();
     };
-
-    // const [avatarFeedback, setAvatarFeedback] = useState("");
     
     const handleFileChange = async (e) => {
-        console.log("pressed the handlefilechange avatar");
         const file = e.target.files[0]; 
         if (!file) {
-            console.log("actually no file was chosen");
             return;
         }
         const allowedFileTypes = [  
@@ -109,19 +100,15 @@ const ProfilePageUser = ({isMobile, setBannerFeedback, profileUser, setRefreshDa
             return;
         }
         setBannerFeedback("");
-        console.log(file);
-
         // It's all good, now upload the photo, then refresh the data.
-        console.log("Attempting to upload new Profile Picture");
         const formData = new FormData();
         formData.append("image", file);
         formData.append("mimeType", file.type);
-        const response = await fetch(`http://localhost:4000/api/users/${profileUser._id}/update-avatar`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${profileUser._id}/update-avatar`, {
             method: "PUT",
             body: formData,
         });
         const message = await response.json();
-        console.log(message);
         setRefreshData(true);
         setRefreshMainUserData(true);
     }
@@ -144,14 +131,13 @@ const ProfilePageUser = ({isMobile, setBannerFeedback, profileUser, setRefreshDa
         if (!isEditing) {
             return (
                 <div className='profile-user-section'>
-                    {/* <div className='avatar-feedback'>{avatarFeedback}</div> */}
                     <div className="profile-edit-buttons">
                         <button className='profile-edit-button' onClick={openEditWindow}>Edit Profile</button>
                         <button className='profile-edit-button' onClick={handleFileUpload}>Change Avatar</button>
                         <input className="createpost-file-avatar" type="file" accept="image/*" onChange={handleFileChange}/>
                         </div>
                     <div className="user-section-top">
-                        <img className="user-profilepicture-large" src={`data:${profileUser.profile_picture.contentType};base64,${profileUser.profile_picture.data}`} alt="Image" />
+                        <img className="user-profilepicture-large" src={`data:${profileUser.profile_picture.contentType};base64,${profileUser.profile_picture.data}`} alt={`${profileUser.first_name} profile`} />
                         <div className="user-section-info">
                             <h4 className='userpage-user-section-name'>{profileUser.first_name} {profileUser.last_name}</h4>
                             <p className='user-section-info-item'>Born: {formatTimestamp(profileUser.birthdate)}</p>

@@ -1,20 +1,12 @@
-import '../Home/Home.css';
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ProfilePost from "./ProfilePost";
 
 const ProfilePostContainer = ({isMobile, setRefreshData, userData, profileUser }) => {
-
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
 
     if (!profileUser || !userData) {
         return <div className='user-post-loading'>Loading...</div>
     }
     
-    // if (error) {
-    //     return <div className='user-post-section'>Error: {error.message}</div>
-    // }
-
     return (
         <div className="post-section">
             { profileUser.posts.length > 0 ? (

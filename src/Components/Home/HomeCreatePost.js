@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import defaultpfp from "../../Assets/default_bee_profile.jpg";
 import upload from "../../Assets/upload.svg";
 
-const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, refreshPostData, setRefreshData, userData }) => {
+const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, setRefreshData, userData }) => {
 
     const [imageFile, setImageFile] = useState(null);
     const [postData, setPostData] = useState({
@@ -27,7 +26,6 @@ const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, refreshPostDat
         const file = e.target.files[0];
 
         if (!file) {
-            console.log("actually no file was chosen");
             setImageFile(null);
             setFileName("");
             return;
@@ -57,14 +55,12 @@ const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, refreshPostDat
         }
         setFileError(<div></div>)
         setImageFile(file);
-        console.log(file);
         setFileName(file.name);
     }
 
     const createPost = async (e) => {
         e.preventDefault();
         if (userData) {
-          console.log("Attempting to post");
           const formData = new FormData();
           formData.append("content", postData.content);
           formData.append("author", userData.updatedUser._id);
@@ -72,15 +68,13 @@ const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, refreshPostDat
             formData.append("image", imageFile);
             formData.append("mimeType", imageFile.type);
           }
-          console.log([...formData]);
-          const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts`, {
+          const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/posts`, {
             method: "POST",
             body: formData,
           });
       
           if (response.ok) {
             const message = await response.json();
-            console.log(message);
             setRefreshData(true);
             setRefreshPostData(true);
             setFileName("");
@@ -92,7 +86,6 @@ const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, refreshPostDat
             const errorData = await response.json();
             console.error("Post creation failed:", errorData);
             setFileName("");
-            // Handle the error, show an error message, or perform other actions
             setFileError(<div className="createpost-file-error">Error: {errorData.errors[0].msg}</div>);
           }
         } else {
@@ -116,7 +109,7 @@ const HomeCreatePost = ({isMobile, guestMode, setRefreshPostData, refreshPostDat
                 </div>
             ) : (
                 <div className="createpost-top-section">
-                <img className="user-profilepicture-medium" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
+                <img className="user-profilepicture-medium" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt={`${userData.updatedUser.first_name} profile`} />
                 <h4 className='createpost-title'>What's on your mind, {userData.updatedUser.first_name}?</h4>
                 </div>
             )}

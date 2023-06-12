@@ -1,13 +1,9 @@
-import '../Home/Home.css';
-import "../Shared/Shared.css";
 import { Link } from "react-router-dom";
 import React from "react";
 import defaultpfp from "../../Assets/default_bee_profile.jpg";
 
 
-const HomeUser = ({guestMode, loading, userData}) => {
-    console.log("below")
-    console.log(userData);
+const HomeUser = ({guestMode, userData}) => {
 
     if (userData == null) {
         return (
@@ -21,7 +17,7 @@ const HomeUser = ({guestMode, loading, userData}) => {
     if (userData) {
         return (
             <div className='user-section'>
-                    {guestMode ? <img className="user-profilepicture-medium" src={defaultpfp} alt="Image" /> : <Link className="user-profilepicture-medium" to={`/profile`}><img className="user-profilepicture-medium" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" /></Link>}
+                    {guestMode ? <img className="user-profilepicture-medium" src={defaultpfp} alt={`${userData.updatedUser.first_name} profile`} /> : <Link className="user-profilepicture-medium" to={`/profile`}><img className="user-profilepicture-medium" src={`data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt={`${userData.updatedUser.first_name} profile`} /></Link>}
                 <div className='home-user-section-info'>
                     <p className='user-section-signinas'>Signed in as...</p>
                     {guestMode ? <h4 className='user-section-name link'>{userData.updatedUser.first_name}</h4> : <Link to={`/profile`}><h4 className='user-section-name link'>{userData.updatedUser.first_name}</h4></Link>}

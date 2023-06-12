@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const UserList = ({guestMode, data, setRefreshData, userData}) => {
 
@@ -7,30 +7,24 @@ const UserList = ({guestMode, data, setRefreshData, userData}) => {
         e.preventDefault();
         const isFriend = userData.updatedUser.friends.includes(user._id);
         const isRequestSent = userData.updatedUser.friend_requests_out.includes(user._id);
-        // Note - Could add extra validation
         if (isFriend || isRequestSent) {
-            console.log("Friend request already sent or user is already a friend");
             return;
           }
-
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/send-friend-request/${user._id}`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/send-friend-request/${user._id}`, {
             method: "PUT",
         });
         const message = await response.json();
         setRefreshData(true);
-        console.log(message);
     }
 
     const resindFriendRequest = async (e, user) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/rescind-friend-request/${user._id}`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/rescind-friend-request/${user._id}`, {
             method: "PUT",
         });
         const message = await response.json();
         setRefreshData(true);
-        console.log(message);
     }
-
 
     if (!data) {
         return <div className='userindex-section-userlist'>Loading...</div>
@@ -56,7 +50,7 @@ const UserList = ({guestMode, data, setRefreshData, userData}) => {
                         <h5 className="userindex-username">{user.first_name} {user.last_name}</h5>
                       </Link>
                       <Link to={`/user/${user._id}`}>
-                        <img className="friend-pfp" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt="Image" />
+                        <img className="friend-pfp" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt={`${user.first_name} profile`} />
                       </Link>
                       {user.friends.includes(userData.updatedUser._id) ? (
                         <div>You're already friends!</div>
@@ -82,7 +76,7 @@ const UserList = ({guestMode, data, setRefreshData, userData}) => {
                         <h5 className="userindex-username">{user.first_name} {user.last_name}</h5>
                       </Link>
                       <Link to={`/user/${user._id}`}>
-                        <img className="friend-pfp" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt="Image" />
+                        <img className="friend-pfp" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt={`${user.first_name} profile`} />
                       </Link>
                         <button disabled={guestMode} className='usercard-send-request' onClick={(e) => sendFriendRequest(e, user)}>Send Friend Request</button>
                     </div>

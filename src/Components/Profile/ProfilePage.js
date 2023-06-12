@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom"
 
 import CreatePost from "../Home/HomeCreatePost";
 import ProfilePostContainer from "./ProfilePostContainer";
@@ -18,20 +17,10 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
 
     useEffect(() => {
       document.documentElement.scrollTop = 0;
-    }, [])
-
-
-    console.log(window.innerHeight);
-    console.log(document.documentElement.scrollTop);
-    console.log(document.documentElement.offsetHeight);
-
+    }, []);
 
     const [page, setPage] = useState(1);
-    console.log(`PAGE COUNT: ${page}`);
     const [hasMore, setHasMore] = useState(true);
-
-
-    console.log(`guest mode: ${guestMode}`);
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -39,7 +28,6 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
             navigate("/login");
         }
     }, [isLoggedIn, guestMode, loadingStatus]);
-    console.log(isLoggedIn);
 
     useEffect(() => {
         if (guestMode) {
@@ -49,14 +37,12 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
 
     const [profileUser, setProfileUser] = useState(null);
     const [refreshData, setRefreshData] = useState(true);
-
-    // const [bannerFile, setBannerFile] = useState(null);
     const [bannerFeedback, setbannerFeedback] = useState("");
 
     useEffect(() => {
         if (userData && refreshData) {
             const fetchUserInfo = async () => {
-                const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}`);
+                const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}`);
                 const profileUserData = await response.json();
                 setProfileUser(profileUserData);
                 setRefreshData(false);
@@ -72,10 +58,8 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
     };
 
     const handleFileChange = async (e) => {
-        console.log("pressed the handlefilechange banner");
         const file = e.target.files[0];
         if (!file) {
-            console.log("actually no file was chosen");
             return;
         }
         const allowedFileTypes = [  
@@ -87,7 +71,6 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
         'image/webp'
         ];
 
-        console.log(file);
         // Validate File Size
         if (file.size > 4 * 1024 * 1024) {
             setbannerFeedback(<div className='createpost-file-error'>Sorry, your file was too big for your banner. (Over 4MB)</div>)
@@ -111,23 +94,18 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
             return;
         }
         setbannerFeedback("");
-        console.log(file);
-
         // It's all good, now upload the photo, then refresh the data.
-        console.log("Attempting to upload new Profile Banner");
         const formData = new FormData();
         formData.append("image", file);
         formData.append("mimeType", file.type);
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/update-banner`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/update-banner`, {
             method: "PUT",
             body: formData,
         });
         const message = await response.json();
-        console.log(message);
         setRefreshData(true);
     }
 
-    // New stuff ------------------------------------------------------------
     const handleScroll = () => {
         if (hasMore && window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
           setPage(prevPage => prevPage + 1);
@@ -147,10 +125,9 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
 
       useEffect(() => {
         if (userData && profileUser) {
-        console.log(`${page} pages`)
         if (page > 1) {
           const fetchMorePosts = async () => {
-            let url = `http://localhost:4000/api/users/${userData.updatedUser._id}?page=${page}`;
+            let url = `https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}?page=${page}`;
     
             if (guestMode) {
               url += '&guestMode=true';
@@ -159,7 +136,6 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
             try {
               const response = await fetch(url);
               const morePosts = await response.json();
-              console.log(morePosts);
               if (morePosts.posts.length === 0) {
                 setHasMore(false);
               } else {
@@ -177,15 +153,13 @@ const ProfilePage = ({theme, setTheme, isMobile, loadingStatus, setGuestMode, gu
     }
       }, [page, userData, guestMode]);
 
-      // END OF NEW STUFF ------------------------------------------------------------
-
     return (
         <div className="profile-page">
             {profileUser ? (
                 <div className="profile-banner">
                     <input className="createpost-file-banner" type="file" accept="image/*" onChange={handleFileChange}/>
                     <button className="banner-button" onClick={handleFileUpload}>Update Banner</button>
-                    <img className="profile-banner" src={`data:${profileUser.banner.contentType};base64,${profileUser.banner.data}`} alt="Image" />
+                    <img className="profile-banner" src={`data:${profileUser.banner.contentType};base64,${profileUser.banner.data}`} alt={`${profileUser.first_name} banner`} />
                 </div>
             ) :
             <div className="profile-banner"></div>}

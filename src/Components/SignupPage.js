@@ -6,12 +6,8 @@ import typeface from "../Assets/transparent.png";
 
 const SignupPage = ({ setIsLoggedIn, isLoggedIn }) => {
     const navigate = useNavigate();
-    // use effect, if signed in, redirect if possible. or do it on app, layer above idk.
-
-    // Check if the user is logged in already
     useEffect(() => {
         if (isLoggedIn === true) {
-            console.log("User alerady logged in");
             navigate("/");
         };
     }, []);
@@ -34,9 +30,7 @@ const SignupPage = ({ setIsLoggedIn, isLoggedIn }) => {
     // Handle Signup Form Submit
     const handleSignupSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         const { first_name, last_name, email, password, passwordtwo, birthdate } = formData;
-
         if (password !== passwordtwo) {
             return setError("Passwords do not match")
         } else {
@@ -48,14 +42,8 @@ const SignupPage = ({ setIsLoggedIn, isLoggedIn }) => {
                 body: JSON.stringify({ first_name, last_name, email, password, passwordtwo, birthdate}),
                 
             });
-            console.log(response);
             const data = await response.json();
-            console.log(data);
-
             if (response.ok) {
-                // navigate("/login");
-                // Login automatically
-                console.log("LOGGING IN - CLIENT SIDE VIA SIGNUP PAGE");
                 const response = await fetch(`http://localhost:4000/auth/login`, {
                     method: "POST",
                     headers: {
@@ -64,9 +52,7 @@ const SignupPage = ({ setIsLoggedIn, isLoggedIn }) => {
                     body: JSON.stringify({ email, password }),
                 });
                 const logindata = await response.json();
-                console.log(logindata);
                 localStorage.setItem("token", logindata.token);
-                console.log(`token from sign up is: ${logindata.token}`);
                 await Promise.resolve();
                 if (response.ok) {
                     setError("");
@@ -75,7 +61,6 @@ const SignupPage = ({ setIsLoggedIn, isLoggedIn }) => {
                 } else {
                     navigate("/login");
                     setError(`${data.message}`);
-                    // DO something if it doesn't log in properly.
                 }
             } else {
                 setError(`${data.errors[0].msg}`);
@@ -96,7 +81,6 @@ const SignupPage = ({ setIsLoggedIn, isLoggedIn }) => {
             }
         }
     }, [formData.passwordtwo, formData.password])
-
 
     return (
         <div className="component-login-container">

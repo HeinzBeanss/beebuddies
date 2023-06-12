@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 import SharedUser from "../Shared/User";
 import SharedNavigation from "../Shared/Navigation";
@@ -9,15 +8,12 @@ import UserPhotos from "../User/UserPhotos";
 
 const PhotosPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, guestMode, isLoggedIn, userData, setIsLoggedIn}) => {
 
-    console.log(`guest mode: ${guestMode}`);
-
     const navigate = useNavigate();
     useEffect(() => {
         if (!isLoggedIn && !guestMode && !loadingStatus) {
             navigate("/login");
         }
     }, [isLoggedIn, guestMode, loadingStatus]);
-    console.log(isLoggedIn);
 
     useEffect(() => {
         if (guestMode) {
@@ -32,12 +28,10 @@ const PhotosPage = ({setTheme, theme, isMobile, loadingStatus, setGuestMode, gue
         if (userData && refreshData) {
             const fetchUsers = async () => {
                 try {
-                    console.log("FETCHING USERS NOW")
-                    const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}`);
+                    const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}`);
                     const data = await response.json();
                     setData(data);
                     setRefreshData(false);
-                    console.log(data);
                 } catch (err) {
 
                 }

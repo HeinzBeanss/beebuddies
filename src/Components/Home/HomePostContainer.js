@@ -15,12 +15,11 @@ const HomePostContainer = ({ isMobile, guestMode, refreshPostData, setRefreshPos
       setRefreshPostData(true);
       setPage(1);
     }, []);
-  
-    console.log(`HOME PAGE COUNT: ${page}`);
+
     useEffect(() => {
       if (userData && refreshPostData) {
         const fetchPosts = async () => {
-          let url = `http://localhost:4000/api/users/${userData.updatedUser._id}/friends/posts`;
+          let url = `https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/friends/posts`;
   
           if (guestMode) {
             url += '?guestMode=true';
@@ -31,7 +30,6 @@ const HomePostContainer = ({ isMobile, guestMode, refreshPostData, setRefreshPos
             const postData = await response.json();
             setPosts(postData);
           } catch (error) {
-            console.error('Error fetching posts:', error);
           } finally {
             setRefreshPostData(false);
           }
@@ -56,7 +54,7 @@ const HomePostContainer = ({ isMobile, guestMode, refreshPostData, setRefreshPos
     useEffect(() => {
       if (page > 1) {
         const fetchMorePosts = async () => {
-          let url = `http://localhost:4000/api/users/${userData.updatedUser._id}/friends/posts?page=${page}`;
+          let url = `https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/friends/posts?page=${page}`;
   
           if (guestMode) {
             url += '&guestMode=true';
@@ -71,7 +69,7 @@ const HomePostContainer = ({ isMobile, guestMode, refreshPostData, setRefreshPos
               setPosts(prevPosts => [...prevPosts, ...morePosts]);
             }
           } catch (error) {
-            console.error('Error fetching more posts:', error);
+            // Handle error
           }
         };
         fetchMorePosts();

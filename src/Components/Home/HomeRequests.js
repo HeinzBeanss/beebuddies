@@ -1,44 +1,37 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import defaultpfp from "../../Assets/default_bee_profile.jpg";
 
-const HomeRequests = ({ guestMode, loading, userData, refreshData, setRefreshData, setRefreshPostData }) => {
+const HomeRequests = ({ guestMode, userData, refreshData, setRefreshData, setRefreshPostData }) => {
 
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
 
     const acceptFriendRequest = async (e, user) => {
         e.preventDefault();
-        // Note - Could add validation
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/add-friend/${user._id}`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/add-friend/${user._id}`, {
         method: "PUT",
         });
         const message = await response.json();
         setRefreshData(true);
         setRefreshPostData(true);
-        console.log(message);
     }
     
     const denyFriendRequest = async (e, user) => {
         e.preventDefault();
-        // Note - Could add validation
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/deny-friend-request/${user._id}`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/deny-friend-request/${user._id}`, {
         method: "PUT",
         });
         const message = await response.json();
         setRefreshData(true);
-        console.log(message);
     }
 
     useEffect(() => {
         if (userData && !guestMode) {
             const fetchData = async () => {
                 try {
-                    console.log("retrieving friend requests")
-                    const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/friend-requests`);
+                    const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/friend-requests`);
                     const data = await response.json();
                     setData(data);
-                    console.log(data);
                     setRefreshData(false);
                 } catch (err) {
                     setError(err);
@@ -76,7 +69,7 @@ const HomeRequests = ({ guestMode, loading, userData, refreshData, setRefreshDat
                     return (
                         <div className='request-section-item' key={index}>
                         <div className="request-item-top">
-                            <Link to={`/user/${user._id}`} className="user-profilepicture-medium"><img className="user-profilepicture-medium" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt="Image" /></Link>
+                            <Link to={`/user/${user._id}`} className="user-profilepicture-medium"><img className="user-profilepicture-medium" src={`data:${user.profile_picture.contentType};base64,${user.profile_picture.data}`} alt={`${user.first_name} profile`} /></Link>
                             <div className='request-item-top-right'>
                                 <Link to={`/user/${user._id}`}><h5 className='small-user-name'>{user.first_name} {user.last_name}</h5></Link>
                                 <p className='request-item-mutuals'>{findMutuals(user)} Mutual Friends</p>

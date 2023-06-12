@@ -10,17 +10,15 @@ import heartfull from "../../Assets/heart.svg";
 const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
 
     const deletePost = async () => {
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/posts/${post._id}`, {
             method: "DELETE",
         })
         const message = await response.json();
-        console.log(message);
         setRefreshData(true);
     };
 
     // Display Likes
     const [likes, setLikes] = useState(null);
-
     const displayLikes = (users) => {
         if (users.length < 1) {
             return
@@ -81,7 +79,7 @@ const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
         }
         const sanitizedComment = sanitizeComment(comment);
 
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}/comment`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/posts/${post._id}/comment`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -100,21 +98,18 @@ const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
       };
 
     const toggleLikePost = async () => {
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}/toggle-like`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/posts/${post._id}/toggle-like`, {
             method: "PUT",
         })
         const message = await response.json();
-        console.log(message);
         setRefreshData(true);
     };
 
     const toggleLikeComment = async (e, comment) => {
-        console.log(post._id);
-        const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}/posts/${post._id}/comments/${comment._id}/toggle-like`, {
+        const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}/posts/${post._id}/comments/${comment._id}/toggle-like`, {
             method: "PUT",
         })
         const message = await response.json();
-        console.log(message);
         setRefreshData(true);
     }
 
@@ -170,7 +165,7 @@ const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
             deletePost={deletePost}
             /> : null}
             <div className="post-section-header">
-                <Link className="user-profilepicture-medium" to={`/user/${post.author._id}`}><img className="user-profilepicture-medium" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt="Image" /></Link>
+                <Link className="user-profilepicture-medium" to={`/user/${post.author._id}`}><img className="user-profilepicture-medium" src={`data:${post.author.profile_picture.contentType};base64,${post.author.profile_picture.data}`} alt={`${post.author.first_name} profile`} /></Link>
                 {post.author._id === userData.updatedUser._id ? 
                 <div className="profilepost-section-header">
                 <div className="post-section-header-info">
@@ -186,19 +181,19 @@ const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
             </div>
             <div className="post-section-content">{post.content}</div>
             {post.image ? (
-                <img className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="Image" onClick={isMobile ? null : enlargeImage} />
+                <img className="post-image" src={`data:${post.image.contentType};base64,${post.image.data}`} alt="post content" onClick={isMobile ? null : enlargeImage} />
             ) : null}
             {/* Note - add hover like thing displaying users. */}
             <div className="post-section-feedback minus">
                 <div className="post-section-likes" onMouseOver={() => displayLikes(post.likes)} onMouseLeave={() => setLikes(null)}>
                     {likes}
-                    <img className="comment-item-likesvg" src={post.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={guestMode ? null : toggleLikePost}></img>
+                    <img className="comment-item-likesvg" src={post.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={guestMode ? null : toggleLikePost} alt="heart"></img>
                     <p className="post-section-likecount">{post.likes.length}</p>
                 </div>
                 <p className="post-section-comments">{post.comments.length} Comments</p>
             </div>
             <form onSubmit={postComment} className={post.comments.length > 0 ? "post-section-writecomment" : "post-section-writecomment-end"}>
-                <img className="user-profilepicture-small" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt="Image" />
+                <img className="user-profilepicture-small" src={guestMode ? defaultpfp : `data:${userData.updatedUser.profile_picture.contentType};base64,${userData.updatedUser.profile_picture.data}`} alt={`${userData.updatedUser.first_name} profile`}/>
                 <input className="writecomment-section-comment" type="text" name="comment" placeholder={guestMode ? "Login to post a comment" : "Write a comment..."} onChange={handleInputChange} value={comment}></input>
                 <button disabled={guestMode} type="submit" className="writecomment-section-post" onClick={postComment}>{isMobile ? "Comment" : "Post Comment"}</button>
             </form>
@@ -209,7 +204,7 @@ const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
                 post.comments.map((comment, index) => {
                     return (
                         <div key={index} className="comment-section-item">
-                            <Link className="user-profilepicture-small" to={`/user/${comment.author._id}`}><img className="user-profilepicture-small" src={`data:${comment.author.profile_picture.contentType};base64,${comment.author.profile_picture.data}`} alt="Image" /></Link>
+                            <Link className="user-profilepicture-small" to={`/user/${comment.author._id}`}><img className="user-profilepicture-small" src={`data:${comment.author.profile_picture.contentType};base64,${comment.author.profile_picture.data}`} alt={`${comment.author.first_name} profile`} /></Link>
                             <div className="comment-item-right">
                                 <div className="comment-item-right-top">
                                 <Link to={`/user/${comment.author._id}`}><h5 className="comment-item-author">{comment.author.first_name} {comment.author.last_name}</h5></Link>
@@ -223,7 +218,7 @@ const Post = ({isMobile, guestMode, setRefreshData, userData, post}) => {
                                     <>{displayCommentLikes(comment.likes)}</>
                                     )}
                                         <p className="comment-section-likecount">{comment.likes.length}</p>
-                                        <img className="comment-item-likesvg" src={comment.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={guestMode ? null : (e) => toggleLikeComment(e, comment)}></img>
+                                        <img className="comment-item-likesvg" src={comment.likes.some(like => like._id === userData.updatedUser._id) ? heartfull : heart} onClick={guestMode ? null : (e) => toggleLikeComment(e, comment)} alt="heart"></img>
 
                                     </div>
                                 </div>

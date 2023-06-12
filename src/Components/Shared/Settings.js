@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import logout from "../../Assets/log-out-outline.svg";
 import logoutHover from "../../Assets/log-out.svg";
@@ -11,7 +11,7 @@ import moonHover from "../../Assets/moon.svg";
 import remove from "../../Assets/close-circle-outline.svg";
 import removeHover from "../../Assets/close-circle.svg";
 
-const SharedSettings = ({isMobile, theme, setTheme, openSettingsComponent, setOpenSettingsComponent, guestMode, setGuestMode, setIsLoggedIn, userData}) => {
+const SharedSettings = ({isMobile, theme, setTheme, setOpenSettingsComponent, guestMode, setGuestMode, setIsLoggedIn, userData}) => {
 
   const [showDeleteAccountPrompt, setShowDeleteAccountPrompt] = useState(false);
   
@@ -23,11 +23,10 @@ const SharedSettings = ({isMobile, theme, setTheme, openSettingsComponent, setOp
   }
 
   const handleDeleteAccount = async () => {
-    const response = await fetch(`http://localhost:4000/api/users/${userData.updatedUser._id}`, {
+    const response = await fetch(`https://beebuddies.up.railway.app/api/users/${userData.updatedUser._id}`, {
       method: "DELETE",
     });
     const message = await response.json();
-    console.log(message);
     localStorage.removeItem("token");
     localStorage.removeItem("isGuest");
     Cookies.remove("token");
@@ -51,7 +50,6 @@ const SharedSettings = ({isMobile, theme, setTheme, openSettingsComponent, setOp
       const newTheme = theme === 'light' ? 'dark' : 'light';
       setTheme(newTheme);
       localStorage.setItem('theme', newTheme);
-      console.log(`just pressed: ${theme}`);
     };
 
     const handleLogoutSubmit = async (e) => {

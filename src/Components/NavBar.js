@@ -8,7 +8,6 @@ import Home from "../Assets/home-outline.svg";
 import Profile from "../Assets/person-circle-outline.svg";
 import Friends from "../Assets/people-circle-outline.svg";
 import Photos from "../Assets/image-outline.svg";
-// import MenuHover from "../Assets/settings.svg";
 
 import HiveHover from "../Assets/honey-hover.svg";
 import HomeHover from "../Assets/home.svg";
@@ -33,14 +32,14 @@ const NavBar = ({isMobile, guestMode, theme, setTheme, userData, setIsLoggedIn, 
           svg: Profile,
           svgHover: ProfileHover,
           path: '/profile',
-          disabled: guestMode, // Disable if guestMode is true
+          disabled: guestMode,
         },
         {
           id: 3,
           svg: Friends,
           svgHover: FriendsHover,
           path: '/friends',
-          disabled: guestMode, // Disable if guestMode is true
+          disabled: guestMode,
         },
         {
           id: 4,
@@ -53,7 +52,7 @@ const NavBar = ({isMobile, guestMode, theme, setTheme, userData, setIsLoggedIn, 
           svg: Photos,
           svgHover: PhotosHover,
           path: '/photos',
-          disabled: guestMode, // Disable if guestMode is true
+          disabled: guestMode,
           isLast: true,
         },
       ];
