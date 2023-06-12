@@ -118,6 +118,7 @@
     width: 120px;
     height: 120px;
     border-radius: 0.5rem;
+    object-fit: cover;
 }
 /* User Page Friends Section */
 .user-photos-loading, .user-post-loading {
