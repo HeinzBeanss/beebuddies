@@ -6,7 +6,8 @@ import typeface from "../Assets/transparent.png";
 
 const LoginPage = ({guestMode, setGuestMode, isLoggedIn, setIsLoggedIn }) => {
     const navigate = useNavigate();
-
+    const token = Cookies.get('token');
+    console.log(token);
     // Check if the user is logged in already
     useEffect(() => {
         if (isLoggedIn || guestMode) {
