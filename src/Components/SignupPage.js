@@ -34,7 +34,7 @@ const SignupPage = ({ setIsLoggedIn, isLoggedIn }) => {
         if (password !== passwordtwo) {
             return setError("Passwords do not match")
         } else {
-            const response = await fetch(`http://localhost:4000/api/users`, {
+            const response = await fetch(`https://beebuddies.up.railway.app/api/users`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -44,7 +44,7 @@ const SignupPage = ({ setIsLoggedIn, isLoggedIn }) => {
             });
             const data = await response.json();
             if (response.ok) {
-                const response = await fetch(`http://localhost:4000/auth/login`, {
+                const response = await fetch(`https://beebuddies.up.railway.app/auth/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
