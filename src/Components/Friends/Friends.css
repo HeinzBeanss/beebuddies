@@ -66,6 +66,8 @@
 
 .friend-pfp {
     width: 100%;
+    min-height: 75%;
+    object-fit: cover;
     border-radius: 0.5rem;
 }
 

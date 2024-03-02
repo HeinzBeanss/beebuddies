@@ -11,10 +11,10 @@ import moonHover from "../../Assets/moon.svg";
 import remove from "../../Assets/close-circle-outline.svg";
 import removeHover from "../../Assets/close-circle.svg";
 
-const SharedSettings = ({isMobile, theme, setTheme, setOpenSettingsComponent, guestMode, setGuestMode, setIsLoggedIn, userData}) => {
+const SharedSettings = ({ isMobile, theme, setTheme, setOpenSettingsComponent, guestMode, setGuestMode, setIsLoggedIn, userData }) => {
 
   const [showDeleteAccountPrompt, setShowDeleteAccountPrompt] = useState(false);
-  
+
   const showPrompt = () => {
     if (isMobile) {
       setOpenSettingsComponent(true);
@@ -35,80 +35,80 @@ const SharedSettings = ({isMobile, theme, setTheme, setOpenSettingsComponent, gu
     navigate("/login");
   }
 
-    const navigate = useNavigate();
-    const [hoveredItem, setHoveredItem] = useState(null);
+  const navigate = useNavigate();
+  const [hoveredItem, setHoveredItem] = useState(null);
 
-    const handleMouseEnter = (item) => {
-      setHoveredItem(item);
-    };
-  
-    const handleMouseLeave = () => {
-      setHoveredItem(null);
-    };
+  const handleMouseEnter = (item) => {
+    setHoveredItem(item);
+  };
 
-    const toggleTheme = () => {
-      const newTheme = theme === 'light' ? 'dark' : 'light';
-      setTheme(newTheme);
-      localStorage.setItem('theme', newTheme);
-    };
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+  };
 
-    const handleLogoutSubmit = async (e) => {
-        e.preventDefault();
-        localStorage.removeItem("token");
-        localStorage.removeItem("isGuest");
-        Cookies.remove("token");
-        setIsLoggedIn(false);
-        setGuestMode(false);
-        navigate("/login");
-    };
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
-    const settingsItems = [
-      {
-        id: 1,
-        title: "Switch Theme",
-        svg: theme === "light" ? sun : moon,
-        svgHover: theme === "light" ? sunHover: moonHover,
-        action: toggleTheme,
-      },
-       {
-        id: 2,
-        title: "Log out",
-        svg: logout,
-        svgHover: logoutHover,
-        action: handleLogoutSubmit,
+  const handleLogoutSubmit = async (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("isGuest");
+    Cookies.remove("token");
+    setIsLoggedIn(false);
+    setGuestMode(false);
+    navigate("/login");
+  };
 
-      },
-      {
-        id: 3,
-        title: "Delete Account",
-        svg: remove,
-        svgHover: removeHover,
-        action: guestMode ? (isMobile ? () => setOpenSettingsComponent(true) : null) : (isMobile ? handleDeleteAccount : showPrompt),
-        isLast: true,
-        disabled: guestMode,
-      },
-    ];
+  const settingsItems = [
+    {
+      id: 1,
+      title: "Switch Theme",
+      svg: theme === "light" ? sun : moon,
+      svgHover: theme === "light" ? sunHover : moonHover,
+      action: toggleTheme,
+    },
+    {
+      id: 2,
+      title: "Log out",
+      svg: logout,
+      svgHover: logoutHover,
+      action: handleLogoutSubmit,
 
-    if (isMobile) {
-      return (
+    },
+    {
+      id: 3,
+      title: "Delete Account",
+      svg: remove,
+      svgHover: removeHover,
+      action: guestMode ? (isMobile ? () => setOpenSettingsComponent(true) : null) : (isMobile ? handleDeleteAccount : showPrompt),
+      isLast: true,
+      disabled: guestMode,
+    },
+  ];
+
+  if (isMobile) {
+    return (
       <div className="mobile-settings-overlay" onClick={() => setOpenSettingsComponent(false)}>
         <div className='mobile-settings'>
-        {settingsItems.map((item) => (
-                <div key={item.id} className={item.isLast ? 'settings-section-item last' : 'settings-section-item'} onMouseEnter={() => handleMouseEnter(item.id)} onMouseLeave={handleMouseLeave} onClick={item.action}>
-                    <img className="settings-section-svg" src={hoveredItem === item.id ? item.svgHover : item.svg} alt={item.title}></img>
-                    <h4 className={item.disabled ? "settings-section-title disabled" : "settings-section-title"}>{item.title}</h4>
-                </div>
-            ))}
+          {settingsItems.map((item) => (
+            <div key={item.id} className={item.isLast ? 'settings-section-item last' : 'settings-section-item'} onMouseEnter={() => handleMouseEnter(item.id)} onMouseLeave={handleMouseLeave} onClick={item.action}>
+              <img className="settings-section-svg" src={hoveredItem === item.id ? item.svgHover : item.svg} alt={item.title}></img>
+              <h4 className={item.disabled ? "settings-section-title disabled" : "settings-section-title"}>{item.title}</h4>
+            </div>
+          ))}
         </div>
       </div>
-      )
-    }
+    )
+  }
 
-    return (
-        <div className="settings-outer">
-          <h4 className='outer-title'>Settings</h4>
-          <div className='shared-settings-section'>
-          {showDeleteAccountPrompt ? 
+  return (
+    <div className="settings-outer">
+      <h4 className='outer-title'>Settings</h4>
+      <div className='shared-settings-section'>
+        {showDeleteAccountPrompt ?
           <div className='delete-account-overlay'>
             <div className="delete-account-container">
               <p className='delete-account-text'>Are you sure you want to delete your account?</p>
@@ -119,15 +119,15 @@ const SharedSettings = ({isMobile, theme, setTheme, setOpenSettingsComponent, gu
             </div>
           </div>
           : null}
-            {settingsItems.map((item) => (
-                <div key={item.id} className={item.isLast ? 'settings-section-item last' : 'settings-section-item'} onMouseEnter={() => handleMouseEnter(item.id)} onMouseLeave={handleMouseLeave} onClick={item.action}>
-                    <img className="settings-section-svg" src={hoveredItem === item.id ? item.svgHover : item.svg} alt={item.title}></img>
-                    <h4 className={item.disabled ? "settings-section-title disabled" : "settings-section-title"}>{item.title}</h4>
-                </div>
-            ))}
+        {settingsItems.map((item) => (
+          <div key={item.id} className={item.isLast ? 'settings-section-item-last' : 'settings-section-item'} onMouseEnter={() => handleMouseEnter(item.id)} onMouseLeave={handleMouseLeave} onClick={item.action}>
+            <img className="settings-section-svg" src={hoveredItem === item.id ? item.svgHover : item.svg} alt={item.title}></img>
+            <h4 className={item.disabled ? "settings-section-title disabled" : "settings-section-title"}>{item.title}</h4>
           </div>
-        </div>
-    )
+        ))}
+      </div>
+    </div>
+  )
 }
 
 export default SharedSettings;

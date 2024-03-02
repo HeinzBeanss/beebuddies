@@ -73,7 +73,7 @@ const Navigation = ({ guestMode }) => {
         {navItems.map((item, index) => (
           <div
             key={item.id}
-            className={`nav-section-item ${item.isLast ? 'last' : ''}`}
+            className={` ${item.isLast ? 'last' : 'nav-section-item'}`}
             onMouseEnter={() => handleMouseEnter(item.id)}
             onMouseLeave={handleMouseLeave}
           >
